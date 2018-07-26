@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e668acae610b458a9d3f0c621b522c3a" Name="Diagram1">
+        <EntityTypeShape EntityType="TradAssetDBModel.asset" Width="1.5" PointX="0.625" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.asset_history" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.asset_history_type" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.asset_type" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.history" Width="1.5" PointX="4.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.os" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.staff" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.supplier" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TradAssetDBModel.user_login" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="TradAssetDBModel.asset_type_id_FK" />
+        <AssociationConnector Association="TradAssetDBModel.original_supplier_id_FK" />
+        <AssociationConnector Association="TradAssetDBModel.os_id_FK" />
+        <AssociationConnector Association="TradAssetDBModel.supplier_id_FK" />
+        <AssociationConnector Association="TradAssetDBModel.using_by_staff_id_FK" />
+        <AssociationConnector Association="TradAssetDBModel.asset_history_id_FK" />
+        <AssociationConnector Association="TradAssetDBModel.asset_history_type_FK" />
+        <AssociationConnector Association="TradAssetDBModel.historye_user_id_FK" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

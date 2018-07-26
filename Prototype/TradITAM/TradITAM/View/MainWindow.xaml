@@ -1,0 +1,188 @@
+﻿<Window x:Class="TradITAM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradITAM"
+        xmlns:vmx="clr-namespace:TradITAM.ViewModel"
+        xmlns:wpfx="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vmx:MainWindowViewModel}"
+        DataContext="{StaticResource MainWindowVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="TradITAM - Tradition IT Asset Management " Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+    <Grid>
+        <!-- Header -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF018EFF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
+                    <wpfx:DropDownButton Content=" File" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <wpfx:DropDownButton.DropDownContent>
+                            <ListBox Cursor="Hand">
+                                <ListBoxItem Content="Item 1" />
+                                <ListBoxItem Content="Item 2" />
+                                <ListBoxItem Content="Item 3" />
+                            </ListBox>
+                        </wpfx:DropDownButton.DropDownContent>
+                    </wpfx:DropDownButton>
+                    <wpfx:DropDownButton Content=" Edit" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <wpfx:DropDownButton.DropDownContent>
+                            <ListBox Cursor="Hand">
+                                <ListBoxItem Content="Create" />
+                                <ListBoxItem Content="Update" />
+                            </ListBox>
+                        </wpfx:DropDownButton.DropDownContent>
+                    </wpfx:DropDownButton>
+                    <wpfx:DropDownButton Content=" View" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <wpfx:DropDownButton.DropDownContent>
+                            <ListBox Cursor="Hand">
+                                <ListBoxItem Content="Item 1" />
+                                <ListBoxItem Content="Item 2" />
+                                <ListBoxItem Content="Item 3" />
+                            </ListBox>
+                        </wpfx:DropDownButton.DropDownContent>
+                    </wpfx:DropDownButton>
+                    <wpfx:DropDownButton Content=" History" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <wpfx:DropDownButton.DropDownContent>
+                            <ListBox Cursor="Hand">
+                                <ListBoxItem Content="Item 1" />
+                                <ListBoxItem Content="Item 2" />
+                                <ListBoxItem Content="Item 3" />
+                            </ListBox>
+                        </wpfx:DropDownButton.DropDownContent>
+                    </wpfx:DropDownButton>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <materialDesign:PackIcon Kind="AccountCircle" Foreground="#373737" Height="22" Width="22" Margin="0,3,5,0"/>
+                    <wpfx:DropDownButton Content=" Name" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <wpfx:DropDownButton.DropDownContent>
+                            <ListBox Cursor="Hand">
+                                <ListBoxItem Content="Item 1" />
+                                <ListBoxItem Content="Item 2" />
+                                <ListBoxItem Content="Item 3" />
+                            </ListBox>
+                        </wpfx:DropDownButton.DropDownContent>
+                    </wpfx:DropDownButton>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <!-- Main Content -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10*"/>
+            </Grid.ColumnDefinitions>
+            <!-- Column 0: Content -->
+            <Grid Grid.Column="0" Background="#373737">
+                <StackPanel Orientation="Vertical">
+                    <Button Command="{Binding getAssetCommand}"  Height="90" Width="100" Background="#373737">
+                        <materialDesign:PackIcon Kind="Archive"  Cursor="Hand" Foreground="WhiteSmoke" HorizontalAlignment="Center" Width="50" Height="50" Margin="0,20,0,0"/>
+                    </Button>
+                    <!--<Label Content="ASSET" Foreground="White" HorizontalAlignment="Center"/>-->
+                    <Button Command="{Binding getStaffCommand}"  Height="90" Width="100" Background="#373737">
+                        <materialDesign:PackIcon  Kind="AccountMultiple"  Cursor="Hand" Foreground="WhiteSmoke" HorizontalAlignment="Center" Width="50" Height="50" Margin="0,20,0,0"/>
+                    </Button>
+                   
+                    
+                    <!--<Label Content="STAFF" Foreground="White" HorizontalAlignment="Center"/>-->
+                    <Button Command="{Binding getSupplierCommand}"  Height="90" Width="100" Background="#373737">
+                        <materialDesign:PackIcon Kind="Caravan"  Cursor="Hand" Foreground="WhiteSmoke" HorizontalAlignment="Center" Width="50" Height="50" Margin="0,5,0,0"/>
+                    </Button>
+                    <!--<Label Content="SUPPLIER" Foreground="White" HorizontalAlignment="Center"/>-->
+                </StackPanel>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
+                    <materialDesign:PackIcon Kind="Information"  Cursor="Hand" Foreground="WhiteSmoke" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="50" Height="50"/>
+                    <Label Content="EDR" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,30"/>
+                </StackPanel>
+            </Grid>
+            <!-- Column 1: Content -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="14*"/>
+                </Grid.RowDefinitions>
+                <!-- Search & Sort by -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+                    <Label Content="Search"/>
+                    <TextBox Width="200" Height="22"/>
+                    <Label Content="  Sort by   "/>
+                    <ComboBox Width="150" Height="22"/>
+                </StackPanel>
+                <Label Name="Label_Table" Content="{x:Null}" HorizontalAlignment="Right" FontSize="20" FontWeight="Bold" Margin="0,0,10,0"/>
+                <!-- DataGrid View -->
+
+                <!--<DataGrid Grid.Row="1" Margin="10"  Name="dg_asset" AutoGenerateColumns="False" ItemsSource="{Binding listAsset}" SelectedItem="{Binding Selecteddata,Mode=TwoWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="1*" Header="asset_id" Binding="{Binding asset_id}"/>
+                        <DataGridTextColumn Width="1*" Header="os_id" Binding="{Binding os_id}"/>
+                        <DataGridTextColumn Width="1*" Header="asset_type_id" Binding="{Binding asset_type_id}"/>
+                        <DataGridTextColumn Width="1*" Header="original_supplier_id" Binding="{Binding original_supplier_id}"/>
+                        <DataGridTextColumn Width="1*" Header="supplier_id" Binding="{Binding supplier_id}"/>
+                        <DataGridTextColumn Width="1*" Header="using_by_staff_id" Binding="{Binding using_by_staff_id}"/>
+                        <DataGridTextColumn Width="1*" Header="asset_code" Binding="{Binding asset_code}"/>
+                        <DataGridTextColumn Width="1*" Header="brand" Binding="{Binding brand}"/>
+                        <DataGridTextColumn Width="1*" Header="price" Binding="{Binding price}"/>
+                        <DataGridTextColumn Width="1*" Header="cpu" Binding="{Binding cpu}"/>
+                        <DataGridTextColumn Width="1*" Header="ram" Binding="{Binding ram}"/>
+                        <DataGridTextColumn Width="1*" Header="hdd" Binding="{Binding hdd}"/>
+                        <DataGridTextColumn Width="1*" Header="notes" Binding="{Binding notes}"/>
+                        <DataGridTextColumn Width="1*" Header="start_date_warranty" Binding="{Binding start_date_warranty}"/>
+                        <DataGridTextColumn Width="1*" Header="expiry_date_warranty" Binding="{Binding expiry_date_warranty}"/>
+                        <DataGridTextColumn Width="1*" Header="is_active" Binding="{Binding is_active}"/>
+                        <DataGridTextColumn Width="1*" Header="create_date" Binding="{Binding create_date}"/>
+                        <DataGridTextColumn Width="1*" Header="modified_date" Binding="{Binding modified_date}"/>
+                        
+                        
+                    </DataGrid.Columns>
+                </DataGrid>-->
+
+
+                <DataGrid Grid.Row="1" Margin="10"  Name="dg_staff" AutoGenerateColumns="False" ItemsSource="{Binding listStaff}" SelectedItem="{Binding Selecteddata,Mode=TwoWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="1*" Header="staff_id" Binding="{Binding staff_id}"/>
+                        <DataGridTextColumn Width="1*" Header="firstname" Binding="{Binding firstname}"/>
+                        <DataGridTextColumn Width="1*" Header="lastname" Binding="{Binding lastname}"/>
+                        <DataGridTextColumn Width="1*" Header="aka" Binding="{Binding aka}"/>
+                        <DataGridTextColumn Width="1*" Header="start_date" Binding="{Binding start_date}"/>
+                        <DataGridTextColumn Width="1*" Header="end_date" Binding="{Binding end_date}"/>
+                        <DataGridTextColumn Width="1*" Header="is_active" Binding="{Binding is_active}"/>
+                        <DataGridTextColumn Width="1*" Header="create_date" Binding="{Binding create_date}"/>
+                        <DataGridTextColumn Width="1*" Header="modified_date" Binding="{Binding modified_date}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+
+                <DataGrid Grid.Row="1" Margin="10"  Name="dg_supplier" AutoGenerateColumns="False" ItemsSource="{Binding listSupplier}" SelectedItem="{Binding Selecteddata,Mode=TwoWay}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="1*" Header="staff_id" Binding="{Binding supplier_id}"/>
+                        <DataGridTextColumn Width="1*" Header="firstname" Binding="{Binding company_name}"/>
+                        <DataGridTextColumn Width="1*" Header="lastname" Binding="{Binding contact_person}"/>
+                        <DataGridTextColumn Width="1*" Header="aka" Binding="{Binding address}"/>
+                        <DataGridTextColumn Width="1*" Header="start_date" Binding="{Binding email}"/>
+                        <DataGridTextColumn Width="1*" Header="end_date" Binding="{Binding phone}"/>
+                        <DataGridTextColumn Width="1*" Header="is_active" Binding="{Binding is_active}"/>
+                        <DataGridTextColumn Width="1*" Header="create_date" Binding="{Binding create_date}"/>
+                        <DataGridTextColumn Width="1*" Header="modified_date" Binding="{Binding modified_date}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

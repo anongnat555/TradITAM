@@ -1,0 +1,693 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TradAssetDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="asset">
+          <Key>
+            <PropertyRef Name="asset_id" />
+          </Key>
+          <Property Name="asset_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="os_id" Type="int" />
+          <Property Name="asset_type_id" Type="int" />
+          <Property Name="original_supplier_id" Type="int" />
+          <Property Name="supplier_id" Type="int" />
+          <Property Name="using_by_staff_id" Type="int" />
+          <Property Name="asset_code" Type="varchar" MaxLength="50" />
+          <Property Name="brand" Type="varchar" MaxLength="100" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="cpu" Type="varchar" MaxLength="100" />
+          <Property Name="ram" Type="varchar" MaxLength="100" />
+          <Property Name="hdd" Type="varchar" MaxLength="100" />
+          <Property Name="notes" Type="text" />
+          <Property Name="start_date_warranty" Type="date" />
+          <Property Name="expiry_date_warranty" Type="date" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="asset_history">
+          <Key>
+            <PropertyRef Name="asset_history_id" />
+          </Key>
+          <Property Name="asset_history_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="asset_id" Type="int" />
+          <Property Name="asset_history_type" Type="int" />
+          <Property Name="remark" Type="text" />
+          <Property Name="history_timestamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="asset_history_type">
+          <Key>
+            <PropertyRef Name="asset_history_type_id" />
+          </Key>
+          <Property Name="asset_history_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type_code" Type="varchar" MaxLength="100" />
+          <Property Name="type_description" Type="text" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="asset_type">
+          <Key>
+            <PropertyRef Name="asset_type_id" />
+          </Key>
+          <Property Name="asset_type_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="asset_type_name" Type="varchar" MaxLength="100" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="history_id" />
+          </Key>
+          <Property Name="history_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" />
+          <Property Name="references_id" Type="int" />
+          <Property Name="detail" Type="text" />
+          <Property Name="history_timestamp" Type="datetime" />
+          <Property Name="history_type" Type="int" />
+        </EntityType>
+        <EntityType Name="os">
+          <Key>
+            <PropertyRef Name="os_id" />
+          </Key>
+          <Property Name="os_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="os_name" Type="varchar" MaxLength="100" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstname" Type="varchar" MaxLength="100" />
+          <Property Name="lastname" Type="varchar" MaxLength="100" />
+          <Property Name="aka" Type="varchar" MaxLength="50" />
+          <Property Name="start_date" Type="date" />
+          <Property Name="end_date" Type="date" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="company_name" Type="varchar" MaxLength="200" />
+          <Property Name="contact_person" Type="varchar" MaxLength="200" />
+          <Property Name="address" Type="varchar" MaxLength="400" />
+          <Property Name="email" Type="varchar" MaxLength="200" />
+          <Property Name="phone" Type="varchar" MaxLength="20" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="user_login">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar" MaxLength="128" />
+          <Property Name="user_role" Type="int" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="create_date" Type="datetime" />
+          <Property Name="modified_date" Type="datetime" />
+        </EntityType>
+        <Association Name="asset_history_id_FK">
+          <End Role="user_login" Type="Self.user_login" Multiplicity="0..1" />
+          <End Role="asset_history" Type="Self.asset_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_login">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="asset_history">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asset_history_type_FK">
+          <End Role="asset_history_type" Type="Self.asset_history_type" Multiplicity="0..1" />
+          <End Role="asset_history" Type="Self.asset_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="asset_history_type">
+              <PropertyRef Name="asset_history_type_id" />
+            </Principal>
+            <Dependent Role="asset_history">
+              <PropertyRef Name="asset_history_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asset_type_id_FK">
+          <End Role="asset_type" Type="Self.asset_type" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="asset_type">
+              <PropertyRef Name="asset_type_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="asset_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="historye_user_id_FK">
+          <End Role="user_login" Type="Self.user_login" Multiplicity="0..1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_login">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="original_supplier_id_FK">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="original_supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="os_id_FK">
+          <End Role="os" Type="Self.os" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="os">
+              <PropertyRef Name="os_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="os_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="supplier_id_FK">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="using_by_staff_id_FK">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="using_by_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TradAssetDBModelStoreContainer">
+          <EntitySet Name="asset" EntityType="Self.asset" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="asset_history" EntityType="Self.asset_history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="asset_history_type" EntityType="Self.asset_history_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="asset_type" EntityType="Self.asset_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="history" EntityType="Self.history" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="os" EntityType="Self.os" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="user_login" EntityType="Self.user_login" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="asset_history_id_FK" Association="Self.asset_history_id_FK">
+            <End Role="user_login" EntitySet="user_login" />
+            <End Role="asset_history" EntitySet="asset_history" />
+          </AssociationSet>
+          <AssociationSet Name="asset_history_type_FK" Association="Self.asset_history_type_FK">
+            <End Role="asset_history_type" EntitySet="asset_history_type" />
+            <End Role="asset_history" EntitySet="asset_history" />
+          </AssociationSet>
+          <AssociationSet Name="asset_type_id_FK" Association="Self.asset_type_id_FK">
+            <End Role="asset_type" EntitySet="asset_type" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="historye_user_id_FK" Association="Self.historye_user_id_FK">
+            <End Role="user_login" EntitySet="user_login" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+          <AssociationSet Name="original_supplier_id_FK" Association="Self.original_supplier_id_FK">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="os_id_FK" Association="Self.os_id_FK">
+            <End Role="os" EntitySet="os" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="supplier_id_FK" Association="Self.supplier_id_FK">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="using_by_staff_id_FK" Association="Self.using_by_staff_id_FK">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TradAssetDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="asset">
+          <Key>
+            <PropertyRef Name="asset_id" />
+          </Key>
+          <Property Name="asset_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="os_id" Type="Int32" />
+          <Property Name="asset_type_id" Type="Int32" />
+          <Property Name="original_supplier_id" Type="Int32" />
+          <Property Name="supplier_id" Type="Int32" />
+          <Property Name="using_by_staff_id" Type="Int32" />
+          <Property Name="asset_code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="brand" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="cpu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ram" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="hdd" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="start_date_warranty" Type="DateTime" Precision="0" />
+          <Property Name="expiry_date_warranty" Type="DateTime" Precision="0" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asset_type" Relationship="Self.asset_type_id_FK" FromRole="asset" ToRole="asset_type" />
+          <NavigationProperty Name="supplier" Relationship="Self.original_supplier_id_FK" FromRole="asset" ToRole="supplier" />
+          <NavigationProperty Name="os" Relationship="Self.os_id_FK" FromRole="asset" ToRole="os" />
+          <NavigationProperty Name="supplier1" Relationship="Self.supplier_id_FK" FromRole="asset" ToRole="supplier" />
+          <NavigationProperty Name="staff" Relationship="Self.using_by_staff_id_FK" FromRole="asset" ToRole="staff" />
+        </EntityType>
+        <EntityType Name="asset_history">
+          <Key>
+            <PropertyRef Name="asset_history_id" />
+          </Key>
+          <Property Name="asset_history_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="asset_id" Type="Int32" />
+          <Property Name="asset_history_type" Type="Int32" />
+          <Property Name="remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="history_timestamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="user_login" Relationship="Self.asset_history_id_FK" FromRole="asset_history" ToRole="user_login" />
+          <NavigationProperty Name="asset_history_type1" Relationship="Self.asset_history_type_FK" FromRole="asset_history" ToRole="asset_history_type" />
+        </EntityType>
+        <EntityType Name="asset_history_type">
+          <Key>
+            <PropertyRef Name="asset_history_type_id" />
+          </Key>
+          <Property Name="asset_history_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type_code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="type_description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asset_history" Relationship="Self.asset_history_type_FK" FromRole="asset_history_type" ToRole="asset_history" />
+        </EntityType>
+        <EntityType Name="asset_type">
+          <Key>
+            <PropertyRef Name="asset_type_id" />
+          </Key>
+          <Property Name="asset_type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="asset_type_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asset" Relationship="Self.asset_type_id_FK" FromRole="asset_type" ToRole="asset" />
+        </EntityType>
+        <EntityType Name="history">
+          <Key>
+            <PropertyRef Name="history_id" />
+          </Key>
+          <Property Name="history_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" />
+          <Property Name="references_id" Type="Int32" />
+          <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="history_timestamp" Type="DateTime" Precision="3" />
+          <Property Name="history_type" Type="Int32" />
+          <NavigationProperty Name="user_login" Relationship="Self.historye_user_id_FK" FromRole="history" ToRole="user_login" />
+        </EntityType>
+        <EntityType Name="os">
+          <Key>
+            <PropertyRef Name="os_id" />
+          </Key>
+          <Property Name="os_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="os_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asset" Relationship="Self.os_id_FK" FromRole="os" ToRole="asset" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="lastname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="aka" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="start_date" Type="DateTime" Precision="0" />
+          <Property Name="end_date" Type="DateTime" Precision="0" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asset" Relationship="Self.using_by_staff_id_FK" FromRole="staff" ToRole="asset" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="company_name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="contact_person" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asset" Relationship="Self.original_supplier_id_FK" FromRole="supplier" ToRole="asset" />
+          <NavigationProperty Name="asset1" Relationship="Self.supplier_id_FK" FromRole="supplier" ToRole="asset" />
+        </EntityType>
+        <EntityType Name="user_login">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="user_role" Type="Int32" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="create_date" Type="DateTime" Precision="3" />
+          <Property Name="modified_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asset_history" Relationship="Self.asset_history_id_FK" FromRole="user_login" ToRole="asset_history" />
+          <NavigationProperty Name="history" Relationship="Self.historye_user_id_FK" FromRole="user_login" ToRole="history" />
+        </EntityType>
+        <Association Name="asset_type_id_FK">
+          <End Role="asset_type" Type="Self.asset_type" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="asset_type">
+              <PropertyRef Name="asset_type_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="asset_type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="original_supplier_id_FK">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="original_supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="os_id_FK">
+          <End Role="os" Type="Self.os" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="os">
+              <PropertyRef Name="os_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="os_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="supplier_id_FK">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="using_by_staff_id_FK">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="asset">
+              <PropertyRef Name="using_by_staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asset_history_id_FK">
+          <End Role="user_login" Type="Self.user_login" Multiplicity="0..1" />
+          <End Role="asset_history" Type="Self.asset_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_login">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="asset_history">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="asset_history_type_FK">
+          <End Role="asset_history_type" Type="Self.asset_history_type" Multiplicity="0..1" />
+          <End Role="asset_history" Type="Self.asset_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="asset_history_type">
+              <PropertyRef Name="asset_history_type_id" />
+            </Principal>
+            <Dependent Role="asset_history">
+              <PropertyRef Name="asset_history_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="historye_user_id_FK">
+          <End Role="user_login" Type="Self.user_login" Multiplicity="0..1" />
+          <End Role="history" Type="Self.history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user_login">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="history">
+              <PropertyRef Name="user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TradAssetDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="asset" EntityType="Self.asset" />
+          <EntitySet Name="asset_history" EntityType="Self.asset_history" />
+          <EntitySet Name="asset_history_type" EntityType="Self.asset_history_type" />
+          <EntitySet Name="asset_type" EntityType="Self.asset_type" />
+          <EntitySet Name="history" EntityType="Self.history" />
+          <EntitySet Name="os" EntityType="Self.os" />
+          <EntitySet Name="staff" EntityType="Self.staff" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" />
+          <EntitySet Name="user_login" EntityType="Self.user_login" />
+          <AssociationSet Name="asset_type_id_FK" Association="Self.asset_type_id_FK">
+            <End Role="asset_type" EntitySet="asset_type" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="original_supplier_id_FK" Association="Self.original_supplier_id_FK">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="os_id_FK" Association="Self.os_id_FK">
+            <End Role="os" EntitySet="os" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="supplier_id_FK" Association="Self.supplier_id_FK">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="using_by_staff_id_FK" Association="Self.using_by_staff_id_FK">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="asset" EntitySet="asset" />
+          </AssociationSet>
+          <AssociationSet Name="asset_history_id_FK" Association="Self.asset_history_id_FK">
+            <End Role="user_login" EntitySet="user_login" />
+            <End Role="asset_history" EntitySet="asset_history" />
+          </AssociationSet>
+          <AssociationSet Name="asset_history_type_FK" Association="Self.asset_history_type_FK">
+            <End Role="asset_history_type" EntitySet="asset_history_type" />
+            <End Role="asset_history" EntitySet="asset_history" />
+          </AssociationSet>
+          <AssociationSet Name="historye_user_id_FK" Association="Self.historye_user_id_FK">
+            <End Role="user_login" EntitySet="user_login" />
+            <End Role="history" EntitySet="history" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TradAssetDBModelStoreContainer" CdmEntityContainer="TradAssetDBEntities">
+          <EntitySetMapping Name="asset">
+            <EntityTypeMapping TypeName="TradAssetDBModel.asset">
+              <MappingFragment StoreEntitySet="asset">
+                <ScalarProperty Name="asset_id" ColumnName="asset_id" />
+                <ScalarProperty Name="os_id" ColumnName="os_id" />
+                <ScalarProperty Name="asset_type_id" ColumnName="asset_type_id" />
+                <ScalarProperty Name="original_supplier_id" ColumnName="original_supplier_id" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="using_by_staff_id" ColumnName="using_by_staff_id" />
+                <ScalarProperty Name="asset_code" ColumnName="asset_code" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="cpu" ColumnName="cpu" />
+                <ScalarProperty Name="ram" ColumnName="ram" />
+                <ScalarProperty Name="hdd" ColumnName="hdd" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="start_date_warranty" ColumnName="start_date_warranty" />
+                <ScalarProperty Name="expiry_date_warranty" ColumnName="expiry_date_warranty" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="asset_history">
+            <EntityTypeMapping TypeName="TradAssetDBModel.asset_history">
+              <MappingFragment StoreEntitySet="asset_history">
+                <ScalarProperty Name="asset_history_id" ColumnName="asset_history_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="asset_id" ColumnName="asset_id" />
+                <ScalarProperty Name="asset_history_type" ColumnName="asset_history_type" />
+                <ScalarProperty Name="remark" ColumnName="remark" />
+                <ScalarProperty Name="history_timestamp" ColumnName="history_timestamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="asset_history_type">
+            <EntityTypeMapping TypeName="TradAssetDBModel.asset_history_type">
+              <MappingFragment StoreEntitySet="asset_history_type">
+                <ScalarProperty Name="asset_history_type_id" ColumnName="asset_history_type_id" />
+                <ScalarProperty Name="type_code" ColumnName="type_code" />
+                <ScalarProperty Name="type_description" ColumnName="type_description" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="asset_type">
+            <EntityTypeMapping TypeName="TradAssetDBModel.asset_type">
+              <MappingFragment StoreEntitySet="asset_type">
+                <ScalarProperty Name="asset_type_id" ColumnName="asset_type_id" />
+                <ScalarProperty Name="asset_type_name" ColumnName="asset_type_name" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="history">
+            <EntityTypeMapping TypeName="TradAssetDBModel.history">
+              <MappingFragment StoreEntitySet="history">
+                <ScalarProperty Name="history_id" ColumnName="history_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="references_id" ColumnName="references_id" />
+                <ScalarProperty Name="detail" ColumnName="detail" />
+                <ScalarProperty Name="history_timestamp" ColumnName="history_timestamp" />
+                <ScalarProperty Name="history_type" ColumnName="history_type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="os">
+            <EntityTypeMapping TypeName="TradAssetDBModel.os">
+              <MappingFragment StoreEntitySet="os">
+                <ScalarProperty Name="os_id" ColumnName="os_id" />
+                <ScalarProperty Name="os_name" ColumnName="os_name" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff">
+            <EntityTypeMapping TypeName="TradAssetDBModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="aka" ColumnName="aka" />
+                <ScalarProperty Name="start_date" ColumnName="start_date" />
+                <ScalarProperty Name="end_date" ColumnName="end_date" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplier">
+            <EntityTypeMapping TypeName="TradAssetDBModel.supplier">
+              <MappingFragment StoreEntitySet="supplier">
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="company_name" ColumnName="company_name" />
+                <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_login">
+            <EntityTypeMapping TypeName="TradAssetDBModel.user_login">
+              <MappingFragment StoreEntitySet="user_login">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="user_role" ColumnName="user_role" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="create_date" ColumnName="create_date" />
+                <ScalarProperty Name="modified_date" ColumnName="modified_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

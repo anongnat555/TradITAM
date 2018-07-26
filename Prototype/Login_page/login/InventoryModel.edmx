@@ -1,0 +1,607 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="inventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin_login">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'inventory.dbo.fix_history' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="fix_history">
+          <Key>
+            <PropertyRef Name="status" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="supplier_id" Type="varchar" MaxLength="10" />
+          <Property Name="item_id" Type="varchar" MaxLength="10" />
+          <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="brand" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="series" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="is_active" Type="bit" />
+          <Property Name="insurance_start" Type="date" />
+          <Property Name="insurance_end" Type="date" />
+          <Property Name="type_id" Type="int" />
+          <Property Name="staff_id" Type="varchar" MaxLength="10" />
+          <Property Name="supplier_id" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="item_type">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'inventory.dbo.pc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="pc">
+          <Key>
+            <PropertyRef Name="pc_id" />
+          </Key>
+          <Property Name="pc_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="os" Type="varchar" MaxLength="30" />
+          <Property Name="cpu" Type="varchar" MaxLength="30" />
+          <Property Name="ram" Type="varchar" MaxLength="30" />
+          <Property Name="hdd" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'inventory.dbo.require_history' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="require_history">
+          <Key>
+            <PropertyRef Name="status" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="staff_id" Type="varchar" MaxLength="10" />
+          <Property Name="item_id" Type="varchar" MaxLength="10" />
+          <Property Name="status" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="description" Type="text" />
+          <Property Name="date" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="text" />
+          <Property Name="phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="address" Type="text" />
+          <Property Name="contact_person" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__fix_histo__item___45F365D3">
+          <End Role="item" Type="Self.item" Multiplicity="0..1" />
+          <End Role="fix_history" Type="Self.fix_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="item_id" />
+            </Principal>
+            <Dependent Role="fix_history">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fix_histo__suppl__44FF419A">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="fix_history" Type="Self.fix_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="fix_history">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__item__staff_id__403A8C7D">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__item__supplier_i__412EB0B6">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__item__type_id__3F466844">
+          <End Role="item_type" Type="Self.item_type" Multiplicity="0..1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_type">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pc__pc_id__4316F928">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="pc" Type="Self.pc" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="item_id" />
+            </Principal>
+            <Dependent Role="pc">
+              <PropertyRef Name="pc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__require_h__item___48CFD27E">
+          <End Role="item" Type="Self.item" Multiplicity="0..1" />
+          <End Role="require_history" Type="Self.require_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="item_id" />
+            </Principal>
+            <Dependent Role="require_history">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__require_h__staff__47DBAE45">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="require_history" Type="Self.require_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="require_history">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="inventoryModelStoreContainer">
+          <EntitySet Name="admin_login" EntityType="Self.admin_login" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="item" EntityType="Self.item" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="item_type" EntityType="Self.item_type" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="staff" EntityType="Self.staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="fix_history" EntityType="Self.fix_history" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [fix_history].[supplier_id] AS [supplier_id], 
+    [fix_history].[item_id] AS [item_id], 
+    [fix_history].[status] AS [status], 
+    [fix_history].[description] AS [description], 
+    [fix_history].[date] AS [date]
+    FROM [dbo].[fix_history] AS [fix_history]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="pc" EntityType="Self.pc" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [pc].[pc_id] AS [pc_id], 
+    [pc].[os] AS [os], 
+    [pc].[cpu] AS [cpu], 
+    [pc].[ram] AS [ram], 
+    [pc].[hdd] AS [hdd]
+    FROM [dbo].[pc] AS [pc]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="require_history" EntityType="Self.require_history" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [require_history].[staff_id] AS [staff_id], 
+    [require_history].[item_id] AS [item_id], 
+    [require_history].[status] AS [status], 
+    [require_history].[description] AS [description], 
+    [require_history].[date] AS [date]
+    FROM [dbo].[require_history] AS [require_history]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__fix_histo__item___45F365D3" Association="Self.FK__fix_histo__item___45F365D3">
+            <End Role="item" EntitySet="item" />
+            <End Role="fix_history" EntitySet="fix_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fix_histo__suppl__44FF419A" Association="Self.FK__fix_histo__suppl__44FF419A">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="fix_history" EntitySet="fix_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__item__staff_id__403A8C7D" Association="Self.FK__item__staff_id__403A8C7D">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__item__supplier_i__412EB0B6" Association="Self.FK__item__supplier_i__412EB0B6">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__item__type_id__3F466844" Association="Self.FK__item__type_id__3F466844">
+            <End Role="item_type" EntitySet="item_type" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pc__pc_id__4316F928" Association="Self.FK__pc__pc_id__4316F928">
+            <End Role="item" EntitySet="item" />
+            <End Role="pc" EntitySet="pc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__require_h__item___48CFD27E" Association="Self.FK__require_h__item___48CFD27E">
+            <End Role="item" EntitySet="item" />
+            <End Role="require_history" EntitySet="require_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__require_h__staff__47DBAE45" Association="Self.FK__require_h__staff__47DBAE45">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="require_history" EntitySet="require_history" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="inventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin_login">
+          <Key>
+            <PropertyRef Name="admin_id" />
+          </Key>
+          <Property Name="admin_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="item_id" />
+          </Key>
+          <Property Name="item_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="brand" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="series" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="is_active" Type="Boolean" />
+          <Property Name="insurance_start" Type="DateTime" Precision="0" />
+          <Property Name="insurance_end" Type="DateTime" Precision="0" />
+          <Property Name="type_id" Type="Int32" />
+          <Property Name="staff_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="supplier_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fix_history" Relationship="Self.FK__fix_histo__item___45F365D3" FromRole="item" ToRole="fix_history" />
+          <NavigationProperty Name="staff" Relationship="Self.FK__item__staff_id__403A8C7D" FromRole="item" ToRole="staff" />
+          <NavigationProperty Name="supplier" Relationship="Self.FK__item__supplier_i__412EB0B6" FromRole="item" ToRole="supplier" />
+          <NavigationProperty Name="item_type" Relationship="Self.FK__item__type_id__3F466844" FromRole="item" ToRole="item_type" />
+          <NavigationProperty Name="pc" Relationship="Self.FK__pc__pc_id__4316F928" FromRole="item" ToRole="pc" />
+          <NavigationProperty Name="require_history" Relationship="Self.FK__require_h__item___48CFD27E" FromRole="item" ToRole="require_history" />
+        </EntityType>
+        <EntityType Name="item_type">
+          <Key>
+            <PropertyRef Name="type_id" />
+          </Key>
+          <Property Name="type_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="item" Relationship="Self.FK__item__type_id__3F466844" FromRole="item_type" ToRole="item" />
+        </EntityType>
+        <EntityType Name="staff">
+          <Key>
+            <PropertyRef Name="staff_id" />
+          </Key>
+          <Property Name="staff_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="item" Relationship="Self.FK__item__staff_id__403A8C7D" FromRole="staff" ToRole="item" />
+          <NavigationProperty Name="require_history" Relationship="Self.FK__require_h__staff__47DBAE45" FromRole="staff" ToRole="require_history" />
+        </EntityType>
+        <EntityType Name="supplier">
+          <Key>
+            <PropertyRef Name="supplier_id" />
+          </Key>
+          <Property Name="supplier_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="contact_person" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="item" Relationship="Self.FK__item__supplier_i__412EB0B6" FromRole="supplier" ToRole="item" />
+          <NavigationProperty Name="fix_history" Relationship="Self.FK__fix_histo__suppl__44FF419A" FromRole="supplier" ToRole="fix_history" />
+        </EntityType>
+        <EntityType Name="fix_history">
+          <Key>
+            <PropertyRef Name="status" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="supplier_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="item_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="item" Relationship="Self.FK__fix_histo__item___45F365D3" FromRole="fix_history" ToRole="item" />
+          <NavigationProperty Name="supplier" Relationship="Self.FK__fix_histo__suppl__44FF419A" FromRole="fix_history" ToRole="supplier" />
+        </EntityType>
+        <EntityType Name="pc">
+          <Key>
+            <PropertyRef Name="pc_id" />
+          </Key>
+          <Property Name="pc_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="os" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="cpu" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ram" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="hdd" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="item" Relationship="Self.FK__pc__pc_id__4316F928" FromRole="pc" ToRole="item" />
+        </EntityType>
+        <EntityType Name="require_history">
+          <Key>
+            <PropertyRef Name="status" />
+            <PropertyRef Name="date" />
+          </Key>
+          <Property Name="staff_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="item_id" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="item" Relationship="Self.FK__require_h__item___48CFD27E" FromRole="require_history" ToRole="item" />
+          <NavigationProperty Name="staff" Relationship="Self.FK__require_h__staff__47DBAE45" FromRole="require_history" ToRole="staff" />
+        </EntityType>
+        <Association Name="FK__fix_histo__item___45F365D3">
+          <End Role="item" Type="Self.item" Multiplicity="0..1" />
+          <End Role="fix_history" Type="Self.fix_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="item_id" />
+            </Principal>
+            <Dependent Role="fix_history">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__item__staff_id__403A8C7D">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__item__supplier_i__412EB0B6">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__item__type_id__3F466844">
+          <End Role="item_type" Type="Self.item_type" Multiplicity="0..1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item_type">
+              <PropertyRef Name="type_id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="type_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__pc__pc_id__4316F928">
+          <End Role="item" Type="Self.item" Multiplicity="1" />
+          <End Role="pc" Type="Self.pc" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="item_id" />
+            </Principal>
+            <Dependent Role="pc">
+              <PropertyRef Name="pc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__require_h__item___48CFD27E">
+          <End Role="item" Type="Self.item" Multiplicity="0..1" />
+          <End Role="require_history" Type="Self.require_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="item">
+              <PropertyRef Name="item_id" />
+            </Principal>
+            <Dependent Role="require_history">
+              <PropertyRef Name="item_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__require_h__staff__47DBAE45">
+          <End Role="staff" Type="Self.staff" Multiplicity="0..1" />
+          <End Role="require_history" Type="Self.require_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="staff">
+              <PropertyRef Name="staff_id" />
+            </Principal>
+            <Dependent Role="require_history">
+              <PropertyRef Name="staff_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fix_histo__suppl__44FF419A">
+          <End Role="supplier" Type="Self.supplier" Multiplicity="0..1" />
+          <End Role="fix_history" Type="Self.fix_history" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="supplier">
+              <PropertyRef Name="supplier_id" />
+            </Principal>
+            <Dependent Role="fix_history">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="inventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admin_login" EntityType="Self.admin_login" />
+          <EntitySet Name="item" EntityType="Self.item" />
+          <EntitySet Name="item_type" EntityType="Self.item_type" />
+          <EntitySet Name="staff" EntityType="Self.staff" />
+          <EntitySet Name="supplier" EntityType="Self.supplier" />
+          <EntitySet Name="fix_history" EntityType="Self.fix_history" />
+          <EntitySet Name="pc" EntityType="Self.pc" />
+          <EntitySet Name="require_history" EntityType="Self.require_history" />
+          <AssociationSet Name="FK__fix_histo__item___45F365D3" Association="Self.FK__fix_histo__item___45F365D3">
+            <End Role="item" EntitySet="item" />
+            <End Role="fix_history" EntitySet="fix_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__item__staff_id__403A8C7D" Association="Self.FK__item__staff_id__403A8C7D">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__item__supplier_i__412EB0B6" Association="Self.FK__item__supplier_i__412EB0B6">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__item__type_id__3F466844" Association="Self.FK__item__type_id__3F466844">
+            <End Role="item_type" EntitySet="item_type" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FK__pc__pc_id__4316F928" Association="Self.FK__pc__pc_id__4316F928">
+            <End Role="item" EntitySet="item" />
+            <End Role="pc" EntitySet="pc" />
+          </AssociationSet>
+          <AssociationSet Name="FK__require_h__item___48CFD27E" Association="Self.FK__require_h__item___48CFD27E">
+            <End Role="item" EntitySet="item" />
+            <End Role="require_history" EntitySet="require_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__require_h__staff__47DBAE45" Association="Self.FK__require_h__staff__47DBAE45">
+            <End Role="staff" EntitySet="staff" />
+            <End Role="require_history" EntitySet="require_history" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fix_histo__suppl__44FF419A" Association="Self.FK__fix_histo__suppl__44FF419A">
+            <End Role="supplier" EntitySet="supplier" />
+            <End Role="fix_history" EntitySet="fix_history" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="inventoryModelStoreContainer" CdmEntityContainer="inventoryEntities">
+          <EntitySetMapping Name="admin_login">
+            <EntityTypeMapping TypeName="inventoryModel.admin_login">
+              <MappingFragment StoreEntitySet="admin_login">
+                <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item">
+            <EntityTypeMapping TypeName="inventoryModel.item">
+              <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="series" ColumnName="series" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="is_active" ColumnName="is_active" />
+                <ScalarProperty Name="insurance_start" ColumnName="insurance_start" />
+                <ScalarProperty Name="insurance_end" ColumnName="insurance_end" />
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item_type">
+            <EntityTypeMapping TypeName="inventoryModel.item_type">
+              <MappingFragment StoreEntitySet="item_type">
+                <ScalarProperty Name="type_id" ColumnName="type_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="staff">
+            <EntityTypeMapping TypeName="inventoryModel.staff">
+              <MappingFragment StoreEntitySet="staff">
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="supplier">
+            <EntityTypeMapping TypeName="inventoryModel.supplier">
+              <MappingFragment StoreEntitySet="supplier">
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="contact_person" ColumnName="contact_person" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fix_history">
+            <EntityTypeMapping TypeName="inventoryModel.fix_history">
+              <MappingFragment StoreEntitySet="fix_history">
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="pc">
+            <EntityTypeMapping TypeName="inventoryModel.pc">
+              <MappingFragment StoreEntitySet="pc">
+                <ScalarProperty Name="pc_id" ColumnName="pc_id" />
+                <ScalarProperty Name="os" ColumnName="os" />
+                <ScalarProperty Name="cpu" ColumnName="cpu" />
+                <ScalarProperty Name="ram" ColumnName="ram" />
+                <ScalarProperty Name="hdd" ColumnName="hdd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="require_history">
+            <EntityTypeMapping TypeName="inventoryModel.require_history">
+              <MappingFragment StoreEntitySet="require_history">
+                <ScalarProperty Name="staff_id" ColumnName="staff_id" />
+                <ScalarProperty Name="item_id" ColumnName="item_id" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
