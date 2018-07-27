@@ -67,7 +67,7 @@ namespace TradITAM.Model
                 TradAssetDBEntities db = new TradAssetDBEntities();
                 var data = new staff()
                 {
-                    staff_id = item.staff_id,
+                    //staff_id = item.staff_id,
                     firstname = item.firstname,
                     lastname = item.lastname,
                     aka = item.aka,
@@ -136,7 +136,7 @@ namespace TradITAM.Model
                     asset_id = item.Asset_id,
                     asset_history_type = item.Asset_history_type,
                     remark = item.Remark,
-                    history_timestamp = DateTime.Now
+                    history_timestamp = item.History_timestamp
                 };
                 db.asset_history.Add(data);
                 db.SaveChanges();

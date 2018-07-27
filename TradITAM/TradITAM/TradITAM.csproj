@@ -122,9 +122,11 @@
     <Compile Include="Model\AssetTypeData.cs" />
     <Compile Include="Model\DataAccess.cs" />
     <Compile Include="Model\InsertAccess.cs" />
+    <Compile Include="Model\LoginAccess.cs" />
     <Compile Include="Model\OsData.cs" />
     <Compile Include="Model\SupplierData.cs" />
     <Compile Include="Model\UpdateAccess.cs" />
+    <Compile Include="Model\UserData.cs" />
     <Compile Include="os.cs">
       <DependentUpon>TradAssetDB.tt</DependentUpon>
     </Compile>
@@ -156,6 +158,7 @@
     <Compile Include="ViewModel\AddStaffWindowViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierWindowViewModel.cs" />
     <Compile Include="ViewModel\CreateWindowViewModel.cs" />
+    <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\RegisterWindowViewModel.cs" />
     <Compile Include="Model\StaffData.cs" />
     <Compile Include="ViewModel\ReportWindowViewModel.cs" />

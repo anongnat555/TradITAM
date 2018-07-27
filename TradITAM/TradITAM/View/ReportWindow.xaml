@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradITAM.View"
         mc:Ignorable="d"
-           Title="TradITAM - Asset Report" Height="600" Width="820" WindowStartupLocation="CenterScreen">
+        xmlns:vmx="clr-namespace:TradITAM.ViewModel"
+        d:DataContext="{d:DesignInstance Type=vmx:ReportWindowViewModel}"
+        Title="TradITAM - Asset Report" Height="600" Width="820" WindowStartupLocation="CenterScreen">
     <Grid>
         <ScrollViewer>
             <StackPanel VerticalAlignment="Stretch" Margin="10">

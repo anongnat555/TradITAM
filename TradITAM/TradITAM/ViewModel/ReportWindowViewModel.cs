@@ -779,10 +779,11 @@ namespace TradITAM.ViewModel
 
         public void AddReport(Object o)
         {
-            SelectedAssetHistory.User_id = Staff_id;
             SelectedAssetHistory.Asset_id = Asset_id;
+            SelectedAssetHistory.User_id = 1;
             SelectedAssetHistory.Asset_history_type = SelectedAssetHistoryType.Asset_history_type_id;
             SelectedAssetHistory.Remark = Remark;
+            SelectedAssetHistory.History_timestamp = DateTime.Now;
 
             var addassethistory = new InsertAccess();
             addassethistory.AddAssetHistory(SelectedAssetHistory);

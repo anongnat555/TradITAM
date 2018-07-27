@@ -26,42 +26,7 @@ namespace TradITAM.View
         public LoginWindow()
         {
             InitializeComponent();
-        }
-
-        private void Button_Login(object sender, RoutedEventArgs e)
-        {
-            SqlConnection sqlCon = new SqlConnection(@"Data Source=DESKTOP-9JV8U4M\MSSQLSERVER02; Initial Catalog=TradAssetDB; Integrated Security=True;");
-            try
-            {
-                if (sqlCon.State == ConnectionState.Closed)
-                    sqlCon.Open();
-                string query = "SELECT COUNT(1) FROM user_login WHERE username = @username AND password = @password";
-                SqlCommand sqlCmd = new SqlCommand(query, sqlCon);
-                sqlCmd.CommandType = CommandType.Text;
-                sqlCmd.Parameters.AddWithValue("@username", txtadmin_id.Text);
-                sqlCmd.Parameters.AddWithValue("@password", txtpassword.Password);
-                int count = Convert.ToInt32(sqlCmd.ExecuteScalar());
-                if (count == 1)
-                {
-                    MainWindow dashboard = new MainWindow();
-                    //((MainWindowViewModel)dashboard.DataContext).setstr("Hello");
-                    dashboard.Show();
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid username or password");
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                sqlCon.Close();
-            }
+            this.DataContext = new LoginWindowViewModel();
         }
 
         private void Button_Close(object sender, RoutedEventArgs e)

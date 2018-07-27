@@ -18,14 +18,16 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> EditAssetEvent { get; set; }
         public DelegateCommand<object> EditStaffEvent { get; set; }
         public DelegateCommand<object> EditSupplierEvent { get; set; }
-        public MainWindowViewModel()
+        public MainWindowViewModel(UserData UserList)
         {
             EditAssetEvent = new DelegateCommand<object>(EditAsset);
             EditStaffEvent = new DelegateCommand<object>(EditStaff);
             EditSupplierEvent = new DelegateCommand<object>(EditSupplier);
+
             LoadStaff();
             LoadAsset();
             LoadSupplier();
+            LoadUser(UserList);
         }
 
         #region call dataaccess
@@ -169,6 +171,30 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region Load User
+        private int _user_id;
+        public int User_id
+        {
+            get { return _user_id; }
+            set
+            {
+                _user_id = value;
+                OnPropertyChanged("User_id");
+            }
+        }
+
+        private string _username;
+        public string Username
+        {
+            get { return _username; }
+            set
+            {
+                _username = value;
+                OnPropertyChanged("Username");
+            }
+        }
+        #endregion
+
         #region Methods 
         public void LoadAsset()
         {
@@ -196,6 +222,12 @@ namespace TradITAM.ViewModel
 
             //SupplierCollectionView.MoveCurrentToFirst();
             SelectedSupplier = (SupplierData)SupplierCollectionView.CurrentItem;
+        }
+
+        public void LoadUser(UserData Userlist)
+        {
+            User_id = Userlist.User_id;
+            Username = Userlist.Username;
         }
         #endregion
     }

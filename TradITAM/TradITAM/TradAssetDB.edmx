@@ -458,8 +458,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="asset_history_id_FK">
-          <End Role="user_login" Type="Self.user_login" Multiplicity="0..1" />
-          <End Role="asset_history" Type="Self.asset_history" Multiplicity="*" />
+          <End Type="Self.user_login" Multiplicity="0..1" Role="user_login" />
+          <End Type="Self.asset_history" Multiplicity="*" Role="asset_history" />
           <ReferentialConstraint>
             <Principal Role="user_login">
               <PropertyRef Name="user_id" />
@@ -524,8 +524,8 @@
             <End Role="asset" EntitySet="asset" />
           </AssociationSet>
           <AssociationSet Name="asset_history_id_FK" Association="Self.asset_history_id_FK">
-            <End Role="user_login" EntitySet="user_login" />
-            <End Role="asset_history" EntitySet="asset_history" />
+            <End EntitySet="user_login" Role="user_login" />
+            <End EntitySet="asset_history" Role="asset_history" />
           </AssociationSet>
           <AssociationSet Name="asset_history_type_FK" Association="Self.asset_history_type_FK">
             <End Role="asset_history_type" EntitySet="asset_history_type" />

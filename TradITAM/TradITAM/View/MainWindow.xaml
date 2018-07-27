@@ -52,53 +52,14 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <!--<StackPanel Orientation="Horizontal" Margin="10,0,0,0">
-                    <wpfx:DropDownButton Content=" File" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <wpfx:DropDownButton.DropDownContent>
-                            <ListBox Cursor="Hand">
-                                <ListBoxItem Content="Export to excel" />
-                                <ListBoxItem Content="Export to CSV" />
-                            </ListBox>
-                        </wpfx:DropDownButton.DropDownContent>
-                    </wpfx:DropDownButton>
-                    <wpfx:DropDownButton Content=" Edit" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <wpfx:DropDownButton.DropDownContent>
-                            <ListBox Cursor="Hand">
-                                <ListBoxItem Content="Create" MouseDoubleClick="Button_CreateForm"/>
-                                <ListBoxItem Content="Update" MouseDoubleClick="Button_UpdateForm" />
-                            </ListBox>
-                        </wpfx:DropDownButton.DropDownContent>
-                    </wpfx:DropDownButton>
-                    <wpfx:DropDownButton Content=" View" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <wpfx:DropDownButton.DropDownContent>
-                            <ListBox Cursor="Hand">
-                                <ListBoxItem Content="Item 1" />
-                                <ListBoxItem Content="Item 2" />
-                                <ListBoxItem Content="Item 3" />
-                            </ListBox>
-                        </wpfx:DropDownButton.DropDownContent>
-                    </wpfx:DropDownButton>
-                    <wpfx:DropDownButton Content=" History" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <wpfx:DropDownButton.DropDownContent>
-                            <ListBox Cursor="Hand">
-                                <ListBoxItem Content="Item 1" />
-                                <ListBoxItem Content="Item 2" />
-                                <ListBoxItem Content="Item 3" />
-                            </ListBox>
-                        </wpfx:DropDownButton.DropDownContent>
-                    </wpfx:DropDownButton>
-                </StackPanel>-->
-            </Grid>
             <Grid Grid.Column="1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <materialDesign:PackIcon Kind="AccountCircle" Foreground="#373737" Height="22" Width="22" Margin="0,3,5,0"/>
-                    <wpfx:DropDownButton Content=" Name" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <wpfx:DropDownButton Content="{Binding Username}" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
                         <wpfx:DropDownButton.DropDownContent>
                             <ListBox Cursor="Hand">
-                                <ListBoxItem Content="Item 1" />
-                                <ListBoxItem Content="Item 2" />
-                                <ListBoxItem Content="Item 3" />
+                                <ListBoxItem Content="View ULOG" />
+                                <ListBoxItem Content="Exit" />
                             </ListBox>
                         </wpfx:DropDownButton.DropDownContent>
                     </wpfx:DropDownButton>
@@ -129,8 +90,9 @@
                                 <ComboBox Width="180" Height="22" BorderThickness="1"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
-                                <Button Name="btnAddAsset" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0" Click="btnAddAsset_Click"/>
-                                <Button Content="Edit" Click="Button_EditAsset" Background="#FFC300" BorderBrush="{x:Null}" Width="100"/>
+                                <Button Name="btnAddAsset" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Content="Edit" Click="Button_EditAsset" Background="#FFC300" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Content="Report" Command="{Binding ReportAssetCommand}" Background="Salmon" BorderBrush="{x:Null}" Width="100"/>
                             </StackPanel>
                         </Grid>
                         <DataGrid Grid.Row="1" Margin="10"  Name="dg_asset" IsReadOnly="True" AutoGenerateColumns="False"  
@@ -187,7 +149,6 @@
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
                                 <Button Name="btnAddStaff" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0" Click="btnAddStaff_Click"/>
                                 <Button Name="btnEditStaff" Command="{Binding EditStaffEvent}" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
-                                <Button Click="Button_Report" Content="Report" Background="Salmon" BorderBrush="{x:Null}" Width="100"/>
                             </StackPanel>
                         </Grid>
                         <DataGrid Grid.Row="1" Margin="10"  Name="dg_staff" IsReadOnly="True" AutoGenerateColumns="False" 

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TradITAM.Model;
 using TradITAM.View;
 using TradITAM.ViewModel;
 
@@ -24,22 +25,10 @@ namespace TradITAM
     public partial class MainWindow : Window
     {
 
-        public MainWindow()
+        public MainWindow(UserData UserList)
         {
             InitializeComponent();
-            this.DataContext = new MainWindowViewModel();
-        }
-
-        public void Button_Report(object sender, RoutedEventArgs e)
-        {
-            ReportWindow n = new ReportWindow();
-            n.Show();
-        }
-
-        private void btnAddAsset_Click(object sender, RoutedEventArgs e)
-        {
-            AddAssetWindow n = new AddAssetWindow();
-            n.Show();
+            this.DataContext = new MainWindowViewModel(UserList);
         }
 
         private void btnAddStaff_Click(object sender, RoutedEventArgs e)
