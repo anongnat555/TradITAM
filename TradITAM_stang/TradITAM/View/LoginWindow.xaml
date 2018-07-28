@@ -73,7 +73,15 @@
                         </TransformGroup>
                     </TextBox.RenderTransform>
                 </TextBox>
-                <TextBox  Text="{Binding UserList.Password}"  Name="txtpassword" materialDesign:HintAssist.Hint="PASSWORD" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,10" RenderTransformOrigin="0.5,0.5">
+                <StackPanel xmlns:w="clr-namespace:TradITAM.Helper">
+                    <PasswordBox w:PasswordHelper.Attach="True" 
+         w:PasswordHelper.Password="{Binding UserList.Password, Mode=TwoWay}" 
+                 materialDesign:HintAssist.Hint="PASSWORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0,10" RenderTransformOrigin="0.5,0.5"/>
+                    <TextBlock Padding="10,0" x:Name="plain" />
+                </StackPanel>
+
+
+                <!--<TextBox  Text="{Binding UserList.Password}"  Name="txtpassword" materialDesign:HintAssist.Hint="PASSWORD" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,10" RenderTransformOrigin="0.5,0.5">
                     <TextBox.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -82,7 +90,7 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </TextBox.RenderTransform>
-                </TextBox>
+                </TextBox>-->
             </StackPanel>
         </Grid>
         <Button Command="{Binding logincommand}" VerticalAlignment="Bottom" Margin="0,85" Width="150" Content="LOGIN" />

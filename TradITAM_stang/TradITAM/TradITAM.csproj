@@ -112,6 +112,7 @@
       <DependentUpon>TradAssetDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Helper\DelegateCommand.cs" />
+    <Compile Include="Helper\PasswordHelper.cs" />
     <Compile Include="Helper\RelayCommand.cs" />
     <Compile Include="history.cs">
       <DependentUpon>TradAssetDB.tt</DependentUpon>
