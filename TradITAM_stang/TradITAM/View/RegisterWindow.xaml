@@ -1,0 +1,44 @@
+﻿<Window x:Class="TradITAM.View.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradITAM.View"
+        xmlns:vmx="clr-namespace:TradITAM.ViewModel"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vmx:RegisterWindowViewModel}"
+        DataContext="{DynamicResource RegisterWindowVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Register" Height="500" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF018EFF">
+            <TextBox Text="ADD NEW ACCOUNT" VerticalAlignment="Center" FontSize="14" BorderBrush="{x:Null}" Foreground="White"/>
+            <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Close" Height="Auto" Margin="150,0,150,80">
+                <materialDesign:PackIcon Kind="Close" Height="25" Width="25" Foreground="White" />
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="10">
+            <Label Content="Username" FontWeight="Bold" FontSize="14"/>
+            <TextBox Text="{Binding Username}" FontSize="14" BorderThickness="1" Padding="3,0,0,0"/>
+            <Label Content="Password" FontWeight="Bold" FontSize="14"/>
+            <TextBox Text="{Binding Password}" FontSize="14" BorderThickness="1" Padding="3,0,0,0"/>
+            <Label Content="Confirm Password" FontWeight="Bold" FontSize="14"/>
+            <TextBox Text="{Binding Password}" FontSize="14" BorderThickness="1" Padding="3,0,0,0"/>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Active Status:  " FontWeight="Bold" FontSize="14"/>
+                <ToggleButton Name="tgb1" IsChecked="{Binding Isactive}" Background="#00ff40" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Label Content="Role Status:  " FontWeight="Bold" FontSize="14"/>
+                <ToggleButton Name="tgb" IsChecked="{Binding Userrole}" Background="#00ff40" />
+            </StackPanel>
+            <Button Command="{Binding AddUserCommand}" Width="250" Content="Create new user" Margin="15"/>
+        </StackPanel>
+
+
+    </Grid>
+</Window>

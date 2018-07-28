@@ -1,0 +1,29 @@
+﻿<Window x:Class="TradITAM.View.HistoeyWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradITAM.View"
+        mc:Ignorable="d"
+        Title="HistoeyWindow" Height="450" Width="800">
+    <Grid>
+        <DataGrid Grid.Row="1" Margin="10"  Name="dg_staff" IsReadOnly="True" AutoGenerateColumns="False" 
+                                  IsSynchronizedWithCurrentItem="true" BorderThickness="1"
+                                  ItemsSource="{Binding StaffCollectionView}" SelectedItem="{Binding SelectedStaff}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="1*" Header="staff_id" Binding="{Binding staff_id}"/>
+                <DataGridTextColumn Width="1*" Header="firstname" Binding="{Binding firstname}"/>
+                <DataGridTextColumn Width="1*" Header="lastname" Binding="{Binding lastname}"/>
+                <DataGridTextColumn Width="1*" Header="aka" Binding="{Binding aka}"/>
+                <DataGridTextColumn Width="1*" Header="start_date" Binding="{Binding start_date}"/>
+                <DataGridTextColumn Width="1*" Header="end_date" Binding="{Binding end_date}"/>
+                <DataGridTextColumn Width="1*" Header="is_active" Binding="{Binding is_active}"/>
+                <DataGridTextColumn Width="1*" Header="create_date" Binding="{Binding create_date}"/>
+                <DataGridTextColumn Width="1*" Header="modified_date" Binding="{Binding modified_date}"/>
+
+            </DataGrid.Columns>
+            
+        </DataGrid>
+
+    </Grid>
+</Window>
