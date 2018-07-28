@@ -179,7 +179,7 @@ namespace TradITAM.ViewModel
             historyUser.User_id = User.User_id;
         
             var adduser = new UpdateAccess();
-            adduser.historyStaff(historyUser,Staffnew);
+            adduser.historyStaff(historyUser);
 
 
 

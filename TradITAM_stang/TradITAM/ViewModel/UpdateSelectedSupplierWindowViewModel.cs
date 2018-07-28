@@ -8,7 +8,7 @@ using TradITAM.Model;
 
 namespace TradITAM.ViewModel
 {
-     public class UpdateSelectedSupplierWindowViewModel : ViewModelBase
+    public class UpdateSelectedSupplierWindowViewModel : ViewModelBase
     {
         public DelegateCommand<object> Updatecommand { get; set; }
         private UserData User { get; set; }
@@ -131,7 +131,7 @@ namespace TradITAM.ViewModel
             Email = supplierSL.email;
             Phone = supplierSL.phone;
             Is_active = supplierSL.is_active;
-           
+
         }
 
         #region Properties
@@ -179,6 +179,7 @@ namespace TradITAM.ViewModel
             var adduser = new UpdateAccess();
             adduser.historyStaff(historyUser);
 
-        #endregion
+            #endregion
+        }
     }
 }
