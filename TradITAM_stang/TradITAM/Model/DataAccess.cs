@@ -126,7 +126,7 @@ namespace TradITAM.Model
             }
             catch (Exception ex)
             {
-                errorMessage = "GetStaff() error, " + ex.Message;
+                errorMessage = "GetSupplier() error, " + ex.Message;
                 hasError = true;
             }
             return _supplier;
@@ -157,7 +157,7 @@ namespace TradITAM.Model
             }
             catch (Exception ex)
             {
-                errorMessage = "GetAsset() error, " + ex.Message;
+                errorMessage = "GetAssettype() error, " + ex.Message;
                 hasError = true;
             }
             return _asset_type;
@@ -187,7 +187,7 @@ namespace TradITAM.Model
             }
             catch (Exception ex)
             {
-                errorMessage = "GetAsset() error, " + ex.Message;
+                errorMessage = "Getos() error, " + ex.Message;
                 hasError = true;
             }
             return _os;
@@ -215,11 +215,43 @@ namespace TradITAM.Model
             }
             catch (Exception ex)
             {
-                errorMessage = "GetStaff() error, " + ex.Message;
+                errorMessage = "Getuser() error, " + ex.Message;
                 hasError = true;
             }
             return _user;
         }
+        #endregion
+
+        #region History
+        public ObservableCollection<HistoryData> GetHistory()
+        {
+            hasError = false;
+            ObservableCollection<HistoryData> _history = new ObservableCollection<HistoryData>();
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var query = db.history.ToList();
+                foreach (var item in query)
+                {
+                    HistoryData pTemp = new HistoryData(/*item*/);
+                    pTemp.History_id = item.history_id;
+                    pTemp.Refernces_id = (int)item.references_id;
+                    pTemp.User_id = (int)item.user_id;
+                    pTemp.Detail = item.detail;
+                    pTemp.History_timestamp = (DateTime)item.history_timestamp;
+                    pTemp.History_type = (int)item.history_type;
+
+                    _history.Add(pTemp);
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Gethistory() error, " + ex.Message;
+                hasError = true;
+            }
+            return _history;
+        }
+
         #endregion
     }
 }

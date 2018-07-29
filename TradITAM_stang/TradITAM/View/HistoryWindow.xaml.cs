@@ -11,17 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TradITAM.ViewModel;
 
 namespace TradITAM.View
 {
     /// <summary>
     /// Interaction logic for HistoeyWindow.xaml
     /// </summary>
-    public partial class HistoeyWindow : Window
+    public partial class HistoryWindow : Window
     {
-        public HistoeyWindow()
+        public HistoryWindow()
         {
             InitializeComponent();
+            this.DataContext = new HistoryWindowViewModel();
         }
     }
 }

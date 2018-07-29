@@ -158,6 +158,7 @@
     <Compile Include="ViewModel\AddStaffWindowViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierWindowViewModel.cs" />
     <Compile Include="ViewModel\CreateWindowViewModel.cs" />
+    <Compile Include="ViewModel\HistoryWindowViewModel.cs" />
     <Compile Include="ViewModel\RegisterWindowViewModel.cs" />
     <Compile Include="Model\StaffData.cs" />
     <Compile Include="ViewModel\ReportWindowViewModel.cs" />

@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:TradITAM"
              xmlns:viewModel="clr-namespace:TradITAM.ViewModel"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
-             StartupUri="View/LoginWindow.xaml">
+             StartupUri="View/HistoryWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

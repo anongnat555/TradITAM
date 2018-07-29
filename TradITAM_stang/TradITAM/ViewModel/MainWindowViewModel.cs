@@ -24,9 +24,7 @@ namespace TradITAM.ViewModel
         public MainWindowViewModel(UserData Userlist)
         {
             User = new UserData();
-
             User = Userlist;
-
             EditAssetEvent = new DelegateCommand<object>(EditAsset);
             EditStaffEvent = new DelegateCommand<object>(EditStaff);
             EditSupplierEvent = new DelegateCommand<object>(EditSupplier);
