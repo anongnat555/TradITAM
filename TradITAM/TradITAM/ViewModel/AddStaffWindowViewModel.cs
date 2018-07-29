@@ -13,17 +13,17 @@ namespace TradITAM.ViewModel
 {
     public class AddStaffWindowViewModel : ViewModelBase
     {
-        public DelegateCommand<object> Addstaffcommand { get; set; }
+        #region Global Variable
+        public DelegateCommand<object> AddStaffCommand { get; set; }
+        #endregion
+
         public AddStaffWindowViewModel()
         {
-            Addstaffcommand = new DelegateCommand<object>(AddStaff);
+            /* Define AddEvent using DelegateCommand */
+            AddStaffCommand = new DelegateCommand<object>(AddStaff);
         }
 
-        #region Fields and Properties
-
-        //private Staff CurrentStaff { get; set; }
-
-
+        #region A Property use for Database
         private StaffData _liststaff = new StaffData();
         public StaffData StaffList
         {
@@ -34,17 +34,13 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(StaffList));
             }
         }
-
-        //public ObservableCollection<Staff> StaffCollectionList { get; set; }
-
-
         #endregion
 
         #region Method
         public void AddStaff(Object o)
         {
-            var addstaff = new InsertAccess();
-            addstaff.AddStaff(StaffList);
+            var insertion = new InsertAccess();
+            insertion.AddStaff(StaffList);
         }
         #endregion
     }

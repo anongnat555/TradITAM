@@ -7,74 +7,78 @@
         mc:Ignorable="d"
         xmlns:vmx="clr-namespace:TradITAM.ViewModel"
         d:DataContext="{d:DesignInstance Type=vmx:UpdateSelectedStaffWindowViewModel}"
-        Title="UpdateSelectedStaffWindow" Height="450" Width="800">
+        Title="UpdateSelectedStaffWindow" Height="490" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel VerticalAlignment="Stretch" Margin="10">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" HorizontalAlignment="center" Width="570" Grid.ColumnSpan="2" Margin="0,0,-1,0">
-                    <Grid>
-                        <Image Grid.Column="0" Height="150" Margin="10">
-                            <Image.Source>
-                                <BitmapImage UriSource="/image/Page_UStaff.png"/>
-                            </Image.Source>
-                        </Image>
-                    </Grid>
-                </StackPanel>
-                <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="1" Orientation="Horizontal">
-                            <Label Content="Active Status:  " FontWeight="Bold" FontSize="14"/>
-                            <ToggleButton Name="tgb1" IsChecked="{Binding Is_active,Mode=TwoWay}" Background="#00ff40" Margin="-150,25,0,0"/>
-                        </StackPanel>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <Label Content="AKA:" FontSize="14" FontWeight="Bold"/>
-                            <TextBox Name="tb1" Text="{Binding Aka,Mode=TwoWay}"  Width="140" BorderThickness="1" Margin="0,0,10,0"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1">
-                            <Label Content="Firstname:" FontSize="14" FontWeight="Bold"/>
-                            <TextBox Name="tb2" Text="{Binding Firstname,Mode=TwoWay}" Width="140" BorderThickness="1" Margin="0,0,10,0"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="2">
-                            <Label Content="Lastname:" FontSize="14" FontWeight="Bold"/>
-                            <TextBox Name="tb3" Text="{Binding Lastname,Mode=TwoWay}" Width="140"  BorderThickness="1" Margin="0,0,10,0"/>
-                        </StackPanel>
-                    </Grid>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <Label Content="Start Date:" FontSize="14" FontWeight="Bold"/>
-                            <DatePicker Name="dt1" SelectedDate="{Binding Start_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220" BorderThickness="1" Margin="0,0,5,0"/>
-                        </StackPanel>
-                        <StackPanel Grid.Column="1" Margin="0,8,0,0">
-                            <CheckBox Content="End Date: " FontSize="14" FontWeight="Bold"/>
-                            <DatePicker Name="dt2" SelectedDate="{Binding End_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220"  BorderThickness="1" Margin="0,0,5,0"/>
-                        </StackPanel>
-                    </Grid>
-                    <!--Command="{Binding AddStaffCommand}"-->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button Command="{Binding Updatecommand}" Width="200" Content="UPDATE" Margin="0,20,10,0"/>
-                        <!--<Button Command="{Binding }" Width="200" Background="Gray" BorderBrush="{x:Null}" Content="CLEAR" Margin="0,20,10,0" Click="Button_Clear"/>-->
+        <StackPanel>
+            <Grid Background="#FF018EFF" Height="50">
+                <Label Content="UPDATE STAFF" FontSize="18" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+            <StackPanel VerticalAlignment="Stretch" Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" HorizontalAlignment="center" Width="570" Grid.ColumnSpan="2" Margin="0,0,-1,0">
+                        <Grid>
+                            <Image Grid.Column="0" Height="150" Margin="10">
+                                <Image.Source>
+                                    <BitmapImage UriSource="/image/Page_UStaff.png"/>
+                                </Image.Source>
+                            </Image>
+                        </Grid>
                     </StackPanel>
+                    <StackPanel Grid.Row="1" HorizontalAlignment="Center">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Label Content="Active Status:  " FontWeight="Bold" FontSize="14"/>
+                                <ToggleButton Name="tgb1" IsChecked="{Binding Is_active,Mode=TwoWay}" Background="#00ff40" Margin="-150,25,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label Content="AKA:" FontSize="14" FontWeight="Bold"/>
+                                <TextBox Name="tb1" Text="{Binding Aka,Mode=TwoWay}"  Width="140" BorderThickness="1" Margin="0,0,10,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <Label Content="Firstname:" FontSize="14" FontWeight="Bold"/>
+                                <TextBox Name="tb2" Text="{Binding Firstname,Mode=TwoWay}" Width="140" BorderThickness="1" Margin="0,0,10,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2">
+                                <Label Content="Lastname:" FontSize="14" FontWeight="Bold"/>
+                                <TextBox Name="tb3" Text="{Binding Lastname,Mode=TwoWay}" Width="140"  BorderThickness="1" Margin="0,0,10,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <Label Content="Start Date:" FontSize="14" FontWeight="Bold"/>
+                                <DatePicker Name="dt1" SelectedDate="{Binding Start_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220" BorderThickness="1" Margin="0,0,5,0"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Margin="0,8,0,0">
+                                <CheckBox Content="End Date: " FontSize="14" FontWeight="Bold"/>
+                                <DatePicker Name="dt2" SelectedDate="{Binding End_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220"  BorderThickness="1" Margin="0,0,5,0"/>
+                            </StackPanel>
+                        </Grid>
+                        <!--Command="{Binding AddStaffCommand}"-->
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Command="{Binding Updatecommand}" Width="200" Content="UPDATE" Margin="0,20,10,0"/>
+                            <!--<Button Command="{Binding }" Width="200" Background="Gray" BorderBrush="{x:Null}" Content="CLEAR" Margin="0,20,10,0" Click="Button_Clear"/>-->
+                        </StackPanel>
 
-                    <!--<TextBlock Text="{Binding Firstname}"></TextBlock>
+                        <!--<TextBlock Text="{Binding Firstname}"></TextBlock>
                                 <TextBlock Text="{Binding Lastname}"></TextBlock>
                                 <TextBlock Text="{Binding Aka}"></TextBlock>
                                 <TextBlock Text="{Binding StartDate}"></TextBlock>
@@ -82,8 +86,9 @@
                                 <TextBlock Text="{Binding Isactive}"></TextBlock>
                                 <TextBlock Text="{Binding CreateDate}"></TextBlock>
                                 <TextBlock Text="{Binding ModifiedDate}"></TextBlock>-->
-                </StackPanel>
-            </Grid>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

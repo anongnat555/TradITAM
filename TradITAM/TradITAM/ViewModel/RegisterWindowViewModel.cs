@@ -6,46 +6,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using TradITAM.Helper;
+using TradITAM.Model;
 
 namespace TradITAM.ViewModel
 {
     public class RegisterWindowViewModel : ViewModelBase
     {
+        #region Global variable
         public DelegateCommand<object> AddUserCommand { get; set; }
+        #endregion
+
         public RegisterWindowViewModel()
         {
-            getUser();
+            /* Define AddEvent using DelegateCommand */
             AddUserCommand = new DelegateCommand<object>(AddUser);
         }
 
-        //select user 
-        private string _username;
-        private string _password;
-        private int _userrole;
-        private bool _isactive;
-
-        private void getUser()
-        {
-            var db = new TradAssetDBEntities();
-            var con = db.user_login.ToList();
-            _listuser = new ObservableCollection<user_login>(con);
-            db.Dispose();
-            
-        }
-       
-        private ObservableCollection<user_login> _listuser = new ObservableCollection<user_login>();
-        public ObservableCollection<user_login> listuser
+        #region A Property use for Database
+        private UserData _listuser = new UserData();
+        public UserData UserList
         {
             get => _listuser;
             set
             {
                 _listuser = value;
-                OnPropertyChanged(nameof(listuser));
+                OnPropertyChanged(nameof(UserList));
             }
         }
+        #endregion
 
-      
-
+        #region Load User Data
+        private string _username;
         public string Username
         {
             get => _username;
@@ -56,6 +47,7 @@ namespace TradITAM.ViewModel
             }
         }
 
+        private string _password;
         public string Password
         {
             get => _password;
@@ -66,56 +58,61 @@ namespace TradITAM.ViewModel
             }
         }
 
-        public int Userrole
+        private int _user_role;
+        public int User_role
         {
-            get => _userrole;
+            get => _user_role;
             set
             {
-                _userrole = value;
-                OnPropertyChanged(nameof(Userrole));
+                _user_role = value;
+                OnPropertyChanged(nameof(User_role));
             }
         }
 
-        public bool Isactive
+        private bool _is_active;
+        public bool Is_active
         {
-            get => _isactive;
+            get => _is_active;
             set
             {
-                _isactive = value;
-                OnPropertyChanged(nameof(Isactive));
+                _is_active = value;
+                OnPropertyChanged(nameof(Is_active));
             }
         }
 
-        private void AddUser(object o)
+        /* for check condition */
+        private string _password_confirm;
+        public string Password_confirm
         {
-            try
+            get => _password_confirm;
+            set
             {
-                using (var db = new TradAssetDBEntities())
-                {
-                    var data = new user_login
-                    {
-                        username = Username,
-                        password = Password,
-                        user_role = Userrole,
-                        is_active = Isactive,
-                        create_date = DateTime.Now,
-                        modified_date = DateTime.Now
-                    };
-                    Console.WriteLine(data);
-                    db.user_login.Add(data);
-                    db.SaveChanges();
-
-                }
-                getUser();
-                MessageBox.Show("Insert complete");
-
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Insert incomplete");
-
+                _password_confirm = value;
+                OnPropertyChanged(nameof(Password_confirm));
             }
         }
+        #endregion
+
+        #region Method
+        public void AddUser(object o)
+        {
+            UserList.username = Username;
+            UserList.password = Password;
+            UserList.is_active = Is_active;
+
+            if (Password == Password_confirm)
+            {
+                var insertion = new InsertAccess();
+                insertion.AddUser(UserList);
+            }
+            else
+            {
+                MessageBox.Show("Password is not correct!");
+            }
+        }
+        #endregion
+
+
 
     }
 }

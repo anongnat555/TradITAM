@@ -16,7 +16,7 @@
         <EntityTypeShape EntityType="TradAssetDBModel.user_login" Width="1.5" PointX="5" PointY="4.125" IsExpanded="true" />
         <AssociationConnector Association="TradAssetDBModel.asset_type_id_FK" ManuallyRouted="false" />
         <AssociationConnector Association="TradAssetDBModel.original_supplier_id_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="TradAssetDBModel.os_id_FK" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="TradAssetDBModel.os_id_FK" />
         <AssociationConnector Association="TradAssetDBModel.supplier_id_FK" ManuallyRouted="false" />
         <AssociationConnector Association="TradAssetDBModel.using_by_staff_id_FK" ManuallyRouted="false" />
         <AssociationConnector ManuallyRouted="false" Association="TradAssetDBModel.asset_history_id_FK" />

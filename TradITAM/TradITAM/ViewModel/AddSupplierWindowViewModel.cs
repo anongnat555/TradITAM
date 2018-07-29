@@ -10,14 +10,17 @@ namespace TradITAM.ViewModel
 {
     public class AddSupplierWindowViewModel : ViewModelBase
     {
-        public DelegateCommand<object> Addsuppliercommand { get; set; }
+        #region Global Variable
+        public DelegateCommand<object> AddSupplierCommand { get; set; }
+        #endregion
+
         public AddSupplierWindowViewModel()
         {
-            Addsuppliercommand = new DelegateCommand<object>(AddSupplier);
+            /* Define AddEvent using DelegateCommand */
+            AddSupplierCommand = new DelegateCommand<object>(AddSupplier);
         }
 
-        #region Fields and Properties
-        //private Staff CurrentStaff { get; set; }
+        #region A Property use for Database
         private SupplierData _listsupplier = new SupplierData();
         public SupplierData SupplierList
         {
@@ -28,15 +31,13 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(SupplierList));
             }
         }
-        //public ObservableCollection<Staff> StaffCollectionList { get; set; }
         #endregion
 
         #region Method
-
         public void AddSupplier(Object o)
         {
-            var addsupplier = new InsertAccess();
-            addsupplier.AddSupplier(SupplierList);
+            var insertion = new InsertAccess();
+            insertion.AddSupplier(SupplierList);
         }
         #endregion
     }

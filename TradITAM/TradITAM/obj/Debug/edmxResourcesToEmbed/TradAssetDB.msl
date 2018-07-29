@@ -65,7 +65,6 @@
         <MappingFragment StoreEntitySet="history">
           <ScalarProperty Name="history_id" ColumnName="history_id" />
           <ScalarProperty Name="user_id" ColumnName="user_id" />
-          <ScalarProperty Name="references_id" ColumnName="references_id" />
           <ScalarProperty Name="detail" ColumnName="detail" />
           <ScalarProperty Name="history_timestamp" ColumnName="history_timestamp" />
           <ScalarProperty Name="history_type" ColumnName="history_type" />
@@ -119,7 +118,6 @@
           <ScalarProperty Name="user_id" ColumnName="user_id" />
           <ScalarProperty Name="username" ColumnName="username" />
           <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="user_role" ColumnName="user_role" />
           <ScalarProperty Name="is_active" ColumnName="is_active" />
           <ScalarProperty Name="create_date" ColumnName="create_date" />
           <ScalarProperty Name="modified_date" ColumnName="modified_date" />

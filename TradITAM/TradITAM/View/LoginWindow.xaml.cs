@@ -37,6 +37,7 @@ namespace TradITAM.View
         private void Button_Register(object sender, RoutedEventArgs e)
         {
             RegisterWindow n = new RegisterWindow();
+            this.Close();
             n.Show();
         }
     }

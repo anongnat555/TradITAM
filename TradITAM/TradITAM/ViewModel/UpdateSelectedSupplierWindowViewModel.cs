@@ -11,9 +11,9 @@ namespace TradITAM.ViewModel
      public class UpdateSelectedSupplierWindowViewModel : ViewModelBase
     {
         public DelegateCommand<object> Updatecommand { get; set; }
-        public UpdateSelectedSupplierWindowViewModel(SupplierData supplierSL)
+        public UpdateSelectedSupplierWindowViewModel(SupplierData SupplierSelect)
         {
-            LoadSelected(supplierSL);
+            LoadSelected(SupplierSelect);
             Updatecommand = new DelegateCommand<object>(Update);
         }
 
@@ -119,15 +119,15 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
-        public void LoadSelected(SupplierData supplierSL)
+        public void LoadSelected(SupplierData SupplierSelect)
         {
-            Supplier_id = supplierSL.supplier_id;
-            Company_name = supplierSL.company_name;
-            Contact_person = supplierSL.contact_person;
-            Address = supplierSL.address;
-            Email = supplierSL.email;
-            Phone = supplierSL.phone;
-            Is_active = supplierSL.is_active;
+            Supplier_id = SupplierSelect.supplier_id;
+            Company_name = SupplierSelect.company_name;
+            Contact_person = SupplierSelect.contact_person;
+            Address = SupplierSelect.address;
+            Email = SupplierSelect.email;
+            Phone = SupplierSelect.phone;
+            Is_active = SupplierSelect.is_active;
            
         }
 

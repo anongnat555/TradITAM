@@ -25,7 +25,7 @@ namespace TradITAM.View
         public UpdateStaffWindow()
         {
             InitializeComponent();
-            //this.DataContext = new UpdateStaffWindowViewModel();
+            this.DataContext = new UpdateStaffWindowViewModel();
         }
 
         

@@ -24,29 +24,58 @@ namespace TradITAM
     /// </summary>
     public partial class MainWindow : Window
     {
+        #region Global Variable
+        private UserData UserInfo { get; set; }
+        #endregion
 
         public MainWindow(UserData UserList)
         {
             InitializeComponent();
             this.DataContext = new MainWindowViewModel(UserList);
+
+            UserInfo = new UserData();
+            UserInfo = UserList;
         }
 
-        private void btnAddStaff_Click(object sender, RoutedEventArgs e)
+        #region Open Add Form
+        private void Button_Add_Asset(object sender, RoutedEventArgs e)
+        {
+            AddAssetWindow n = new AddAssetWindow();
+            n.Show();
+        }
+
+        private void Button_Add_Staff(object sender, RoutedEventArgs e)
         {
             AddStaffWindow n = new AddStaffWindow();
             n.Show();
         }
 
-        private void btnAddSupplier_Click(object sender, RoutedEventArgs e)
+        private void Button_Add_Supplier(object sender, RoutedEventArgs e)
         {
             AddSupplierWindow n = new AddSupplierWindow();
             n.Show();
         }
+        #endregion
 
-        private void Button_EditAsset(object sender, RoutedEventArgs e)
+        #region Open Update Form
+        private void Button_Update_Asset(object sender, RoutedEventArgs e)
         {
             UpdateAssetWindow n = new UpdateAssetWindow();
             n.Show();
         }
+
+        private void Button_Update_Staff(object sender, RoutedEventArgs e)
+        {
+            UpdateStaffWindow n = new UpdateStaffWindow();
+            n.Show();
+        }
+
+        private void Button_Update_Supplier(object sender, RoutedEventArgs e)
+        {
+            UpdateSupplierWindow n = new UpdateSupplierWindow();
+            n.Show();
+        }
+        #endregion
+
     }
 }

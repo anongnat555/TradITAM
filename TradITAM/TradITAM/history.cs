@@ -16,7 +16,6 @@ namespace TradITAM
     {
         public int history_id { get; set; }
         public Nullable<int> user_id { get; set; }
-        public Nullable<int> references_id { get; set; }
         public string detail { get; set; }
         public Nullable<System.DateTime> history_timestamp { get; set; }
         public Nullable<int> history_type { get; set; }

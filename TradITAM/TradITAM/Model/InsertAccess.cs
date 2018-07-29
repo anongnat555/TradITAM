@@ -17,6 +17,33 @@ namespace TradITAM.Model
 
         }
 
+        #region User
+        public void AddUser(UserData item)
+        {
+            hasError = false;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var data = new user_login()
+                {
+                    username = item.username,
+                    password = item.password,
+                    is_active = item.is_active,
+                    create_date = DateTime.Now,
+                    modified_date = DateTime.Now
+                };
+                db.user_login.Add(data);
+                db.SaveChanges();
+                MessageBox.Show("Insert complete");
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Add error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+        
         #region Asset
         public void AddAsset(AssetData item)
         {
@@ -48,7 +75,6 @@ namespace TradITAM.Model
                 db.asset.Add(data);
                 db.SaveChanges();
                 MessageBox.Show("Insert complete");
-
             }
             catch (Exception ex)
             {
@@ -112,7 +138,6 @@ namespace TradITAM.Model
                 db.supplier.Add(data);
                 db.SaveChanges();
                 MessageBox.Show("Insert complete");
-
             }
             catch (Exception ex)
             {

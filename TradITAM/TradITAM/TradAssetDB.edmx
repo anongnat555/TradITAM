@@ -335,7 +335,6 @@
           </Key>
           <Property Name="history_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="user_id" Type="Int32" />
-          <Property Name="references_id" Type="Int32" />
           <Property Name="detail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="history_timestamp" Type="DateTime" Precision="3" />
           <Property Name="history_type" Type="Int32" />
@@ -390,7 +389,6 @@
           <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
-          <Property Name="user_role" Type="Int32" />
           <Property Name="is_active" Type="Boolean" />
           <Property Name="create_date" Type="DateTime" Precision="3" />
           <Property Name="modified_date" Type="DateTime" Precision="3" />
@@ -422,8 +420,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="os_id_FK">
-          <End Role="os" Type="Self.os" Multiplicity="0..1" />
-          <End Role="asset" Type="Self.asset" Multiplicity="*" />
+          <End Type="Self.os" Multiplicity="0..1" Role="os" />
+          <End Type="Self.asset" Multiplicity="*" Role="asset" />
           <ReferentialConstraint>
             <Principal Role="os">
               <PropertyRef Name="os_id" />
@@ -512,8 +510,8 @@
             <End Role="asset" EntitySet="asset" />
           </AssociationSet>
           <AssociationSet Name="os_id_FK" Association="Self.os_id_FK">
-            <End Role="os" EntitySet="os" />
-            <End Role="asset" EntitySet="asset" />
+            <End EntitySet="os" Role="os" />
+            <End EntitySet="asset" Role="asset" />
           </AssociationSet>
           <AssociationSet Name="supplier_id_FK" Association="Self.supplier_id_FK">
             <End Role="supplier" EntitySet="supplier" />
@@ -606,7 +604,6 @@
               <MappingFragment StoreEntitySet="history">
                 <ScalarProperty Name="history_id" ColumnName="history_id" />
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
-                <ScalarProperty Name="references_id" ColumnName="references_id" />
                 <ScalarProperty Name="detail" ColumnName="detail" />
                 <ScalarProperty Name="history_timestamp" ColumnName="history_timestamp" />
                 <ScalarProperty Name="history_type" ColumnName="history_type" />
@@ -660,7 +657,6 @@
                 <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="user_role" ColumnName="user_role" />
                 <ScalarProperty Name="is_active" ColumnName="is_active" />
                 <ScalarProperty Name="create_date" ColumnName="create_date" />
                 <ScalarProperty Name="modified_date" ColumnName="modified_date" />

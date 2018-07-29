@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TradITAM.Model;
 using TradITAM.ViewModel;
 
 namespace TradITAM.View
@@ -21,10 +20,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class UpdateSupplierWindow : Window
     {
-        public UpdateSupplierWindow(SupplierData selectedsupplier)
+        public UpdateSupplierWindow()
         {
             InitializeComponent();
-            this.DataContext = new UpdateSelectedSupplierWindowViewModel(selectedsupplier);
+            this.DataContext = new UpdateSupplierWindowViewModel();
         }
     }
 }

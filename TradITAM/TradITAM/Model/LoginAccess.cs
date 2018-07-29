@@ -23,9 +23,9 @@ namespace TradITAM.Model
             int result = 0;
             try
             {
-                var query = db.user_login.FirstOrDefault(x => x.username == item.Username);
+                var query = db.user_login.FirstOrDefault(x => x.username == item.username);
 
-                if (query.username == item.Username && query.password == item.Password)
+                if (query.username == item.username && query.password == item.password)
                 {
                     result = query.user_id;
                 }

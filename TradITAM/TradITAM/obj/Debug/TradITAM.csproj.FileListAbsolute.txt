@@ -33,7 +33,6 @@ C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradI
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\TradITAM.csprojResolveAssemblyReference.cache
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\AddAssetWindow.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\AddStaffWindow.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\AddSupplierWindow.g.cs
@@ -45,7 +44,6 @@ C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradI
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateAssetWindow.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSelectedStaffWindow.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateStaffWindow.g.cs
-C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSupplierWindow.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateWindow.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\App.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\TradITAM_Content.g.cs
@@ -63,7 +61,6 @@ C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradI
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateAssetWindow.baml
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSelectedStaffWindow.baml
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateStaffWindow.baml
-C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSupplierWindow.baml
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateWindow.baml
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\TradITAM.g.resources
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\TradITAM.Properties.Resources.resources
@@ -73,3 +70,14 @@ C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradI
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\TradITAM.pdb
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSelectedAssetWindow.g.cs
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSelectedAssetWindow.baml
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\ManageAssetHistoryWindow.g.cs
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\ManageAssetTypeWindow.g.cs
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\ManageOsWindow.g.cs
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\ManageAssetHistoryWindow.baml
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\ManageAssetTypeWindow.baml
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\ManageOsWindow.baml
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSelectedSupplierWindow.g.cs
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSelectedSupplierWindow.baml
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSupplierWindow.g.cs
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\View\UpdateSupplierWindow.baml
+C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\obj\Debug\GeneratedInternalTypeHelper.g.cs

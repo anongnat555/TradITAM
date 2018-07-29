@@ -20,8 +20,12 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> GetStaffEvent { get; set; }
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
 
-        public ReportWindowViewModel()
+        private UserData UserInfo { get; set; }
+        public ReportWindowViewModel(UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             GetAssetEvent = new DelegateCommand<object>(GetAssetInformation);
             GetStaffEvent = new DelegateCommand<object>(GetStaffInformation);
             GetAssetTypeEvent = new DelegateCommand<object>(GetAssetTypeInformation);
@@ -780,7 +784,7 @@ namespace TradITAM.ViewModel
         public void AddReport(Object o)
         {
             SelectedAssetHistory.Asset_id = Asset_id;
-            SelectedAssetHistory.User_id = 1;
+            SelectedAssetHistory.User_id = UserInfo.user_id;
             SelectedAssetHistory.Asset_history_type = SelectedAssetHistoryType.Asset_history_type_id;
             SelectedAssetHistory.Remark = Remark;
             SelectedAssetHistory.History_timestamp = DateTime.Now;
@@ -798,7 +802,7 @@ namespace TradITAM.ViewModel
 
             foreach (var item in AssetTypeList)
             {
-                Asset_type_name = item.Asset_type_name;
+                Asset_type_name = item.asset_type_name;
             }
 
             foreach (var item in StaffList)

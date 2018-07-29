@@ -15,22 +15,35 @@ namespace TradITAM.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
+        #region Global Variable
         public DelegateCommand<object> EditAssetEvent { get; set; }
         public DelegateCommand<object> EditStaffEvent { get; set; }
         public DelegateCommand<object> EditSupplierEvent { get; set; }
+        public DelegateCommand<UserData> ReportAssetEvent { get; set; }
+
+        private UserData UserInfo { get; set; }
+        #endregion
+
         public MainWindowViewModel(UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
+            /* Define EditEvent using DelegateCommand */
             EditAssetEvent = new DelegateCommand<object>(EditAsset);
             EditStaffEvent = new DelegateCommand<object>(EditStaff);
             EditSupplierEvent = new DelegateCommand<object>(EditSupplier);
 
-            LoadStaff();
-            LoadAsset();
-            LoadSupplier();
-            LoadUser(UserList);
+            /* Define GetEvent using DelegateCommand */
+            ReportAssetEvent = new DelegateCommand<UserData>(ReportAsset);
+
+            LoadStaff();            // Load 'Staff' from database to get '*' into DataGrid
+            LoadAsset();            // Load 'Asset' from database to get '*' into DataGrid
+            LoadSupplier();         // Load 'Supplier' from database to get '*' into DataGrid
+            LoadUser(UserList);     // Load user information from 'UserList'
         }
 
-        #region call dataaccess
+        #region Call DataAccess
         private DataAccess _DataAccess;
         public DataAccess DataAccess
         {
@@ -43,8 +56,7 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
-        #region Asset
-
+        #region Asset Properties
         private ObservableCollection<AssetData> _listasset = new ObservableCollection<AssetData>();
         public ObservableCollection<AssetData> AssetList
         {
@@ -66,16 +78,6 @@ namespace TradITAM.ViewModel
             }
         }
 
-        public void EditAsset(Object obj)
-        {
-            if (SelectedStaff != null)
-            {
-                UpdateSelectedAssetWindow update = new UpdateSelectedAssetWindow(SelectedAsset);
-                update.ShowDialog();
-
-            }
-        }
-
         private ICollectionView _AssetCollectionView;
         public ICollectionView AssetCollectionView
         {
@@ -84,8 +86,8 @@ namespace TradITAM.ViewModel
         }
 
         #endregion
-        
-        #region Staff
+
+        #region Staff Properties
 
         private ObservableCollection<StaffData> _liststaff = new ObservableCollection<StaffData>();
         public ObservableCollection<StaffData> StaffList
@@ -108,19 +110,6 @@ namespace TradITAM.ViewModel
             }
         }
 
-        public void EditStaff(Object obj)
-        {
-            if (SelectedStaff != null)
-            {
-                //MessageBox.Show(SelectedStaff.firstname);
-
-
-                UpdateSelectedStaffWindow update = new UpdateSelectedStaffWindow(SelectedStaff);
-                update.ShowDialog();
-
-            }
-        }
-
         private ICollectionView _StaffCollectionView;
         public ICollectionView StaffCollectionView
         {
@@ -130,8 +119,7 @@ namespace TradITAM.ViewModel
 
         #endregion
 
-        #region Supplier
-
+        #region Supplier Properties
         private ObservableCollection<SupplierData> _listsupplier = new ObservableCollection<SupplierData>();
         public ObservableCollection<SupplierData> SupplierList
         {
@@ -158,16 +146,6 @@ namespace TradITAM.ViewModel
         {
             get { return _SupplierCollectionView; }
             set { _SupplierCollectionView = value; }
-        }
-
-        public void EditSupplier(Object obj)
-        {
-            if (SelectedStaff != null)
-            {
-                 UpdateSupplierWindow  supplierwindow= new UpdateSupplierWindow(SelectedSupplier);
-                 supplierwindow.ShowDialog();
-
-            }
         }
         #endregion
 
@@ -202,8 +180,7 @@ namespace TradITAM.ViewModel
             AssetCollectionView = CollectionViewSource.GetDefaultView(AssetList);
 
            // AssetCollectionView.MoveCurrentToFirst();
-            SelectedAsset = (AssetData)AssetCollectionView.CurrentItem;
-        
+            SelectedAsset = (AssetData)AssetCollectionView.CurrentItem;  
         }
 
         public void LoadStaff()
@@ -226,8 +203,60 @@ namespace TradITAM.ViewModel
 
         public void LoadUser(UserData Userlist)
         {
-            User_id = Userlist.User_id;
-            Username = Userlist.Username;
+            User_id = Userlist.user_id;
+            Username = Userlist.username;
+        }
+        #endregion
+
+        #region Send UserList Data to other form
+
+        #region Add
+        public void AddStaff(object obj)
+        {
+            AddStaffWindow n = new AddStaffWindow();
+            n.Show();
+        }
+
+        public void AddSupplier(object obj)
+        {
+            AddSupplierWindow n = new AddSupplierWindow();
+            n.Show();
+        }
+        #endregion
+
+        #region Edit
+        public void EditAsset(Object obj)
+        {
+            if (SelectedStaff != null)
+            {
+                UpdateSelectedAssetWindow n = new UpdateSelectedAssetWindow(SelectedAsset);
+                n.Show();
+            }
+        }
+
+        public void EditStaff(Object obj)
+        {
+            if (SelectedStaff != null)
+            {
+                UpdateStaffWindow n = new UpdateStaffWindow();
+                n.Show();
+            }
+        }
+
+        public void EditSupplier(Object obj)
+        {
+            if (SelectedStaff != null)
+            {
+                UpdateSupplierWindow n = new UpdateSupplierWindow();
+                n.Show();
+            }
+        }
+        #endregion
+
+        public void ReportAsset(Object obj)
+        {
+            ReportWindow n = new ReportWindow(UserInfo);
+            n.Show();
         }
         #endregion
     }

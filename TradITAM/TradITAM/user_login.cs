@@ -24,7 +24,6 @@ namespace TradITAM
         public int user_id { get; set; }
         public string username { get; set; }
         public string password { get; set; }
-        public Nullable<int> user_role { get; set; }
         public Nullable<bool> is_active { get; set; }
         public Nullable<System.DateTime> create_date { get; set; }
         public Nullable<System.DateTime> modified_date { get; set; }

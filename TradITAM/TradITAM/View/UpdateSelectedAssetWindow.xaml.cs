@@ -21,10 +21,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class UpdateSelectedAssetWindow : Window
     {
-        public UpdateSelectedAssetWindow(AssetData selectedAsset)
+        public UpdateSelectedAssetWindow(AssetData SelectedAsset)
         {
             InitializeComponent();
-            this.DataContext = new UpdateSelectedAssetWindowViewModel(selectedAsset);
+            this.DataContext = new UpdateSelectedAssetWindowViewModel(SelectedAsset);
         }
     }
 }

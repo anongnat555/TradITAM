@@ -90,9 +90,9 @@
                                 <ComboBox Width="180" Height="22" BorderThickness="1"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
-                                <Button Name="btnAddAsset" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
-                                <Button Content="Edit" Click="Button_EditAsset" Background="#FFC300" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
-                                <Button Content="Report" Command="{Binding ReportAssetCommand}" Background="Salmon" BorderBrush="{x:Null}" Width="100"/>
+                                <Button Click="Button_Add_Asset" Command="{Binding AddAssetEvent}" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Click="Button_Update_Asset" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Content="Report" Command="{Binding ReportAssetEvent}" Background="Salmon" BorderBrush="{x:Null}" Width="100"/>
                             </StackPanel>
                         </Grid>
                         <DataGrid Grid.Row="1" Margin="10"  Name="dg_asset" IsReadOnly="True" AutoGenerateColumns="False"  
@@ -147,8 +147,8 @@
                                 <ComboBox Width="180" Height="22" BorderThickness="1"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
-                                <Button Name="btnAddStaff" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0" Click="btnAddStaff_Click"/>
-                                <Button Name="btnEditStaff" Command="{Binding EditStaffEvent}" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Click="Button_Add_Staff" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Click="Button_Update_Staff" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100"/>
                             </StackPanel>
                         </Grid>
                         <DataGrid Grid.Row="1" Margin="10"  Name="dg_staff" IsReadOnly="True" AutoGenerateColumns="False" 
@@ -195,8 +195,8 @@
                                 <ComboBox Width="180" Height="22" BorderThickness="1"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
-                                <Button Name="btnAddSupplier" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0" Click="btnAddSupplier_Click"/>
-                                <Button Command="{Binding EditSupplierEvent}" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100"/>
+                                <Button Click="Button_Add_Supplier" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Click="Button_Update_Supplier" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100"/>
                             </StackPanel>
                         </Grid>
                         <DataGrid Grid.Row="1" Margin="10"  Name="dg_supplier" IsReadOnly="True" AutoGenerateColumns="False" 

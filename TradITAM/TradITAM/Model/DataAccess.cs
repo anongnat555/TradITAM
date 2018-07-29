@@ -31,7 +31,7 @@ namespace TradITAM.Model
             try
             {
                 TradAssetDBEntities db = new TradAssetDBEntities();
-                var query = db.staff.ToList(); 
+                var query = db.staff.ToList();
                 foreach (var item in query)
                 {
                     StaffData pTemp = new StaffData(/*item*/);
@@ -147,11 +147,11 @@ namespace TradITAM.Model
                 foreach (var item in query)
                 {
                     AssetTypeData pTemp = new AssetTypeData(/*item*/);
-                    pTemp.Asset_type_id = item.asset_type_id;
-                    pTemp.Asset_type_name = item.asset_type_name;
-                    pTemp.Is_active = (bool)item.is_active;
-                    pTemp.Create_date = (DateTime)item.create_date;
-                    pTemp.Modified_date = (DateTime)item.modified_date;
+                    pTemp.asset_type_id = item.asset_type_id;
+                    pTemp.asset_type_name = item.asset_type_name;
+                    pTemp.is_active = (bool)item.is_active;
+                    pTemp.create_date = (DateTime)item.create_date;
+                    pTemp.modified_date = (DateTime)item.modified_date;
 
                     _asset_type.Add(pTemp);
                 }
@@ -177,11 +177,11 @@ namespace TradITAM.Model
                 foreach (var item in query)
                 {
                     OsData pTemp = new OsData(/*item*/);
-                    pTemp.Os_id = item.os_id;
-                    pTemp.Os_name = item.os_name;
-                    pTemp.Is_active = (bool)item.is_active;
-                    pTemp.Create_date = (DateTime)item.create_date;
-                    pTemp.Modified_date = (DateTime)item.modified_date;
+                    pTemp.os_id = item.os_id;
+                    pTemp.os_name = item.os_name;
+                    pTemp.is_active = (bool)item.is_active;
+                    pTemp.create_date = (DateTime)item.create_date;
+                    pTemp.modified_date = (DateTime)item.modified_date;
 
                     _os.Add(pTemp);
                 }
@@ -226,6 +226,132 @@ namespace TradITAM.Model
         }
         #endregion
 
+        #region Get value for UpdateAssetWindow's Combobox
+
+        #region Get Staff's Aka 
+        public string GetStaffAka(int Uid)
+        {
+            hasError = false;
+            string _result = null;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+
+                var query = db.staff.FirstOrDefault(x => x.staff_id == Uid);
+
+                if (query != null)
+                {
+                    _result = query.aka;
+                }
+                else
+                {
+                    MessageBox.Show("NOT FOUND");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "GetStaffAka() error, " + ex.Message;
+                hasError = true;
+            }
+            return _result;
+        }
+        #endregion
+
+        #region  Get Supplier's Company_name 
+        public string GetSupplierCompanyName(int Sid)
+        {
+            hasError = false;
+            string _result = null;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+
+                var query = db.supplier.FirstOrDefault(x => x.supplier_id == Sid);
+
+                if (query != null)
+                {
+                    _result = query.company_name;
+                }
+                else
+                {
+                    MessageBox.Show("NOT FOUND");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "GetSupplierCompanyName() error, " + ex.Message;
+                hasError = true;
+            }
+            return _result;
+        }
+        #endregion
+
+        #region  Get AssetType's Asset_type_name 
+        public string GetAssetTypeName(int Tid)
+        {
+            hasError = false;
+            string _result = null;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+
+                var query = db.asset_type.FirstOrDefault(x => x.asset_type_id == Tid);
+
+                if (query != null)
+                {
+                    _result = query.asset_type_name;
+                }
+                else
+                {
+                    MessageBox.Show("NOT FOUND");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "GetAssetTypeName() error, " + ex.Message;
+                hasError = true;
+            }
+            return _result;
+        }
+        #endregion
+
+        #region  Get Os's Os_name 
+        public string GetOsName(int Oid)
+        {
+            hasError = false;
+            string _result = null;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+
+                var query = db.os.FirstOrDefault(x => x.os_id == Oid);
+
+                if (query != null)
+                {
+                    _result = query.os_name;
+                }
+                else
+                {
+                    MessageBox.Show("NOT FOUND");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "GetOsName() error, " + ex.Message;
+                hasError = true;
+            }
+            return _result;
+        }
+        #endregion
+
+        #endregion
+
+        #region Get foreign key value for ReportWindow
+
         #region Join Asset Type via Asset
         public ObservableCollection<AssetTypeData> GetAssetTypeFromAsset(AssetData item)
         {
@@ -240,8 +366,8 @@ namespace TradITAM.Model
                 if (query != null)
                 {
                     AssetTypeData pTemp = new AssetTypeData(/*item*/);
-                    pTemp.Asset_type_id = query.asset_type_id;
-                    pTemp.Asset_type_name = query.asset_type_name;
+                    pTemp.asset_type_id = query.asset_type_id;
+                    pTemp.asset_type_name = query.asset_type_name;
 
                     _result.Add(pTemp);
                 }
@@ -344,8 +470,8 @@ namespace TradITAM.Model
                 if (query != null)
                 {
                     OsData pTemp = new OsData(/*item*/);
-                    pTemp.Os_id = query.os_id;
-                    pTemp.Os_name = query.os_name;
+                    pTemp.os_id = query.os_id;
+                    pTemp.os_name = query.os_name;
 
                     _result.Add(pTemp);
                 }
@@ -362,6 +488,8 @@ namespace TradITAM.Model
             }
             return _result;
         }
+        #endregion
+
         #endregion
     }
 }

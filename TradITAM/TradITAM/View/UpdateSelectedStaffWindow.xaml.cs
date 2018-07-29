@@ -21,10 +21,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class UpdateSelectedStaffWindow : Window
     {
-        public UpdateSelectedStaffWindow(StaffData selectedStaff)
+        public UpdateSelectedStaffWindow(StaffData SelectedStaff)
         {
             InitializeComponent();
-            this.DataContext = new UpdateSelectedStaffWindowViewModel(selectedStaff);
+            this.DataContext = new UpdateSelectedStaffWindowViewModel(SelectedStaff);
         }
     }
 }

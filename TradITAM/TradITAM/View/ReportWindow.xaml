@@ -10,105 +10,106 @@
         Title="TradITAM - Asset Report" Height="600" Width="820" WindowStartupLocation="CenterScreen">
     <Grid>
         <ScrollViewer>
-            <StackPanel VerticalAlignment="Stretch" Margin="10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="2*"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" HorizontalAlignment="center" Width="570" Grid.ColumnSpan="2" Margin="0,0,-1,0">
-                        <Grid>
-                            <Image Grid.Column="0" Height="150" Margin="10">
-                                <Image.Source>
-                                    <BitmapImage UriSource="/image/Page_U.png"/>
-                                </Image.Source>
-                            </Image>
-                        </Grid>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" HorizontalAlignment="Center">
-                        <Grid>
+            <StackPanel>
+                <Grid Background="#FF018EFF" Height="50">
+                    <Label Content="ASSET REPORT" FontSize="18" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <StackPanel VerticalAlignment="Stretch" Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="2*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2.5*"/>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2.5*"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Margin="0,10,10,0">
-                                <Label Content="Report Type:" FontWeight="Bold" FontSize="14"/>
+                            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right">
+                                <Image Grid.Column="0" Height="150">
+                                    <Image.Source>
+                                        <BitmapImage UriSource="/image/Page_U.png"/>
+                                    </Image.Source>
+                                </Image>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0,28,0,10">
+                                <Label Content="Report Type:" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Margin="0,0,0,10"/>
+                                <Label Content="Asset Code:" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Margin="0,0,0,10"/>
+                                <Label Content="Used By: " FontWeight="Bold" FontSize="14" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left">
                                 <ComboBox ItemsSource="{Binding AssetHistoryTypeCollectionView}" DisplayMemberPath="Type_code" 
                                       SelectedValue="{Binding SelectedAssetHistoryType}" Text="{Binding SelectedAssetHistoryType}"
-                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" Margin="0,10,10,0">
-                                <Label Content="Asset Code:" FontWeight="Bold" FontSize="14"/>
+                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1" Margin="10,30,0,10"/>
                                 <ComboBox Name="cb1" ItemsSource="{Binding AssetCollectionView}" DisplayMemberPath="Asset_code" 
                                       SelectedValue="{Binding SelectedAsset}" Text="{Binding SelectedAsset}"
-                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="2" Margin="0,10,0,0">
-                                <Label Content="Used By: " FontWeight="Bold" FontSize="14"/>
+                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1" Margin="10,0,0,10"/>
                                 <ComboBox ItemsSource="{Binding StaffCollectionView}" DisplayMemberPath="aka" 
                                       SelectedIndex="{Binding Staff_id}"
                                       SelectedValue="{Binding SelectedStaff}" Text="{Binding SelectedStaff}"
-                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1"/>
+                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1" Margin="10,0,0,10"/>
                             </StackPanel>
                         </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Margin="0,10,0,0">
-                                <Label Content="Brand:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                                <Label Content="{Binding Brand, Mode=TwoWay}" FontSize="14" Margin="5" Cursor="Arrow"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" Margin="0,10,0,0">
-                                <Label Content="Type:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                                <Label Content="{Binding Asset_type_name, Mode=TwoWay}" FontSize="14" Margin="5" Cursor="Arrow"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="2" Margin="0,10,0,0">
-                                <Label Content="Supplier:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                                <Label Content="{Binding Company_name}" FontSize="14" Margin="5" Cursor="Arrow"/>
-                            </StackPanel>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0" Margin="0,10,0,0">
-                                <Label Content="Email:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                                <Label Content="{Binding Email}" FontSize="14" Margin="5" Cursor="Arrow"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="1" Margin="0,10,0,0">
-                                <Label Content="Contact Person:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                                <Label Content="{Binding Contact_person}" FontSize="14" Margin="5" Cursor="Arrow"/>
-                            </StackPanel>
-                            <StackPanel Grid.Column="2" Margin="0,10,0,0">
-                                <Label Content="Phone:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                                <Label Content="{Binding Phone}" FontSize="14" Margin="5" Cursor="Arrow"/>
-                            </StackPanel>
-                        </Grid>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,10,0,0">
+                                    <Label Content="Brand:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                    <Label Content="{Binding Brand, Mode=TwoWay}" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="0,10,0,0">
+                                    <Label Content="Type:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                    <Label Content="{Binding Asset_type_name, Mode=TwoWay}" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Margin="0,10,0,0">
+                                    <Label Content="Supplier:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                    <Label Content="{Binding Company_name}" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0" Margin="0,10,0,0">
+                                    <Label Content="Email:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                    <Label Content="{Binding Email}" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Margin="0,10,0,0">
+                                    <Label Content="Contact Person:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                    <Label Content="{Binding Contact_person}" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2" Margin="0,10,0,0">
+                                    <Label Content="Phone:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                    <Label Content="{Binding Phone}" FontSize="14" Margin="5" Cursor="Arrow"/>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                        </Grid>
-                        <Label Content="Adress:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                        <Label Content="{Binding Address}" FontSize="14" Margin="5" Cursor="Arrow"/>
+                            </Grid>
+                            <Label Content="Adress:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                            <Label Content="{Binding Address}" FontSize="14" Margin="5" Cursor="Arrow"/>
 
-                        <Label Content="Remark:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
-                        <TextBox Name="tb5" Text="{Binding Remark}" Cursor="IBeam" Width="660" Height="150" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,0,0,0" Margin="8"/>
-                        <!--Command="{Binding AddStaffCommand}"-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Command="{Binding AddReportCommand}" Width="200" Content="SEND" Margin="0,20,10,0"/>
-                            <Button Command="{Binding GetStaffEvent}" Width="200" Background="Gray" BorderBrush="{x:Null}" Content="CLEAR" Margin="0,20,10,0" />
+                            <Label Content="Remark:" FontWeight="Bold" FontSize="14" Margin="5" Cursor="Arrow"/>
+                            <TextBox Name="tb5" Text="{Binding Remark}" Cursor="IBeam" Width="660" Height="150" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,0,0,0" Margin="8"/>
+                            <!--Command="{Binding AddStaffCommand}"-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Command="{Binding AddReportCommand}" Width="200" Content="SEND" Margin="0,20,10,0"/>
+                                <Button Command="{Binding GetStaffEvent}" Width="200" Background="Gray" BorderBrush="{x:Null}" Content="CLEAR" Margin="0,20,10,0" />
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </Grid>
+                    </Grid>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>

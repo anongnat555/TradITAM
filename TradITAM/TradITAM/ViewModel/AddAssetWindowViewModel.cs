@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using TradITAM.Helper;
 using TradITAM.Model;
@@ -13,40 +14,40 @@ namespace TradITAM.ViewModel
 {
     public class AddAssetWindowViewModel : ViewModelBase
     {
-   
+
+        #region Global Variable
         public DelegateCommand<object> GetStaffEvent { get; set; }
         public DelegateCommand<object> GetSupplierEvent { get; set; }
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
         public DelegateCommand<object> GetOsEvent { get; set; }
-        public DelegateCommand<object> Addassetcommand { get; set; }
+
+        public DelegateCommand<object> AddAssetCommand { get; set; }
+
+        //private UserData UserInfo { get; set; }
+        #endregion
+
         public AddAssetWindowViewModel()
         {
-            
+            //UserInfo = new UserData();
+            //UserInfo = UserList;
+
+            /* Define GetEvent using DelegateCommand */
             GetStaffEvent = new DelegateCommand<object>(GetStaffInformation);
             GetSupplierEvent = new DelegateCommand<object>(GetSupplierInformation);
             GetAssetTypeEvent = new DelegateCommand<object>(GetAssetTypeInformation);
             GetOsEvent = new DelegateCommand<object>(GetOsInformation);
-            LoadAka();
-            LoadCompanyName();
-            LoadAssetTypeName();
-            LoadOsName();
-            Addassetcommand = new DelegateCommand<object>(AddAsset);
+
+            LoadAsset();                //Load 'Asset' from database to get 'AKA' in combobox
+            LoadSupplier();             //Load 'Supplier' from database to get 'Company_name' in combobox
+            LoadAssetType();            //Load 'AssetType' from database to get 'Asset_type_name' in combobox
+            LoadOs();                   //Load 'Os' from database to get 'Os_name' in combobox
+
+            /* Define AddEvent using DelegateCommand */
+            AddAssetCommand = new DelegateCommand<object>(AddAsset);
 
         }
 
-        #region Fields and Properties
-        private AssetData _newlistasset = new AssetData();
-        public AssetData newAssetList
-        {
-            get => _newlistasset;
-            set
-            {
-                _newlistasset = value;
-                OnPropertyChanged(nameof(newAssetList));
-            }
-        }
-        #endregion
-        //call dataaccess
+        #region Call DataAccess
         private DataAccess _DataAccess;
         public DataAccess DataAccess
         {
@@ -57,33 +58,22 @@ namespace TradITAM.ViewModel
                 return _DataAccess;
             }
         }
+        #endregion
 
-        #region Method
-
-        public void AddAsset(Object o)
+        #region A Property use for Database
+        private AssetData _assetlist = new AssetData();
+        public AssetData AssetList
         {
-            newAssetList.Os_id = SelectedOs.Os_id;
-            newAssetList.Asset_type_id = SelectedAssetType.Asset_type_id;
-            newAssetList.Original_supplier_id = SelectedStaff.staff_id;
-            newAssetList.Using_by_staff_id = SelectedStaff.staff_id;
-            newAssetList.Supplier_id = SelectedSupplier.supplier_id;
-            newAssetList.Is_active = Is_active_a;
-            newAssetList.Asset_code = Asset_code;
-            newAssetList.Brand = Brand;
-            newAssetList.Price = Price;
-            newAssetList.Cpu = Cpu;
-            newAssetList.Ram = Ram;
-            newAssetList.Hdd = Hdd;
-            newAssetList.Note = Note;
-            newAssetList.Start_date_warranty = Start_date_warranty;
-            newAssetList.Expiry_date_warranty = Expiry_date_warranty;
-
-            var addasset = new InsertAccess();
-            addasset.AddAsset(newAssetList);
+            get => _assetlist;
+            set
+            {
+                _assetlist = value;
+                OnPropertyChanged(nameof(AssetList));
+            }
         }
         #endregion
 
-        #region Staff
+        #region Staff Properties
         private ObservableCollection<StaffData> _liststaff = new ObservableCollection<StaffData>();
         public ObservableCollection<StaffData> StaffList
         {
@@ -120,12 +110,12 @@ namespace TradITAM.ViewModel
         {
             if (SelectedStaff != null)
             {
-
+                Staff_id = SelectedStaff.staff_id;
             }
         }
         #endregion
 
-        #region Supplier
+        #region Supplier Properties
         private ObservableCollection<SupplierData> _listsupplier = new ObservableCollection<SupplierData>();
         public ObservableCollection<SupplierData> SupplierList
         {
@@ -162,12 +152,12 @@ namespace TradITAM.ViewModel
         {
             if (SelectedSupplier != null)
             {
-
+                Supplier_id = SelectedSupplier.supplier_id;
             }
         }
         #endregion
 
-        #region AssetType
+        #region AssetType Properties
         private ObservableCollection<AssetTypeData> _listassettype = new ObservableCollection<AssetTypeData>();
         public ObservableCollection<AssetTypeData> AssetTypeList
         {
@@ -204,12 +194,12 @@ namespace TradITAM.ViewModel
         {
             if (SelectedSupplier != null)
             {
-
+                Asset_type_id = SelectedAssetType.asset_type_id;
             }
         }
         #endregion
 
-        #region Os
+        #region Os Properties
         private ObservableCollection<OsData> _listos = new ObservableCollection<OsData>();
         public ObservableCollection<OsData> OsList
         {
@@ -246,20 +236,20 @@ namespace TradITAM.ViewModel
         {
             if (SelectedOs != null)
             {
-
+                Os_id = SelectedOs.os_id;
             }
         }
         #endregion
 
         #region Load Asset Data
-        private int _os_id;
-        public int Os_id
+        private int _os_id_a;
+        public int Os_id_a
         {
-            get => _os_id;
+            get => _os_id_a;
             set
             {
-                _os_id = value;
-                OnPropertyChanged(nameof(Os_id));
+                _os_id_a = value;
+                OnPropertyChanged(nameof(Os_id_a));
             }
         }
 
@@ -416,31 +406,20 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(Is_active_a));
             }
         }
-
-        private DateTime _create_date_a;
-        public DateTime Create_date_a
-        {
-            get { return _create_date_a; }
-            set
-            {
-                _create_date_a = value;
-                OnPropertyChanged(nameof(Create_date_a));
-            }
-        }
-
-        private DateTime _modified_date_a;
-        public DateTime Modified_date_a
-        {
-            get { return _modified_date_a; }
-            set
-            {
-                _modified_date_a = value;
-                OnPropertyChanged(nameof(Modified_date_a));
-            }
-        }
         #endregion
 
         #region Load Staff Data
+        private int _staff_id;
+        public int Staff_id
+        {
+            get { return _staff_id; }
+            set
+            {
+                _staff_id = value;
+                OnPropertyChanged(nameof(Staff_id));
+            }
+        }
+
         private string _aka;
         public string Aka
         {
@@ -466,6 +445,19 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region Load Os Data
+        private int _os_id;
+        public int Os_id
+        {
+            get => _os_id;
+            set
+            {
+                _os_id = value;
+                OnPropertyChanged(nameof(Os_id));
+            }
+        }
+        #endregion
+
         #region Load AssetType Data
         private string _asset_type_name;
         public string Asset_type_name
@@ -481,29 +473,73 @@ namespace TradITAM.ViewModel
 
         #region Method
 
-        public void LoadAka()
+        #region Add
+        public void AddAsset(Object o)
+        {
+            /* From object 'SelectedStaff' */
+            AssetList.Os_id = Os_id;
+
+            /* From object 'SelectedAssetType' */
+            AssetList.Asset_type_id = Asset_type_id;        
+
+            /* From object 'SelectedSupplier' */   
+            AssetList.Supplier_id = Supplier_id;
+
+            /* From object 'SelectedStaff' */
+            AssetList.Using_by_staff_id = Staff_id;
+            AssetList.Original_supplier_id = Staff_id;
+
+            /* From UI's TextBox (Binding) */
+            AssetList.Is_active = Is_active_a;
+            AssetList.Asset_code = Asset_code;
+            AssetList.Brand = Brand;
+            AssetList.Price = Price;
+            AssetList.Cpu = Cpu;
+            AssetList.Ram = Ram;
+            AssetList.Hdd = Hdd;
+            AssetList.Note = Note;
+            AssetList.Start_date_warranty = Start_date_warranty;
+            AssetList.Expiry_date_warranty = Expiry_date_warranty;
+
+            /* Insert to Database */
+            if (Os_id == 0)
+            {
+                MessageBox.Show("Please Select some OS");
+            }
+            else
+            {
+                var insertion = new InsertAccess();
+                insertion.AddAsset(AssetList);
+            }
+        }
+        #endregion
+
+        #region Get
+        public void LoadAsset()
         {
             StaffList = DataAccess.GetStaff();
             StaffCollectionView = CollectionViewSource.GetDefaultView(StaffList);
         }
 
-        public void LoadCompanyName()
+        public void LoadSupplier()
         {
             SupplierList = DataAccess.GetSupplier();
             SupplierCollectionView = CollectionViewSource.GetDefaultView(SupplierList);
         }
 
-        public void LoadAssetTypeName()
+        public void LoadAssetType()
         {
             AssetTypeList = DataAccess.GetAssetType();
             AssetTypeCollectionView = CollectionViewSource.GetDefaultView(AssetTypeList);
         }
 
-        public void LoadOsName()
+        public void LoadOs()
         {
             OsList = DataAccess.GetOs();
             OsCollectionView = CollectionViewSource.GetDefaultView(OsList);
         }
+        #endregion
+
         #endregion
 
     }

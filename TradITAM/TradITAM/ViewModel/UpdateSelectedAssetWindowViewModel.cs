@@ -19,9 +19,11 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
         public DelegateCommand<object> GetOsEvent { get; set; }
 
-        public UpdateSelectedAssetWindowViewModel(AssetData assetDt)
+        private AssetData AssetInfo { get; set; }
+        public UpdateSelectedAssetWindowViewModel(AssetData AssetSelect)
         {
-            MessageBox.Show(assetDt.Asset_code.ToString());
+            AssetInfo = new AssetData();
+            AssetInfo = AssetSelect;
 
             GetStaffEvent = new DelegateCommand<object>(GetStaffInformation);
             GetSupplierEvent = new DelegateCommand<object>(GetSupplierInformation);
@@ -35,7 +37,7 @@ namespace TradITAM.ViewModel
             LoadOsName();
             #endregion
 
-            LoadSelected(assetDt);
+            LoadSelected(AssetSelect);
         }
 
         #region call dataaccess
@@ -541,24 +543,24 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
-        public void LoadSelected(AssetData assetDt)
+        public void LoadSelected(AssetData AssetSelect)
         {
-            Asset_id = assetDt.Asset_id;
-            Os_id = assetDt.Os_id;
-            Asset_type_id = assetDt.Asset_type_id;
-            Original_supplier_id = assetDt.Original_supplier_id;
-            Supplier_id = assetDt.Supplier_id - 1;
-            Using_by_staff_id = assetDt.Using_by_staff_id - 1;
-            Asset_code = assetDt.Asset_code;
-            Brand = assetDt.Brand;
-            Price = assetDt.Price;
-            Cpu = assetDt.Cpu;
-            Ram = assetDt.Ram;
-            Hdd = assetDt.Hdd;
-            Is_active_a = assetDt.Is_active;
-            Start_date_warranty = assetDt.Start_date_warranty;
-            Expiry_date_warranty = assetDt.Expiry_date_warranty;
-            Note = assetDt.Note;
+            Asset_id = AssetSelect.Asset_id;
+            Os_id = AssetSelect.Os_id;
+            Asset_type_id = AssetSelect.Asset_type_id;
+            Original_supplier_id = AssetSelect.Original_supplier_id;
+            Supplier_id = AssetSelect.Supplier_id - 1;
+            Using_by_staff_id = AssetSelect.Using_by_staff_id - 1;
+            Asset_code = AssetSelect.Asset_code;
+            Brand = AssetSelect.Brand;
+            Price = AssetSelect.Price;
+            Cpu = AssetSelect.Cpu;
+            Ram = AssetSelect.Ram;
+            Hdd = AssetSelect.Hdd;
+            Is_active_a = AssetSelect.Is_active;
+            Start_date_warranty = AssetSelect.Start_date_warranty;
+            Expiry_date_warranty = AssetSelect.Expiry_date_warranty;
+            Note = AssetSelect.Note;
         }
         #endregion
     }

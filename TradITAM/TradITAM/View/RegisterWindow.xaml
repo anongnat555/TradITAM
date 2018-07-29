@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TradITAM.View"
         xmlns:vmx="clr-namespace:TradITAM.ViewModel"
+        xmlns:w="clr-namespace:TradITAM.Helper"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=vmx:RegisterWindowViewModel}"
-        DataContext="{DynamicResource RegisterWindowVM}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Register" Height="500" Width="350" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Grid>
@@ -15,26 +15,36 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="#FF018EFF">
-            <TextBox Text="ADD NEW ACCOUNT" VerticalAlignment="Center" FontSize="14" BorderBrush="{x:Null}" Foreground="White"/>
-            <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Close" Height="Auto" Margin="150,0,150,80">
-                <materialDesign:PackIcon Kind="Close" Height="25" Width="25" Foreground="White" />
-            </Button>
-        </StackPanel>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#FF018EFF">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Close" Width="50" Height="Auto" HorizontalAlignment="Right">
+                    <materialDesign:PackIcon Kind="Close" Height="20" Width="auto" Foreground="White" />
+                </Button>
+            </Grid>
+            <Grid Grid.Row="1" Background="#FF018EFF">
+                <TextBox Text="ADD NEW ACCOUNT" FontWeight="DemiBold" VerticalAlignment="Center" HorizontalAlignment="Center"  FontSize="18" BorderBrush="{x:Null}" BorderThickness="0" Foreground="White"/>
+            </Grid>
+        </Grid>
         <StackPanel Grid.Row="1" Margin="10">
             <Label Content="Username" FontWeight="Bold" FontSize="14"/>
-            <TextBox Text="{Binding Username}" FontSize="14" BorderThickness="1" Padding="3,0,0,0"/>
+            <TextBox Text="{Binding Username,Mode=TwoWay}" FontSize="14" BorderThickness="1" Padding="3,0,0,0"/>
             <Label Content="Password" FontWeight="Bold" FontSize="14"/>
-            <TextBox Text="{Binding Password}" FontSize="14" BorderThickness="1" Padding="3,0,0,0"/>
+            <StackPanel>
+                <PasswordBox w:PasswordCommand.Attach="True" w:PasswordCommand.Password="{Binding Password, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                             FontSize="14" Height="auto" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Padding="0,-6,0,0"/>
+            </StackPanel>
             <Label Content="Confirm Password" FontWeight="Bold" FontSize="14"/>
-            <TextBox Text="{Binding Password}" FontSize="14" BorderThickness="1" Padding="3,0,0,0"/>
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Content="Active Status:  " FontWeight="Bold" FontSize="14"/>
-                <ToggleButton Name="tgb1" IsChecked="{Binding Isactive}" Background="#00ff40" />
+            <StackPanel>
+                <PasswordBox w:PasswordCommand.Attach="True" w:PasswordCommand.Password="{Binding Password_confirm, Mode=TwoWay}" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" 
+                             FontSize="14" Height="auto" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Padding="0,-6,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="5">
-                <Label Content="Role Status:  " FontWeight="Bold" FontSize="14"/>
-                <ToggleButton Name="tgb" IsChecked="{Binding Userrole}" Background="#00ff40" />
+                <Label Content="Active Status:  " FontWeight="Bold" FontSize="14"/>
+                <ToggleButton Name="tgb1" IsChecked="{Binding Is_active,Mode=TwoWay}" Background="#00ff40" />
             </StackPanel>
             <Button Command="{Binding AddUserCommand}" Width="250" Content="Create new user" Margin="15"/>
         </StackPanel>

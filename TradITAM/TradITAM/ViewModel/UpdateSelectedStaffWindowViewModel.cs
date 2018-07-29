@@ -12,9 +12,9 @@ namespace TradITAM.ViewModel
     public class UpdateSelectedStaffWindowViewModel : ViewModelBase
     {
         public DelegateCommand<object> Updatecommand { get; set; }
-        public UpdateSelectedStaffWindowViewModel(StaffData staffDt)
+        public UpdateSelectedStaffWindowViewModel(StaffData StaffSelect)
         {
-            LoadSelected(staffDt);
+            LoadSelected(StaffSelect);
             Updatecommand = new DelegateCommand<object>(Update);
         }
 
@@ -133,15 +133,15 @@ namespace TradITAM.ViewModel
         #endregion
 
         #region Method
-        public void LoadSelected(StaffData staffDt)
+        public void LoadSelected(StaffData StaffSelect)
         {
-            Staff_id = staffDt.staff_id;
-            Aka = staffDt.aka;
-            Firstname = staffDt.firstname;
-            Lastname = staffDt.lastname;
-            Is_active = staffDt.is_active;
-            Start_date = staffDt.start_date;
-            End_date = staffDt.end_date;
+            Staff_id = StaffSelect.staff_id;
+            Aka = StaffSelect.aka;
+            Firstname = StaffSelect.firstname;
+            Lastname = StaffSelect.lastname;
+            Is_active = StaffSelect.is_active;
+            Start_date = StaffSelect.start_date;
+            End_date = StaffSelect.end_date;
         }
 
         public void Update(object o)

@@ -14,26 +14,31 @@ namespace TradITAM.ViewModel
 {
     public class UpdateAssetWindowViewModel : ViewModelBase
     {
+        #region Global Variable
         public DelegateCommand<object> GetAssetEvent { get; set; }
         public DelegateCommand<object> GetStaffEvent { get; set; }
-        public DelegateCommand<object> GetSupplierEvent { get; set; }
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
         public DelegateCommand<object> GetOsEvent { get; set; }
 
+        public DelegateCommand<object> UpdateCommand { get; set; }
+        #endregion
+
         public UpdateAssetWindowViewModel()
         {
+            /* Define GetEvent using DelegateCommand */
             GetAssetEvent = new DelegateCommand<object>(GetAssetInformation);
             GetStaffEvent = new DelegateCommand<object>(GetStaffInformation);
-            GetSupplierEvent = new DelegateCommand<object>(GetSupplierInformation);
             GetAssetTypeEvent = new DelegateCommand<object>(GetAssetTypeInformation);
             GetOsEvent = new DelegateCommand<object>(GetOsInformation);
 
-            LoadAssetCode();
-            LoadAka();
-            LoadCompanyName();
+            /* Define UpdateEvent using DelegateCommand */
+            UpdateCommand = new DelegateCommand<object>(Update);
 
-            LoadAssetTypeName();
-            LoadOsName();
+            LoadAsset();        //Load 'Asset' from database to get 'Asset_code' in combobox
+            LoadStaff();        //Load 'Staff' from database to get 'Aka' in combobox
+            LoadSupplier();     //Load 'Supplier' from database to get 'Company_name' in combobox
+            LoadAssetType();    //Load 'AssetType' from database to get 'Asset_type_name' in combobox
+            LoadOs();           //Load 'Os' from database to get 'Os_name' in combobox
         }
 
         #region call dataaccess
@@ -45,6 +50,19 @@ namespace TradITAM.ViewModel
                 if (_DataAccess == null)
                     _DataAccess = new DataAccess();
                 return _DataAccess;
+            }
+        }
+        #endregion
+
+        #region A Property use for Database
+        private AssetData _newasset = new AssetData();
+        public AssetData Assetnew
+        {
+            get => _newasset;
+            set
+            {
+                _newasset = value;
+                OnPropertyChanged(nameof(Assetnew));
             }
         }
         #endregion
@@ -86,13 +104,15 @@ namespace TradITAM.ViewModel
         {
             if (SelectedAsset != null)
             {
+                /* Assign asset value into each asset property from ui selection */
+                Asset_id = SelectedAsset.Asset_id;
                 Brand = SelectedAsset.Brand;
                 Price = SelectedAsset.Price;
                 Asset_code = SelectedAsset.Asset_code;
-                Asset_type_id = SelectedAsset.Asset_type_id - 1;
-                Using_by_staff_id = SelectedAsset.Using_by_staff_id - 1;
-                Supplier_id =  SelectedAsset.Supplier_id - 1;
-                Os_id = SelectedAsset.Os_id - 1;
+                Asset_type_id = SelectedAsset.Asset_type_id;
+                Using_by_staff_id = SelectedAsset.Using_by_staff_id;
+                Supplier_id = SelectedAsset.Supplier_id;
+                Os_id = SelectedAsset.Os_id;
                 Cpu = SelectedAsset.Cpu;
                 Ram = SelectedAsset.Ram;
                 Hdd = SelectedAsset.Hdd;
@@ -100,6 +120,9 @@ namespace TradITAM.ViewModel
                 Is_active_a = SelectedAsset.Is_active;
                 Start_date_warranty = SelectedAsset.Start_date_warranty;
                 Expiry_date_warranty = SelectedAsset.Expiry_date_warranty;
+
+                /* Assign other combobox value that depend on Asset's Selection  */
+                LoadSelected(SelectedAsset.Using_by_staff_id, SelectedAsset.Supplier_id, SelectedAsset.Asset_type_id, SelectedAsset.Os_id);
             }
         }
         #endregion
@@ -137,20 +160,10 @@ namespace TradITAM.ViewModel
             set { _StaffCollectionView = value; }
         }
 
-        public void GetStaffInformation(Object obj)
+        private void GetStaffInformation(object obj)
         {
-            if (SelectedStaff != null)
-            {
-                //MessageBox.Show(SelectedStaff.firstname);
-                Aka = SelectedStaff.aka;
-                Firstname = SelectedStaff.firstname;
-                Lastname = SelectedStaff.lastname;
-                Is_active_s = SelectedStaff.is_active;
-                Start_date = SelectedStaff.start_date;
-                End_date = SelectedStaff.end_date;
-                //CreateWindow xxx = new CreateWindow(SelectedStaff);
-                //xxx.ShowDialog();
-            }
+            /* Assign staff value into each asset property from ui selection */
+            Staff_id = SelectedStaff.staff_id;
         }
         #endregion
 
@@ -187,12 +200,10 @@ namespace TradITAM.ViewModel
             set { _SupplierCollectionView = value; }
         }
 
-        public void GetSupplierInformation(Object obj)
+        public void GetSupplierInformation(object o)
         {
-            if (SelectedSupplier != null)
-            {
-
-            }
+            /* Assign supplier value into each asset property from ui selection */
+            Supplier_id_s = SelectedSupplier.supplier_id;
         }
         #endregion
 
@@ -229,12 +240,10 @@ namespace TradITAM.ViewModel
             set { _AssetTypeCollectionView = value; }
         }
 
-        public void GetAssetTypeInformation(Object obj)
+        private void GetAssetTypeInformation(object obj)
         {
-            if (SelectedSupplier != null)
-            {
-
-            }
+            /* Assign asset type value into each asset property from ui selection */
+            Asset_type_id_at = SelectedAssetType.asset_type_id;
         }
         #endregion
 
@@ -271,12 +280,10 @@ namespace TradITAM.ViewModel
             set { _OsCollectionView = value; }
         }
 
-        public void GetOsInformation(Object obj)
+        private void GetOsInformation(object obj)
         {
-            if (SelectedOs != null)
-            {
-                
-            }
+            /* Assign os value into each asset property from ui selection */
+            Os_id_o = SelectedOs.os_id;
         }
         #endregion
 
@@ -481,192 +488,49 @@ namespace TradITAM.ViewModel
         #endregion
 
         #region Load Staff Data
-        private string _firstname;
-        public string Firstname
+        private int _staff_id;
+        public int Staff_id
         {
-            get { return _firstname; }
+            get => _staff_id;
             set
             {
-                _firstname = value;
-                OnPropertyChanged(nameof(Firstname));
-            }
-        }
-
-        private string _lastname;
-        public string Lastname
-        {
-            get { return _lastname; }
-            set
-            {
-                _lastname = value;
-                OnPropertyChanged(nameof(Lastname));
+                _staff_id = value;
+                OnPropertyChanged(nameof(Staff_id));
             }
         }
 
         private string _aka;
         public string Aka
         {
-            get { return _aka; }
+            get => _aka;
             set
             {
                 _aka = value;
                 OnPropertyChanged(nameof(Aka));
             }
         }
-
-        private DateTime _start_date;
-        public DateTime Start_date
-        {
-            get { return _start_date; }
-            set
-            {
-                _start_date = value;
-                OnPropertyChanged(nameof(Start_date));
-            }
-        }
-
-        private DateTime _end_date;
-        public DateTime End_date
-        {
-            get { return _end_date; }
-            set
-            {
-                _end_date = value;
-                OnPropertyChanged(nameof(End_date));
-            }
-        }
-
-        private bool _is_active_s;
-        public bool Is_active_s
-        {
-            get { return _is_active_s; }
-            set
-            {
-                _is_active_s = value;
-                OnPropertyChanged(nameof(Is_active_s));
-            }
-        }
-
-        private DateTime _create_date_s;
-        public DateTime Create_date_s
-        {
-            get { return _create_date_s; }
-            set
-            {
-                _create_date_s = value;
-                OnPropertyChanged(nameof(Create_date_s));
-            }
-        }
-
-        private DateTime _modified_date_s;
-        public DateTime Modified_date_s
-        {
-            get { return _modified_date_s; }
-            set
-            {
-                _modified_date_s = value;
-                OnPropertyChanged(nameof(Modified_date_s));
-            }
-        }
         #endregion
 
         #region Load Supplier Data
-        private string _supplier_id_sp;
-        public string Supplier_id_sp
+        private int _supplier_id_s;
+        public int Supplier_id_s
         {
-            get => _supplier_id_sp;
+            get => _supplier_id_s;
             set
             {
-                _supplier_id_sp = value;
-                OnPropertyChanged(nameof(Supplier_id_sp));
+                _supplier_id_s = value;
+                OnPropertyChanged(nameof(Supplier_id_s));
             }
         }
 
         private string _company_name;
         public string Company_name
         {
-            get => _company_name; 
+            get => _company_name;
             set
             {
                 _company_name = value;
                 OnPropertyChanged(nameof(Company_name));
-            }
-        }
-
-        private string _contact_person;
-        public string Contact_person
-        {
-            get => _contact_person; 
-            set
-            {
-                _contact_person = value;
-                OnPropertyChanged(nameof(Contact_person));
-            }
-        }
-
-        private string _address;
-        public string Address
-        {
-            get => _address;
-            set
-            {
-                _address = value;
-                OnPropertyChanged(nameof(Address));
-            }
-        }
-
-        private string _email;
-        public string Email
-        {
-            get { return _email; }
-            set
-            {
-                _email = value;
-                OnPropertyChanged(nameof(Email));
-            }
-        }
-
-        private string _phone;
-        public string Phone
-        {
-            get { return _phone; }
-            set
-            {
-                _phone = value;
-                OnPropertyChanged(nameof(Phone));
-            }
-        }
-
-        private bool _is_active_sp;
-        public bool Is_active_sp
-        {
-            get { return _is_active_sp; }
-            set
-            {
-                _is_active_sp = value;
-                OnPropertyChanged(nameof(Is_active_sp));
-            }
-        }
-
-        private DateTime _create_date_sp;
-        public DateTime Create_date_sp
-        {
-            get { return _create_date_sp; }
-            set
-            {
-                _create_date_sp = value;
-                OnPropertyChanged(nameof(Create_date_sp));
-            }
-        }
-
-        private DateTime _modified_date_sp;
-        public DateTime Modified_date_sp
-        {
-            get { return _modified_date_sp; }
-            set
-            {
-                _modified_date_sp = value;
-                OnPropertyChanged(nameof(Modified_date_sp));
             }
         }
         #endregion
@@ -693,50 +557,17 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(Asset_type_name));
             }
         }
-
-        private bool _is_active_at;
-        public bool Is_active_at
-        {
-            get { return _is_active_at; }
-            set
-            {
-                _is_active_at = value;
-                OnPropertyChanged(nameof(Is_active_at));
-            }
-        }
-
-        private DateTime _create_date_at;
-        public DateTime Create_date_at
-        {
-            get { return _create_date_at; }
-            set
-            {
-                _create_date_s = value;
-                OnPropertyChanged(nameof(Create_date_at));
-            }
-        }
-
-        private DateTime _modified_date_at;
-        public DateTime Modified_date_at
-        {
-            get { return _modified_date_at; }
-            set
-            {
-                _modified_date_at = value;
-                OnPropertyChanged(nameof(Modified_date_at));
-            }
-        }
         #endregion
 
         #region Load Os Data
-        private int _os_id_os;
-        public int Os_id_os
+        private int _os_id_o;
+        public int Os_id_o
         {
-            get => _os_id_os;
+            get => _os_id_o;
             set
             {
-                _os_id_os = value;
-                OnPropertyChanged(nameof(Os_id_os));
+                _os_id_o = value;
+                OnPropertyChanged(nameof(Os_id_o));
             }
         }
 
@@ -750,71 +581,79 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(Os_name));
             }
         }
-
-        private bool _is_active_os;
-        public bool Is_active_os
-        {
-            get { return _is_active_os; }
-            set
-            {
-                _is_active_os = value;
-                OnPropertyChanged(nameof(Is_active_os));
-            }
-        }
-
-        private DateTime _create_date_os;
-        public DateTime Create_date_os
-        {
-            get { return _create_date_os; }
-            set
-            {
-                _create_date_os = value;
-                OnPropertyChanged(nameof(Create_date_os));
-            }
-        }
-
-        private DateTime _modified_date_os;
-        public DateTime Modified_date_os
-        {
-            get { return _modified_date_os; }
-            set
-            {
-                _modified_date_os = value;
-                OnPropertyChanged(nameof(Modified_date_os));
-            }
-        }
         #endregion
 
         #region Method
-        public void LoadAssetCode()
+
+        #region Load initial data 
+        public void LoadAsset()
         {
             AssetList = DataAccess.GetAsset();
             AssetCollectionView = CollectionViewSource.GetDefaultView(AssetList);
         }
 
-        public void LoadAka()
+        public void LoadStaff()
         {
             StaffList = DataAccess.GetStaff();
             StaffCollectionView = CollectionViewSource.GetDefaultView(StaffList);
         }
 
-        public void LoadCompanyName()
+        public void LoadSupplier()
         {
             SupplierList = DataAccess.GetSupplier();
             SupplierCollectionView = CollectionViewSource.GetDefaultView(SupplierList);
         }
 
-        public void LoadAssetTypeName()
+        public void LoadAssetType()
         {
             AssetTypeList = DataAccess.GetAssetType();
             AssetTypeCollectionView = CollectionViewSource.GetDefaultView(AssetTypeList);
         }
 
-        public void LoadOsName()
+        public void LoadOs()
         {
             OsList = DataAccess.GetOs();
             OsCollectionView = CollectionViewSource.GetDefaultView(OsList);
         }
+        #endregion
+
+        #region Load data after selected asset
+        private void LoadSelected(int Uid, int Sid, int Tid, int Oid)
+        {
+            Aka = DataAccess.GetStaffAka(Uid);
+            Company_name = DataAccess.GetSupplierCompanyName(Sid);
+            Asset_type_name = DataAccess.GetAssetTypeName(Tid);
+            Os_name = DataAccess.GetOsName(Oid);
+        }
+        #endregion
+
+        #region Update to database
+        public void Update(object obj)
+        {
+            if (Assetnew != null)
+            {
+                Assetnew.Asset_id = Asset_id;
+                Assetnew.Asset_type_id = Asset_type_id_at;
+                Assetnew.Asset_code = Asset_code;
+                Assetnew.Brand = Brand;
+                Assetnew.Cpu = Cpu;
+                Assetnew.Ram = Ram;
+                Assetnew.Hdd = Hdd;
+                Assetnew.Price = Price;
+                Assetnew.Os_id = Os_id_o;
+                Assetnew.Using_by_staff_id = Staff_id;
+                Assetnew.Supplier_id = Supplier_id_s;
+                Assetnew.Note = Note;
+                Assetnew.Is_active = Is_active_a;
+                Assetnew.Start_date_warranty = Start_date_warranty;
+                Assetnew.Expiry_date_warranty = Expiry_date_warranty;
+
+                var update = new UpdateAccess();
+                update.UpdateAsset(Assetnew);
+            }
+        }
+        #endregion
+
         #endregion
     }
 }
