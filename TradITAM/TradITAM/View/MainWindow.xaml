@@ -147,7 +147,7 @@
                                 <ComboBox Width="180" Height="22" BorderThickness="1"/>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
-                                <Button Click="Button_Add_Staff" Command="{Binding }" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Click="Button_Add_Staff" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
                                 <Button Click="Button_Update_Staff" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100"/>
                             </StackPanel>
                         </Grid>

@@ -35,20 +35,18 @@
                             </StackPanel>
                             <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0,28,0,10">
                                 <Label Content="Report Type:" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Margin="0,0,0,10"/>
-                                <Label Content="Asset Code:" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Margin="0,0,0,10"/>
-                                <Label Content="Used By: " FontWeight="Bold" FontSize="14" HorizontalAlignment="Right"/>
+                                <Button Click="Button_Add_ReportType" Content="ADD MORE" Background="#FFC300" FontWeight="Bold" BorderBrush="{x:Null}" FontSize="10" Width="70" Height="20" Padding="2" Margin="15,-10,0,0"/>
+                                <Label Content="Asset Code:" FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Margin="0,10,0,10"/>
+                                <Label Content="Used By: " FontWeight="Bold" FontSize="14" HorizontalAlignment="Right" Margin="0,10,0,0"/>
                             </StackPanel>
                             <StackPanel Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left">
                                 <ComboBox ItemsSource="{Binding AssetHistoryTypeCollectionView}" DisplayMemberPath="Type_code" 
                                       SelectedValue="{Binding SelectedAssetHistoryType}" Text="{Binding SelectedAssetHistoryType}"
-                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1" Margin="10,30,0,10"/>
+                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="210" BorderThickness="1" Margin="10,40,0,10"/>
                                 <ComboBox Name="cb1" ItemsSource="{Binding AssetCollectionView}" DisplayMemberPath="Asset_code" 
-                                      SelectedValue="{Binding SelectedAsset}" Text="{Binding SelectedAsset}"
-                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1" Margin="10,0,0,10"/>
-                                <ComboBox ItemsSource="{Binding StaffCollectionView}" DisplayMemberPath="aka" 
-                                      SelectedIndex="{Binding Staff_id}"
-                                      SelectedValue="{Binding SelectedStaff}" Text="{Binding SelectedStaff}"
-                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="220" BorderThickness="1" Margin="10,0,0,10"/>
+                                      SelectedValue="{Binding SelectedAsset}" Text="{Binding Asset_code, Mode=TwoWay}"
+                                      IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="210" FontSize="14" BorderThickness="1" Margin="10,10,0,10"/>
+                                <Label Content="{Binding Aka, Mode=TwoWay}" Width="210" FontSize="14" BorderThickness="1" Margin="10,5,0,10"/>
                             </StackPanel>
                         </Grid>
                         <StackPanel Grid.Row="1" HorizontalAlignment="Center" Margin="10">

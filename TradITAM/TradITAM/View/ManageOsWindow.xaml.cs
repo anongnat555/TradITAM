@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TradITAM.ViewModel;
 
 namespace TradITAM.View
 {
@@ -22,6 +23,7 @@ namespace TradITAM.View
         public ManageOsWindow()
         {
             InitializeComponent();
+            this.DataContext = new ManageOsWindowViewModel();
         }
     }
 }

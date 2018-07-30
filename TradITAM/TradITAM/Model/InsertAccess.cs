@@ -43,7 +43,7 @@ namespace TradITAM.Model
             }
         }
         #endregion
-        
+
         #region Asset
         public void AddAsset(AssetData item)
         {
@@ -164,6 +164,84 @@ namespace TradITAM.Model
                     history_timestamp = item.History_timestamp
                 };
                 db.asset_history.Add(data);
+                db.SaveChanges();
+                MessageBox.Show("Insert complete");
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Add error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+
+        #region AssetType
+        public void AddAssetType(AssetTypeData item)
+        {
+            hasError = false;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var data = new asset_type()
+                {
+                    asset_type_name = item.asset_type_name,
+                    is_active = item.is_active,
+                    create_date = DateTime.Now,
+                    modified_date = DateTime.Now
+                };
+                db.asset_type.Add(data);
+                db.SaveChanges();
+                MessageBox.Show("Insert complete");
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Add error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+
+        #region Os
+        public void AddOs(OsData item)
+        {
+            hasError = false;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var data = new os()
+                {
+                    os_name = item.os_name,
+                    is_active = item.is_active,
+                    create_date = DateTime.Now,
+                    modified_date = DateTime.Now
+                };
+                db.os.Add(data);
+                db.SaveChanges();
+                MessageBox.Show("Insert complete");
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Add error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+
+        #region AssetHistoryType
+        public void AddAssetHistoryType(AssetHistoryTypeData item)
+        {
+            hasError = false;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var data = new asset_history_type()
+                {
+                    type_code = item.Type_code,
+                    is_active = item.Is_active,
+                    create_date = DateTime.Now,
+                    modified_date = DateTime.Now
+                };
+                db.asset_history_type.Add(data);
                 db.SaveChanges();
                 MessageBox.Show("Insert complete");
             }

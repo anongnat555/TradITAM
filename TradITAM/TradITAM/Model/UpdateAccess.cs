@@ -101,7 +101,6 @@ namespace TradITAM.Model
         }
         #endregion
 
-
         #region Supplier
         public void UpdateSupplier(SupplierData newitem)
         {
@@ -123,6 +122,105 @@ namespace TradITAM.Model
                         supplier_.modified_date = DateTime.Now;
 
                         db.supplier.AddOrUpdate(supplier_);
+                        db.SaveChanges();
+                        MessageBox.Show("Update complete");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can not update");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Update error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+
+        #region AssetType
+        public void UpdateAssetType(AssetTypeData newitem)
+        {
+            hasError = false;
+            try
+            {
+                using (TradAssetDBEntities db = new TradAssetDBEntities())
+                {
+                    var assettype_ = db.asset_type.FirstOrDefault(x => x.asset_type_id == newitem.asset_type_id);
+                    if (assettype_ != null)
+                    {
+                        assettype_.asset_type_name = newitem.asset_type_name;
+                        assettype_.is_active = newitem.is_active;
+                        assettype_.modified_date = DateTime.Now;
+
+                        db.asset_type.AddOrUpdate(assettype_);
+                        db.SaveChanges();
+                        MessageBox.Show("Update complete");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can not update");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Update error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+
+        #region Os
+        public void UpdateOs(OsData newitem)
+        {
+            hasError = false;
+            try
+            {
+                using (TradAssetDBEntities db = new TradAssetDBEntities())
+                {
+                    var os_ = db.os.FirstOrDefault(x => x.os_id == newitem.os_id);
+                    if (os_ != null)
+                    {
+                        os_.os_name = newitem.os_name;
+                        os_.is_active = newitem.is_active;
+                        os_.modified_date = DateTime.Now;
+
+                        db.os.AddOrUpdate(os_);
+                        db.SaveChanges();
+                        MessageBox.Show("Update complete");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can not update");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Update error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+
+        #region AssetHistoryType
+        public void UpdateAssetHistoryType(AssetHistoryTypeData newitem)
+        {
+            hasError = false;
+            try
+            {
+                using (TradAssetDBEntities db = new TradAssetDBEntities())
+                {
+                    var aht_ = db.asset_history_type.FirstOrDefault(x => x.asset_history_type_id == newitem.Asset_history_type_id);
+                    if (aht_ != null)
+                    {
+                        aht_.type_code = newitem.Type_code;
+                        aht_.is_active = newitem.Is_active;
+                        aht_.modified_date = DateTime.Now;
+
+                        db.asset_history_type.AddOrUpdate(aht_);
                         db.SaveChanges();
                         MessageBox.Show("Update complete");
                     }

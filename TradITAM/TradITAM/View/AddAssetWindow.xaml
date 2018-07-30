@@ -76,14 +76,20 @@
                                     <TextBox Name="tb3" Text="{Binding Asset_code,Mode=TwoWay}" Width="170" Height="25" FontSize="10" BorderThickness="1" Padding="3,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="1" Orientation="Vertical">
-                                    <Label Content="Type:" FontSize="14" FontWeight="Bold" Cursor="Arrow"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="Type:" FontSize="14" FontWeight="Bold" Cursor="Arrow"/>
+                                        <Button Click="Button_Add_Type" Content="ADD MORE" Background="#FFC300" FontWeight="Bold" BorderBrush="{x:Null}" FontSize="10" Width="70" Height="20" Padding="2" Margin="5,0,0,0"/>
+                                    </StackPanel>
                                     <ComboBox Name="cb4" ItemsSource="{Binding AssetTypeCollectionView}" DisplayMemberPath="asset_type_name" 
                                       SelectedValue="{Binding SelectedAssetType}" Text="{Binding SelectedAssetType}" IsEditable="True" 
                                       IsReadOnly="True" IsTextSearchEnabled="True" Width="170" Height="25" FontSize="14" BorderThickness="1" 
                                       Padding="3,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" Orientation="Vertical">
-                                    <Label Content="OS:" FontSize="14" FontWeight="Bold" Cursor="Arrow"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label Content="OS:" FontSize="14" FontWeight="Bold" Cursor="Arrow"/>
+                                        <Button Click="Button_Add_Os" Content="ADD MORE" Background="#FFC300" FontWeight="Bold" BorderBrush="{x:Null}" FontSize="10" Width="70" Height="20" Padding="2" Margin="5,0,0,0"/>
+                                    </StackPanel>
                                     <ComboBox Name="cb5" ItemsSource="{Binding OsCollectionView}" DisplayMemberPath="os_name"
                                       SelectedValue="{Binding SelectedOs}" Text="{Binding SelectedOs}" IsEditable="True" 
                                       IsReadOnly="True" IsTextSearchEnabled="True" Width="170" Height="25" FontSize="14" BorderThickness="1" 

@@ -238,7 +238,7 @@ namespace TradITAM.ViewModel
         {
             if (SelectedStaff != null)
             {
-                UpdateStaffWindow n = new UpdateStaffWindow();
+                UpdateSelectedStaffWindow n = new UpdateSelectedStaffWindow(SelectedStaff);
                 n.Show();
             }
         }
@@ -247,7 +247,7 @@ namespace TradITAM.ViewModel
         {
             if (SelectedStaff != null)
             {
-                UpdateSupplierWindow n = new UpdateSupplierWindow();
+                UpdateSelectedSupplierWindow n = new UpdateSelectedSupplierWindow(SelectedSupplier);
                 n.Show();
             }
         }

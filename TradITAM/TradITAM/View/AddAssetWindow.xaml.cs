@@ -46,5 +46,17 @@ namespace TradITAM.View
 
             tgb1.IsChecked = false;
         }
+
+        private void Button_Add_Type(object sender, RoutedEventArgs e)
+        {
+            ManageAssetTypeWindow n = new ManageAssetTypeWindow();
+            n.Show();
+        }
+
+        private void Button_Add_Os(object sender, RoutedEventArgs e)
+        {
+            ManageOsWindow n = new ManageOsWindow();
+            n.Show();
+        }
     }
 }

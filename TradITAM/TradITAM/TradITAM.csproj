@@ -160,6 +160,9 @@
     <Compile Include="ViewModel\AddSupplierWindowViewModel.cs" />
     <Compile Include="ViewModel\CreateWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
+    <Compile Include="ViewModel\ManageAssetHistoryWindowViewModel.cs" />
+    <Compile Include="ViewModel\ManageAssetTypeWindowViewModel.cs" />
+    <Compile Include="ViewModel\ManageOsWindowViewModel.cs" />
     <Compile Include="ViewModel\RegisterWindowViewModel.cs" />
     <Compile Include="Model\StaffData.cs" />
     <Compile Include="ViewModel\ReportWindowViewModel.cs" />

@@ -14,6 +14,7 @@ namespace TradITAM.ViewModel
 {
     public class ReportWindowViewModel : ViewModelBase
     {
+        #region Global Variable
         public DelegateCommand<object> AddReportCommand { get; set; }
         public DelegateCommand<object> GetAssetHistoryTypeEvent { get; set; }
         public DelegateCommand<object> GetAssetEvent { get; set; }
@@ -21,26 +22,28 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
 
         private UserData UserInfo { get; set; }
+        #endregion
+
         public ReportWindowViewModel(UserData UserList)
         {
             UserInfo = new UserData();
             UserInfo = UserList;
 
+            /* Define GetEvent using DelegateCommand */
             GetAssetEvent = new DelegateCommand<object>(GetAssetInformation);
             GetStaffEvent = new DelegateCommand<object>(GetStaffInformation);
             GetAssetTypeEvent = new DelegateCommand<object>(GetAssetTypeInformation);
             GetAssetHistoryTypeEvent = new DelegateCommand<object>(GetAssetHistoryTypeInformation);
 
-            #region Get Data to Combobox
-            LoadAssaetHistoryTypeCode();
-            LoadAssetCode();
-            LoadAka();
-            #endregion
-
+            /* Define AddEvent using DelegateCommand */
             AddReportCommand = new DelegateCommand<object>(AddReport);
+
+            LoadAssaetHistoryType();    //Load 'Asset History Type' from database to get 'Type_code' in combobox
+            LoadAsset();                //Load 'Asset' from database to get 'Asset_code' in combobox
+            LoadStaff();                //Load 'Asset Staff' from database to get 'Aka' in combobox
         }
 
-        #region call dataaccess
+        #region Call DataAccess
         private DataAccess _DataAccess;
         public DataAccess DataAccess
         {
@@ -53,7 +56,7 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
-        #region Property
+        #region A Property use for Database
         private AssetHistoryData _SelectedAssetHistory = new AssetHistoryData();
         public AssetHistoryData SelectedAssetHistory
         {
@@ -105,22 +108,12 @@ namespace TradITAM.ViewModel
             {
                 Asset_id = SelectedAsset.Asset_id;
                 Brand = SelectedAsset.Brand;
-                //Price = SelectedAsset.Price;
                 Asset_code = SelectedAsset.Asset_code;
-                //Asset_type_id = SelectedAsset.Asset_type_id - 1;
-                //Using_by_staff_id = SelectedAsset.Using_by_staff_id - 1;
-                //Supplier_id = SelectedAsset.Supplier_id - 1;
-                //Os_id = SelectedAsset.Os_id - 1;
-                //Cpu = SelectedAsset.Cpu;
-                //Ram = SelectedAsset.Ram;
-                //Hdd = SelectedAsset.Hdd;
-                //Note = SelectedAsset.Note;
-                //Is_active_a = SelectedAsset.Is_active;
-                //Start_date_warranty = SelectedAsset.Start_date_warranty;
-                //Expiry_date_warranty = SelectedAsset.Expiry_date_warranty;
 
-                //Send Asset Data to Retrieve Other Data Table
                 LoadAssetTypeName();
+
+                /* Assign other combobox value that depend on Asset's Selection  */
+                LoadSelected(SelectedAsset.Using_by_staff_id);
             }
         }
         #endregion
@@ -164,11 +157,6 @@ namespace TradITAM.ViewModel
             {
                 Staff_id = SelectedStaff.staff_id;
                 Aka = SelectedStaff.aka;
-                //Firstname = SelectedStaff.firstname;
-                //Lastname = SelectedStaff.lastname;
-                //Is_active_s = SelectedStaff.is_active;
-                //Start_date = SelectedStaff.start_date;
-                //End_date = SelectedStaff.end_date;
             }
         }
         #endregion
@@ -350,61 +338,6 @@ namespace TradITAM.ViewModel
             }
         }
 
-        private int _os_id;
-        public int Os_id
-        {
-            get => _os_id;
-            set
-            {
-                _os_id = value;
-                OnPropertyChanged(nameof(Os_id));
-            }
-        }
-
-        private int _asset_type_id;
-        public int Asset_type_id
-        {
-            get => _asset_type_id;
-            set
-            {
-                _asset_type_id = value;
-                OnPropertyChanged(nameof(Asset_type_id));
-            }
-        }
-
-        private int _original_supplier_id;
-        public int Original_supplier_id
-        {
-            get => _original_supplier_id;
-            set
-            {
-                _original_supplier_id = value;
-                OnPropertyChanged(nameof(Original_supplier_id));
-            }
-        }
-
-        private int _supplier_id;
-        public int Supplier_id
-        {
-            get => _supplier_id;
-            set
-            {
-                _supplier_id = value;
-                OnPropertyChanged(nameof(Supplier_id));
-            }
-        }
-
-        private int _using_by_staff_id;
-        public int Using_by_staff_id
-        {
-            get => _using_by_staff_id;
-            set
-            {
-                _using_by_staff_id = value;
-                OnPropertyChanged(nameof(Using_by_staff_id));
-            }
-        }
-
         private string _asset_code;
         public string Asset_code
         {
@@ -426,116 +359,6 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(Brand));
             }
         }
-
-        private decimal _price;
-        public decimal Price
-        {
-            get => _price;
-            set
-            {
-                _price = value;
-                OnPropertyChanged(nameof(Price));
-            }
-        }
-
-        private string _cpu;
-        public string Cpu
-        {
-            get => _cpu;
-            set
-            {
-                _cpu = value;
-                OnPropertyChanged(nameof(Cpu));
-            }
-        }
-
-        private string _ram;
-        public string Ram
-        {
-            get => _ram;
-            set
-            {
-                _ram = value;
-                OnPropertyChanged(nameof(Ram));
-            }
-        }
-
-        private string _hdd;
-        public string Hdd
-        {
-            get => _hdd;
-            set
-            {
-                _hdd = value;
-                OnPropertyChanged(nameof(Hdd));
-            }
-        }
-
-        private string _note;
-        public string Note
-        {
-            get => _note;
-            set
-            {
-                _note = value;
-                OnPropertyChanged(nameof(Note));
-            }
-        }
-
-        private DateTime _start_date_warranty;
-        public DateTime Start_date_warranty
-        {
-            get => _start_date_warranty;
-            set
-            {
-                _start_date_warranty = value;
-                OnPropertyChanged(nameof(Start_date_warranty));
-            }
-        }
-
-        private DateTime _expiry_date_warranty;
-        public DateTime Expiry_date_warranty
-        {
-            get => _expiry_date_warranty;
-            set
-            {
-                _expiry_date_warranty = value;
-                OnPropertyChanged(nameof(Expiry_date_warranty));
-            }
-        }
-
-        private bool _is_active_a;
-        public bool Is_active_a
-        {
-            get { return _is_active_a; }
-            set
-            {
-                _is_active_a = value;
-                OnPropertyChanged(nameof(Is_active_a));
-            }
-        }
-
-        private DateTime _create_date_a;
-        public DateTime Create_date_a
-        {
-            get { return _create_date_a; }
-            set
-            {
-                _create_date_a = value;
-                OnPropertyChanged(nameof(Create_date_a));
-            }
-        }
-
-        private DateTime _modified_date_a;
-        public DateTime Modified_date_a
-        {
-            get { return _modified_date_a; }
-            set
-            {
-                _modified_date_a = value;
-                OnPropertyChanged(nameof(Modified_date_a));
-            }
-        }
         #endregion
 
         #region Load Staff Data
@@ -550,28 +373,6 @@ namespace TradITAM.ViewModel
             }
         }
 
-        private string _firstname;
-        public string Firstname
-        {
-            get { return _firstname; }
-            set
-            {
-                _firstname = value;
-                OnPropertyChanged(nameof(Firstname));
-            }
-        }
-
-        private string _lastname;
-        public string Lastname
-        {
-            get { return _lastname; }
-            set
-            {
-                _lastname = value;
-                OnPropertyChanged(nameof(Lastname));
-            }
-        }
-
         private string _aka;
         public string Aka
         {
@@ -580,61 +381,6 @@ namespace TradITAM.ViewModel
             {
                 _aka = value;
                 OnPropertyChanged(nameof(Aka));
-            }
-        }
-
-        private DateTime _start_date;
-        public DateTime Start_date
-        {
-            get { return _start_date; }
-            set
-            {
-                _start_date = value;
-                OnPropertyChanged(nameof(Start_date));
-            }
-        }
-
-        private DateTime _end_date;
-        public DateTime End_date
-        {
-            get { return _end_date; }
-            set
-            {
-                _end_date = value;
-                OnPropertyChanged(nameof(End_date));
-            }
-        }
-
-        private bool _is_active_s;
-        public bool Is_active_s
-        {
-            get { return _is_active_s; }
-            set
-            {
-                _is_active_s = value;
-                OnPropertyChanged(nameof(Is_active_s));
-            }
-        }
-
-        private DateTime _create_date_s;
-        public DateTime Create_date_s
-        {
-            get { return _create_date_s; }
-            set
-            {
-                _create_date_s = value;
-                OnPropertyChanged(nameof(Create_date_s));
-            }
-        }
-
-        private DateTime _modified_date_s;
-        public DateTime Modified_date_s
-        {
-            get { return _modified_date_s; }
-            set
-            {
-                _modified_date_s = value;
-                OnPropertyChanged(nameof(Modified_date_s));
             }
         }
         #endregion
@@ -761,20 +507,24 @@ namespace TradITAM.ViewModel
 
         #region Method
 
-        #region Load Data to Combobox
-        public void LoadAssaetHistoryTypeCode()
+        #region Load data after selected asset
+        private void LoadSelected(int Uid)
+        {
+            Aka = DataAccess.GetStaffAka(Uid);
+        }
+        public void LoadAssaetHistoryType()
         {
             AssetHistoryTypeList = DataAccess.GetAssetTypeHistory();
             AssetHistoryTypeCollectionView = CollectionViewSource.GetDefaultView(AssetHistoryTypeList);
         }
 
-        public void LoadAssetCode()
+        public void LoadAsset()
         {
             AssetList = DataAccess.GetAsset();
             AssetCollectionView = CollectionViewSource.GetDefaultView(AssetList);
         }
 
-        public void LoadAka()
+        public void LoadStaff()
         {
             StaffList = DataAccess.GetStaff();
             StaffCollectionView = CollectionViewSource.GetDefaultView(StaffList);

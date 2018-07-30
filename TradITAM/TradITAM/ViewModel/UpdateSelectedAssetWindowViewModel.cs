@@ -14,28 +14,35 @@ namespace TradITAM.ViewModel
 {
     public class UpdateSelectedAssetWindowViewModel : ViewModelBase
     {
+        #region Global Variable
         public DelegateCommand<object> GetStaffEvent { get; set; }
         public DelegateCommand<object> GetSupplierEvent { get; set; }
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
         public DelegateCommand<object> GetOsEvent { get; set; }
 
+        public DelegateCommand<object> UpdateCommand { get; set; }
+
         private AssetData AssetInfo { get; set; }
+        #endregion
+
         public UpdateSelectedAssetWindowViewModel(AssetData AssetSelect)
         {
             AssetInfo = new AssetData();
             AssetInfo = AssetSelect;
 
+            /* Define GetEvent using DelegateCommand */
             GetStaffEvent = new DelegateCommand<object>(GetStaffInformation);
             GetSupplierEvent = new DelegateCommand<object>(GetSupplierInformation);
             GetAssetTypeEvent = new DelegateCommand<object>(GetAssetTypeInformation);
             GetOsEvent = new DelegateCommand<object>(GetOsInformation);
 
-            #region Load Default Data
-            LoadAka();
-            LoadCompanyName();
-            LoadAssetTypeName();
-            LoadOsName();
-            #endregion
+            /* Define UpdateEvent using DelegateCommand */
+            UpdateCommand = new DelegateCommand<object>(Update);
+
+            LoadStaff();        //Load 'Staff' from database to get 'Aka' in combobox
+            LoadSupplier();     //Load 'Supplier' from database to get 'Company_name' in combobox
+            LoadAssetType();    //Load 'AssetType' from database to get 'Asset_type_name' in combobox
+            LoadOs();           //Load 'Os' from database to get 'Os_name' in combobox
 
             LoadSelected(AssetSelect);
         }
@@ -49,6 +56,19 @@ namespace TradITAM.ViewModel
                 if (_DataAccess == null)
                     _DataAccess = new DataAccess();
                 return _DataAccess;
+            }
+        }
+        #endregion
+
+        #region A Property use for Database
+        private AssetData _newasset = new AssetData();
+        public AssetData Assetnew
+        {
+            get => _newasset;
+            set
+            {
+                _newasset = value;
+                OnPropertyChanged(nameof(Assetnew));
             }
         }
         #endregion
@@ -90,7 +110,7 @@ namespace TradITAM.ViewModel
         {
             if (SelectedAsset != null)
             {
-
+                
             }
         }
         #endregion
@@ -132,7 +152,8 @@ namespace TradITAM.ViewModel
         {
             if (SelectedStaff != null)
             {
-
+                /* Assign staff value into each asset property from ui selection */
+                Staff_id = SelectedStaff.staff_id;
             }
         }
         #endregion
@@ -174,7 +195,8 @@ namespace TradITAM.ViewModel
         {
             if (SelectedSupplier != null)
             {
-
+                /* Assign supplier value into each asset property from ui selection */
+                Supplier_id_s = SelectedSupplier.supplier_id;
             }
         }
         #endregion
@@ -216,7 +238,8 @@ namespace TradITAM.ViewModel
         {
             if (SelectedSupplier != null)
             {
-
+                /* Assign asset type value into each asset property from ui selection */
+                Asset_type_id_at = SelectedAssetType.asset_type_id;
             }
         }
         #endregion
@@ -258,7 +281,8 @@ namespace TradITAM.ViewModel
         {
             if (SelectedOs != null)
             {
-
+                /* Assign os value into each asset property from ui selection */
+                Os_id_o = SelectedOs.os_id;
             }
         }
         #endregion
@@ -464,6 +488,17 @@ namespace TradITAM.ViewModel
         #endregion
 
         #region Load Staff Data
+        private int _staff_id;
+        public int Staff_id
+        {
+            get { return _staff_id; }
+            set
+            {
+                _staff_id = value;
+                OnPropertyChanged(nameof(Staff_id));
+            }
+        }
+
         private string _aka;
         public string Aka
         {
@@ -477,6 +512,17 @@ namespace TradITAM.ViewModel
         #endregion
 
         #region Load Supplier Data
+        private int _supplier_id_s;
+        public int Supplier_id_s
+        {
+            get => _supplier_id_s;
+            set
+            {
+                _supplier_id_s = value;
+                OnPropertyChanged(nameof(Supplier_id_s));
+            }
+        }
+
         private string _company_name;
         public string Company_name
         {
@@ -490,6 +536,17 @@ namespace TradITAM.ViewModel
         #endregion
 
         #region Load AssetType Data
+        private int _asset_type_id_at;
+        public int Asset_type_id_at
+        {
+            get => _asset_type_id_at;
+            set
+            {
+                _asset_type_id_at = value;
+                OnPropertyChanged(nameof(Asset_type_id_at));
+            }
+        }
+
         private string _asset_type_name;
         public string Asset_type_name
         {
@@ -503,6 +560,17 @@ namespace TradITAM.ViewModel
         #endregion
 
         #region Load Os Data
+        private int _os_id_o;
+        public int Os_id_o
+        {
+            get => _os_id_o;
+            set
+            {
+                _os_id_o = value;
+                OnPropertyChanged(nameof(Os_id_o));
+            }
+        }
+
         private string _os_name;
         public string Os_name
         {
@@ -518,39 +586,47 @@ namespace TradITAM.ViewModel
         #region Method
 
         #region Load Default Data
-        public void LoadAka()
+        public void LoadStaff()
         {
             StaffList = DataAccess.GetStaff();
             StaffCollectionView = CollectionViewSource.GetDefaultView(StaffList);
         }
 
-        public void LoadCompanyName()
+        public void LoadSupplier()
         {
             SupplierList = DataAccess.GetSupplier();
             SupplierCollectionView = CollectionViewSource.GetDefaultView(SupplierList);
         }
 
-        public void LoadAssetTypeName()
+        public void LoadAssetType()
         {
             AssetTypeList = DataAccess.GetAssetType();
             AssetTypeCollectionView = CollectionViewSource.GetDefaultView(AssetTypeList);
         }
 
-        public void LoadOsName()
+        public void LoadOs()
         {
             OsList = DataAccess.GetOs();
             OsCollectionView = CollectionViewSource.GetDefaultView(OsList);
         }
         #endregion
 
+        #region Load Selected Data
         public void LoadSelected(AssetData AssetSelect)
         {
+            /* Load value to combobox */
+            Aka = DataAccess.GetStaffAka(AssetSelect.Using_by_staff_id);
+            Company_name = DataAccess.GetSupplierCompanyName(AssetSelect.Supplier_id);
+            Asset_type_name = DataAccess.GetAssetTypeName(AssetSelect.Asset_type_id);
+            Os_name = DataAccess.GetOsName(AssetSelect.Os_id);
+
+            /* Load other value */
             Asset_id = AssetSelect.Asset_id;
-            Os_id = AssetSelect.Os_id;
-            Asset_type_id = AssetSelect.Asset_type_id;
+            Os_id_o = AssetSelect.Os_id;
+            Asset_type_id_at = AssetSelect.Asset_type_id;
             Original_supplier_id = AssetSelect.Original_supplier_id;
-            Supplier_id = AssetSelect.Supplier_id - 1;
-            Using_by_staff_id = AssetSelect.Using_by_staff_id - 1;
+            Supplier_id_s = AssetSelect.Supplier_id;
+            Using_by_staff_id = AssetSelect.Using_by_staff_id;
             Asset_code = AssetSelect.Asset_code;
             Brand = AssetSelect.Brand;
             Price = AssetSelect.Price;
@@ -561,7 +637,37 @@ namespace TradITAM.ViewModel
             Start_date_warranty = AssetSelect.Start_date_warranty;
             Expiry_date_warranty = AssetSelect.Expiry_date_warranty;
             Note = AssetSelect.Note;
+
         }
+        #endregion
+
+        #region Update to database
+        public void Update(object obj)
+        {
+            if (Assetnew != null)
+            {
+                Assetnew.Asset_id = Asset_id;
+                Assetnew.Asset_type_id = Asset_type_id_at;
+                Assetnew.Asset_code = Asset_code;
+                Assetnew.Brand = Brand;
+                Assetnew.Cpu = Cpu;
+                Assetnew.Ram = Ram;
+                Assetnew.Hdd = Hdd;
+                Assetnew.Price = Price;
+                Assetnew.Os_id = Os_id_o;
+                Assetnew.Using_by_staff_id = Staff_id;
+                Assetnew.Supplier_id = Supplier_id_s;
+                Assetnew.Note = Note;
+                Assetnew.Is_active = Is_active_a;
+                Assetnew.Start_date_warranty = Start_date_warranty;
+                Assetnew.Expiry_date_warranty = Expiry_date_warranty;
+
+                var update = new UpdateAccess();
+                update.UpdateAsset(Assetnew);
+            }
+        }
+        #endregion
+
         #endregion
     }
 }

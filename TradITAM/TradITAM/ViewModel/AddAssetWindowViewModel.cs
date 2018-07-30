@@ -44,7 +44,6 @@ namespace TradITAM.ViewModel
 
             /* Define AddEvent using DelegateCommand */
             AddAssetCommand = new DelegateCommand<object>(AddAsset);
-
         }
 
         #region Call DataAccess
