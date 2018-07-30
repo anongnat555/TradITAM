@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Data;
 using TradITAM.Helper;
 using TradITAM.Model;
+using TradITAM.View;
 
 namespace TradITAM.ViewModel
 {
@@ -16,6 +17,8 @@ namespace TradITAM.ViewModel
     {
         #region Global Variable
         public DelegateCommand<object> AddReportCommand { get; set; }
+        public DelegateCommand<object> AddAssetHistoryTypeCommand { get; set; }
+
         public DelegateCommand<object> GetAssetHistoryTypeEvent { get; set; }
         public DelegateCommand<object> GetAssetEvent { get; set; }
         public DelegateCommand<object> GetStaffEvent { get; set; }
@@ -37,6 +40,7 @@ namespace TradITAM.ViewModel
 
             /* Define AddEvent using DelegateCommand */
             AddReportCommand = new DelegateCommand<object>(AddReport);
+            AddAssetHistoryTypeCommand = new DelegateCommand<object>(AddAssetHistoryType);
 
             LoadAssaetHistoryType();    //Load 'Asset History Type' from database to get 'Type_code' in combobox
             LoadAsset();                //Load 'Asset' from database to get 'Asset_code' in combobox
@@ -568,6 +572,14 @@ namespace TradITAM.ViewModel
                 Phone = item.phone;
                 Address = item.address;
             }
+        }
+        #endregion
+
+        #region Send UserList Data to other form
+        public void AddAssetHistoryType(Object obj)
+        {
+            ManageAssetHistoryWindow n = new ManageAssetHistoryWindow(UserInfo);
+            n.ShowDialog();
         }
         #endregion
     }

@@ -17,10 +17,15 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> AddAssetTypeCommand { get; set; }
         public DelegateCommand<object> UpdateAssetTypeCommand { get; set; }
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
+
+        private UserData UserInfo { get; set; }
         #endregion
 
-        public ManageAssetTypeWindowViewModel()
+        public ManageAssetTypeWindowViewModel(UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             /* Define AddEvent using DelegateCommand */
             AddAssetTypeCommand = new DelegateCommand<object>(AddAssetType);
 
@@ -66,6 +71,19 @@ namespace TradITAM.ViewModel
             {
                 _assettypenew = value;
                 OnPropertyChanged(nameof(AssetTypenew));
+            }
+        }
+        #endregion
+
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
             }
         }
         #endregion
@@ -181,6 +199,12 @@ namespace TradITAM.ViewModel
             {
                 var insertion = new InsertAccess();
                 insertion.AddAssetType(AssetTypeList);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Insert " + Asset_type_name + " in AssetType Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
 
@@ -194,6 +218,12 @@ namespace TradITAM.ViewModel
             {
                 var update = new UpdateAccess();
                 update.UpdateAssetType(AssetTypenew);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Update " + Asset_type_name_u + " in AssetType Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
 

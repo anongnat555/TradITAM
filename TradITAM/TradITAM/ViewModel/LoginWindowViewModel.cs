@@ -14,6 +14,8 @@ namespace TradITAM.ViewModel
     {
         #region Global Variable
         public DelegateCommand<object> LoginCommand { get; set; }
+
+        public Action CloseAction { get; set; }
         #endregion
 
         public LoginWindowViewModel()
@@ -53,7 +55,8 @@ namespace TradITAM.ViewModel
             {
                 UserList.user_id = user_id;                 // assign 'User_id' value into 'UserList'
                 MainWindow n = new MainWindow(UserList);    // share 'UserList' to MainWindow
-                n.Show();
+                CloseAction();
+                n.ShowDialog();
             }
         }
         #endregion

@@ -22,10 +22,10 @@ namespace TradITAM.View
     {
         //private StaffData selectedStaff;
 
-        public UpdateStaffWindow()
+        public UpdateStaffWindow(UserData UserList)
         {
             InitializeComponent();
-            this.DataContext = new UpdateStaffWindowViewModel();
+            this.DataContext = new UpdateStaffWindowViewModel(UserList);
         }
 
         

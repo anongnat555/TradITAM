@@ -16,9 +16,18 @@ namespace TradITAM.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         #region Global Variable
+        public DelegateCommand<object> AddAssetEvent { get; set; }
+        public DelegateCommand<object> AddStaffEvent { get; set; }
+        public DelegateCommand<object> AddSupplierEvent { get; set; }
+
         public DelegateCommand<object> EditAssetEvent { get; set; }
         public DelegateCommand<object> EditStaffEvent { get; set; }
         public DelegateCommand<object> EditSupplierEvent { get; set; }
+
+        public DelegateCommand<object> EditSelectedAssetEvent { get; set; }
+        public DelegateCommand<object> EditSelectedStaffEvent { get; set; }
+        public DelegateCommand<object> EditSelectedSupplierEvent { get; set; }
+
         public DelegateCommand<UserData> ReportAssetEvent { get; set; }
 
         private UserData UserInfo { get; set; }
@@ -29,10 +38,20 @@ namespace TradITAM.ViewModel
             UserInfo = new UserData();
             UserInfo = UserList;
 
+            /* Define AddEvent using DelegateCommand */
+            AddAssetEvent = new DelegateCommand<object>(AddAsset);
+            AddStaffEvent = new DelegateCommand<object>(AddStaff);
+            AddSupplierEvent = new DelegateCommand<object>(AddSupplier);
+
             /* Define EditEvent using DelegateCommand */
             EditAssetEvent = new DelegateCommand<object>(EditAsset);
             EditStaffEvent = new DelegateCommand<object>(EditStaff);
             EditSupplierEvent = new DelegateCommand<object>(EditSupplier);
+
+            /* Define EditSelectedEvent using DelegateCommand */
+            EditSelectedAssetEvent = new DelegateCommand<object>(EditSelectedAsset);
+            EditSelectedStaffEvent = new DelegateCommand<object>(EditSelectedStaff);
+            EditSelectedSupplierEvent = new DelegateCommand<object>(EditSelectedSupplier);
 
             /* Define GetEvent using DelegateCommand */
             ReportAssetEvent = new DelegateCommand<UserData>(ReportAsset);
@@ -211,15 +230,21 @@ namespace TradITAM.ViewModel
         #region Send UserList Data to other form
 
         #region Add
+        public void AddAsset(object obj)
+        {
+            AddAssetWindow n = new AddAssetWindow(UserInfo);
+            n.Show();
+        }
+
         public void AddStaff(object obj)
         {
-            AddStaffWindow n = new AddStaffWindow();
+            AddStaffWindow n = new AddStaffWindow(UserInfo);
             n.Show();
         }
 
         public void AddSupplier(object obj)
         {
-            AddSupplierWindow n = new AddSupplierWindow();
+            AddSupplierWindow n = new AddSupplierWindow(UserInfo);
             n.Show();
         }
         #endregion
@@ -229,7 +254,7 @@ namespace TradITAM.ViewModel
         {
             if (SelectedStaff != null)
             {
-                UpdateSelectedAssetWindow n = new UpdateSelectedAssetWindow(SelectedAsset);
+                UpdateAssetWindow n = new UpdateAssetWindow(UserInfo);
                 n.Show();
             }
         }
@@ -238,7 +263,7 @@ namespace TradITAM.ViewModel
         {
             if (SelectedStaff != null)
             {
-                UpdateSelectedStaffWindow n = new UpdateSelectedStaffWindow(SelectedStaff);
+                UpdateStaffWindow n = new UpdateStaffWindow(UserInfo);
                 n.Show();
             }
         }
@@ -247,7 +272,36 @@ namespace TradITAM.ViewModel
         {
             if (SelectedStaff != null)
             {
-                UpdateSelectedSupplierWindow n = new UpdateSelectedSupplierWindow(SelectedSupplier);
+                UpdateSupplierWindow n = new UpdateSupplierWindow(UserInfo);
+                n.Show();
+            }
+        }
+        #endregion
+
+        #region EditSelected
+        public void EditSelectedAsset(Object obj)
+        {
+            if (SelectedStaff != null)
+            {
+                UpdateSelectedAssetWindow n = new UpdateSelectedAssetWindow(SelectedAsset, UserInfo);
+                n.Show();
+            }
+        }
+
+        public void EditSelectedStaff(Object obj)
+        {
+            if (SelectedStaff != null)
+            {
+                UpdateSelectedStaffWindow n = new UpdateSelectedStaffWindow(SelectedStaff, UserInfo);
+                n.Show();
+            }
+        }
+
+        public void EditSelectedSupplier(Object obj)
+        {
+            if (SelectedStaff != null)
+            {
+                UpdateSelectedSupplierWindow n = new UpdateSelectedSupplierWindow(SelectedSupplier, UserInfo);
                 n.Show();
             }
         }

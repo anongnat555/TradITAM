@@ -38,11 +38,11 @@
                                 <Grid Grid.Column="2">
                                     <StackPanel HorizontalAlignment="Center" Margin="-20,50,0,0">
                                         <ComboBox Name="cb2" ItemsSource="{Binding StaffCollectionView}" DisplayMemberPath="aka" 
-                                     SelectedValue="{Binding SelectedStaff}" Text="{Binding SelectedStaff}" 
+                                     SelectedValue="{Binding SelectedStaff}" Text="{Binding Aka, Mode=TwoWay}" 
                                       IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="150" FontSize="14" BorderThickness="1" 
                                       Margin="0,0,0,10"/>
                                         <ComboBox  Name="cb3" ItemsSource="{Binding SupplierCollectionView}" DisplayMemberPath="company_name" 
-                                      SelectedValue="{Binding SelectedSupplier}" Text="{Binding SelectedSupplier}" 
+                                      SelectedValue="{Binding SelectedSupplier}" Text="{Binding Company_name, Mode=TwoWay}" 
                                       IsEditable="True" IsReadOnly="True" IsTextSearchEnabled="True" Width="150" FontSize="14" BorderThickness="1" 
                                       Margin="0,0,0,10"/>
                                         <ToggleButton Name="tgb1" IsChecked="{Binding Is_active_a, Mode=TwoWay}" Background="#00ff40" HorizontalAlignment="Left"/>
@@ -78,20 +78,20 @@
                                 <StackPanel Grid.Column="1" Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="Type:" FontSize="14" FontWeight="Bold" Cursor="Arrow"/>
-                                        <Button Click="Button_Add_Type" Content="ADD MORE" Background="#FFC300" FontWeight="Bold" BorderBrush="{x:Null}" FontSize="10" Width="70" Height="20" Padding="2" Margin="5,0,0,0"/>
+                                        <Button Command="{Binding AddAssetTypeEvent}" Content="ADD MORE" Background="#FFC300" FontWeight="Bold" BorderBrush="{x:Null}" FontSize="10" Width="70" Height="20" Padding="2" Margin="5,0,0,0"/>
                                     </StackPanel>
                                     <ComboBox Name="cb4" ItemsSource="{Binding AssetTypeCollectionView}" DisplayMemberPath="asset_type_name" 
-                                      SelectedValue="{Binding SelectedAssetType}" Text="{Binding SelectedAssetType}" IsEditable="True" 
+                                      SelectedValue="{Binding SelectedAssetType}" Text="{Binding Asset_type_name,Mode=TwoWay}" IsEditable="True" 
                                       IsReadOnly="True" IsTextSearchEnabled="True" Width="170" Height="25" FontSize="14" BorderThickness="1" 
                                       Padding="3,0,0,0"/>
                                 </StackPanel>
                                 <StackPanel Grid.Column="2" Orientation="Vertical">
                                     <StackPanel Orientation="Horizontal">
                                         <Label Content="OS:" FontSize="14" FontWeight="Bold" Cursor="Arrow"/>
-                                        <Button Click="Button_Add_Os" Content="ADD MORE" Background="#FFC300" FontWeight="Bold" BorderBrush="{x:Null}" FontSize="10" Width="70" Height="20" Padding="2" Margin="5,0,0,0"/>
+                                        <Button Command="{Binding AddOsEvent}" Content="ADD MORE" Background="#FFC300" FontWeight="Bold" BorderBrush="{x:Null}" FontSize="10" Width="70" Height="20" Padding="2" Margin="5,0,0,0"/>
                                     </StackPanel>
                                     <ComboBox Name="cb5" ItemsSource="{Binding OsCollectionView}" DisplayMemberPath="os_name"
-                                      SelectedValue="{Binding SelectedOs}" Text="{Binding SelectedOs}" IsEditable="True" 
+                                      SelectedValue="{Binding SelectedOs}" Text="{Binding Os_name, Mode=TwoWay}" IsEditable="True" 
                                       IsReadOnly="True" IsTextSearchEnabled="True" Width="170" Height="25" FontSize="14" BorderThickness="1" 
                                       Padding="3,0,0,0"/>
                                 </StackPanel>
@@ -110,7 +110,7 @@
                                                 <Setter Property="IsEnabled" Value="False" />
                                                 <Setter Property="Background" Value="LightGray" />
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=SelectedAssetType.Asset_type_name}" Value="PC">
+                                                    <DataTrigger Binding="{Binding Path=Asset_type_name}" Value="PC">
                                                         <Setter Property="IsEnabled" Value="True" />
                                                         <Setter Property="Background" Value="{x:Null}" />
                                                     </DataTrigger>
@@ -128,7 +128,7 @@
                                                 <Setter Property="IsEnabled" Value="False" />
                                                 <Setter Property="Background" Value="LightGray" />
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=SelectedAssetType.Asset_type_name}" Value="PC">
+                                                    <DataTrigger Binding="{Binding Path=Asset_type_name}" Value="PC">
                                                         <Setter Property="IsEnabled" Value="True" />
                                                         <Setter Property="Background" Value="{x:Null}" />
                                                     </DataTrigger>
@@ -151,7 +151,7 @@
                                                 <Setter Property="IsEnabled" Value="False" />
                                                 <Setter Property="Background" Value="LightGray" />
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Path=SelectedAssetType.Asset_type_name}" Value="PC">
+                                                    <DataTrigger Binding="{Binding Path=Asset_type_name}" Value="PC">
                                                         <Setter Property="IsEnabled" Value="True" />
                                                         <Setter Property="Background" Value="{x:Null}" />
                                                     </DataTrigger>

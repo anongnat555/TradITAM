@@ -122,6 +122,7 @@
     <Compile Include="Model\AssetHistoryTypeData.cs" />
     <Compile Include="Model\AssetTypeData.cs" />
     <Compile Include="Model\DataAccess.cs" />
+    <Compile Include="Model\HistoryData.cs" />
     <Compile Include="Model\InsertAccess.cs" />
     <Compile Include="Model\LoginAccess.cs" />
     <Compile Include="Model\OsData.cs" />
@@ -158,7 +159,6 @@
     <Compile Include="ViewModel\AddAssetWindowViewModel.cs" />
     <Compile Include="ViewModel\AddStaffWindowViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierWindowViewModel.cs" />
-    <Compile Include="ViewModel\CreateWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\ManageAssetHistoryWindowViewModel.cs" />
     <Compile Include="ViewModel\ManageAssetTypeWindowViewModel.cs" />
@@ -172,7 +172,6 @@
     <Compile Include="ViewModel\UpdateSelectedSupplierWindowViewModel.cs" />
     <Compile Include="ViewModel\UpdateStaffWindowViewModel.cs" />
     <Compile Include="ViewModel\UpdateSupplierWindowViewModel.cs" />
-    <Compile Include="ViewModel\UpdateWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AddAssetWindow.xaml.cs">
       <DependentUpon>AddAssetWindow.xaml</DependentUpon>
@@ -182,9 +181,6 @@
     </Compile>
     <Compile Include="View\AddSupplierWindow.xaml.cs">
       <DependentUpon>AddSupplierWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CreateWindow.xaml.cs">
-      <DependentUpon>CreateWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ManageAssetHistoryWindow.xaml.cs">
       <DependentUpon>ManageAssetHistoryWindow.xaml</DependentUpon>
@@ -219,9 +215,6 @@
     <Compile Include="View\UpdateSupplierWindow.xaml.cs">
       <DependentUpon>UpdateSupplierWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\UpdateWindow.xaml.cs">
-      <DependentUpon>UpdateWindow.xaml</DependentUpon>
-    </Compile>
     <Page Include="View\AddAssetWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -231,10 +224,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddSupplierWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CreateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -299,10 +288,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\UpdateSupplierWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\UpdateWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

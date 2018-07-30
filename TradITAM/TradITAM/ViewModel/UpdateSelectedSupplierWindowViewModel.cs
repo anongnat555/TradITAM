@@ -10,13 +10,46 @@ namespace TradITAM.ViewModel
 {
      public class UpdateSelectedSupplierWindowViewModel : ViewModelBase
     {
+        #region Global Variable
         public DelegateCommand<object> Updatecommand { get; set; }
-        public UpdateSelectedSupplierWindowViewModel(SupplierData SupplierSelect)
+
+        private UserData UserInfo { get; set; }
+        #endregion
+
+        public UpdateSelectedSupplierWindowViewModel(SupplierData SupplierSelect, UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             LoadSelected(SupplierSelect);
             Updatecommand = new DelegateCommand<object>(Update);
         }
 
+        #region A Property use for Database
+        private SupplierData _newsupplier = new SupplierData();
+        public SupplierData Suppliernew
+        {
+            get => _newsupplier;
+            set
+            {
+                _newsupplier = value;
+                OnPropertyChanged(nameof(Suppliernew));
+            }
+        }
+        #endregion
+
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
+            }
+        }
+        #endregion
 
         #region Load supplier data
         private int _supplierid;
@@ -119,31 +152,6 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
-        public void LoadSelected(SupplierData SupplierSelect)
-        {
-            Supplier_id = SupplierSelect.supplier_id;
-            Company_name = SupplierSelect.company_name;
-            Contact_person = SupplierSelect.contact_person;
-            Address = SupplierSelect.address;
-            Email = SupplierSelect.email;
-            Phone = SupplierSelect.phone;
-            Is_active = SupplierSelect.is_active;
-           
-        }
-
-        #region Properties
-        private SupplierData _newsupplier = new SupplierData();
-        public SupplierData Suppliernew
-        {
-            get => _newsupplier;
-            set
-            {
-                _newsupplier = value;
-                OnPropertyChanged(nameof(Suppliernew));
-            }
-        }
-        #endregion
-
         #region Method
         public void Update(object o)
         {
@@ -160,8 +168,25 @@ namespace TradITAM.ViewModel
 
             var updatesupplier = new UpdateAccess();
             updatesupplier.UpdateSupplier(Suppliernew);
+
+            /*  Add User Log */
+            historyUser.User_id = UserInfo.user_id;
+            historyUser.Detail = "Update " + Suppliernew.company_name + " in Supplier Table";
+            var insertionLog = new InsertAccess();
+            insertionLog.LogHistory(historyUser);
         }
 
+        public void LoadSelected(SupplierData SupplierSelect)
+        {
+            Supplier_id = SupplierSelect.supplier_id;
+            Company_name = SupplierSelect.company_name;
+            Contact_person = SupplierSelect.contact_person;
+            Address = SupplierSelect.address;
+            Email = SupplierSelect.email;
+            Phone = SupplierSelect.phone;
+            Is_active = SupplierSelect.is_active;
+
+        }
         #endregion
     }
 }

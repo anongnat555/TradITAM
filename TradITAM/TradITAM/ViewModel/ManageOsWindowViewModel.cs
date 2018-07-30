@@ -17,10 +17,15 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> AddOsCommand { get; set; }
         public DelegateCommand<object> UpdateOsCommand { get; set; }
         public DelegateCommand<object> GetOsEvent { get; set; }
+
+        private UserData UserInfo { get; set; }
         #endregion
 
-        public ManageOsWindowViewModel()
+        public ManageOsWindowViewModel(UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             /* Define AddEvent using DelegateCommand */
             AddOsCommand = new DelegateCommand<object>(AddOs);
 
@@ -57,6 +62,19 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(OsList));
             }
         }
+
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
+            }
+        }
+        #endregion
 
         private OsData _osnew = new OsData();
         public OsData Osnew
@@ -180,6 +198,12 @@ namespace TradITAM.ViewModel
             {
                 var insertion = new InsertAccess();
                 insertion.AddOs(OsList);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Insert " + Os_name + " in Os Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
 
@@ -193,6 +217,12 @@ namespace TradITAM.ViewModel
             {
                 var update = new UpdateAccess();
                 update.UpdateOs(Osnew);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Update " + Os_name_u + " in Os Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
 

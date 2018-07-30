@@ -21,10 +21,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class AddAssetWindow : Window
     {
-        public AddAssetWindow()
+        public AddAssetWindow(UserData UserList)
         {
             InitializeComponent();
-            this.DataContext = new AddAssetWindowViewModel();
+            this.DataContext = new AddAssetWindowViewModel(UserList);
         }
 
         public void Button_ClearAsset(object sender, RoutedEventArgs e)
@@ -45,18 +45,6 @@ namespace TradITAM.View
             dp2.Text = null;
 
             tgb1.IsChecked = false;
-        }
-
-        private void Button_Add_Type(object sender, RoutedEventArgs e)
-        {
-            ManageAssetTypeWindow n = new ManageAssetTypeWindow();
-            n.Show();
-        }
-
-        private void Button_Add_Os(object sender, RoutedEventArgs e)
-        {
-            ManageOsWindow n = new ManageOsWindow();
-            n.Show();
         }
     }
 }

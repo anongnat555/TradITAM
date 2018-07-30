@@ -27,6 +27,11 @@ namespace TradITAM.View
         {
             InitializeComponent();
             this.DataContext = new LoginWindowViewModel();
+
+            LoginWindowViewModel vm = new LoginWindowViewModel();
+            this.DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
         }
 
         private void Button_Close(object sender, RoutedEventArgs e)

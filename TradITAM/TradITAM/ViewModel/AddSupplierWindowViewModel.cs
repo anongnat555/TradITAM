@@ -12,10 +12,15 @@ namespace TradITAM.ViewModel
     {
         #region Global Variable
         public DelegateCommand<object> AddSupplierCommand { get; set; }
+
+        private UserData UserInfo { get; set; }
         #endregion
 
-        public AddSupplierWindowViewModel()
+        public AddSupplierWindowViewModel(UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             /* Define AddEvent using DelegateCommand */
             AddSupplierCommand = new DelegateCommand<object>(AddSupplier);
         }
@@ -33,11 +38,30 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
+            }
+        }
+        #endregion
+
         #region Method
         public void AddSupplier(Object o)
         {
             var insertion = new InsertAccess();
             insertion.AddSupplier(SupplierList);
+
+            /*  Add User Log */
+            historyUser.User_id = UserInfo.user_id;
+            historyUser.Detail = "Insert " + SupplierList.company_name + " in Supplier Table";
+            var insertionLog = new InsertAccess();
+            insertionLog.LogHistory(historyUser);
         }
         #endregion
     }

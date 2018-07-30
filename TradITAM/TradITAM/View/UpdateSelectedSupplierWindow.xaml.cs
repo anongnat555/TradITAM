@@ -21,10 +21,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class UpdateSelectedSupplierWindow : Window
     {
-        public UpdateSelectedSupplierWindow(SupplierData SelectedSupplier)
+        public UpdateSelectedSupplierWindow(SupplierData SelectedSupplier, UserData UserList)
         {
             InitializeComponent();
-            this.DataContext = new UpdateSelectedSupplierWindowViewModel(SelectedSupplier);
+            this.DataContext = new UpdateSelectedSupplierWindowViewModel(SelectedSupplier, UserList);
         }
     }
 }

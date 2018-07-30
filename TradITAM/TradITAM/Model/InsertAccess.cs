@@ -237,6 +237,7 @@ namespace TradITAM.Model
                 var data = new asset_history_type()
                 {
                     type_code = item.Type_code,
+                    type_description = item.Type_description,
                     is_active = item.Is_active,
                     create_date = DateTime.Now,
                     modified_date = DateTime.Now
@@ -244,6 +245,34 @@ namespace TradITAM.Model
                 db.asset_history_type.Add(data);
                 db.SaveChanges();
                 MessageBox.Show("Insert complete");
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Add error, " + ex.Message;
+                hasError = true;
+            }
+        }
+        #endregion
+
+        #region Add Log History
+        public void LogHistory(HistoryData item)
+        {
+            hasError = false;
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var data = new history()
+                {
+                    //history_id = item.History_id,
+                    user_id = item.User_id,
+                    detail = item.Detail,
+                    history_timestamp = DateTime.Now,
+                    history_type = 1
+                };
+                db.history.Add(data);
+                db.SaveChanges();
+                MessageBox.Show("Insert complete");
+
             }
             catch (Exception ex)
             {

@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Data;
 using TradITAM.Helper;
 using TradITAM.Model;
+using TradITAM.View;
 
 namespace TradITAM.ViewModel
 {
@@ -21,21 +22,28 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> GetAssetTypeEvent { get; set; }
         public DelegateCommand<object> GetOsEvent { get; set; }
 
+        public DelegateCommand<object> AddAssetTypeEvent { get; set; }
+        public DelegateCommand<object> AddOsEvent { get; set; }
+
         public DelegateCommand<object> AddAssetCommand { get; set; }
 
-        //private UserData UserInfo { get; set; }
+        private UserData UserInfo { get; set; }
         #endregion
 
-        public AddAssetWindowViewModel()
+        public AddAssetWindowViewModel(UserData UserList)
         {
-            //UserInfo = new UserData();
-            //UserInfo = UserList;
+            UserInfo = new UserData();
+            UserInfo = UserList;
 
             /* Define GetEvent using DelegateCommand */
             GetStaffEvent = new DelegateCommand<object>(GetStaffInformation);
             GetSupplierEvent = new DelegateCommand<object>(GetSupplierInformation);
             GetAssetTypeEvent = new DelegateCommand<object>(GetAssetTypeInformation);
             GetOsEvent = new DelegateCommand<object>(GetOsInformation);
+
+            /* Define AddEvent using DelegateCommand */
+            AddAssetTypeEvent = new DelegateCommand<object>(AddAssetType);
+            AddOsEvent = new DelegateCommand<object>(AddOs);
 
             LoadAsset();                //Load 'Asset' from database to get 'AKA' in combobox
             LoadSupplier();             //Load 'Supplier' from database to get 'Company_name' in combobox
@@ -68,6 +76,19 @@ namespace TradITAM.ViewModel
             {
                 _assetlist = value;
                 OnPropertyChanged(nameof(AssetList));
+            }
+        }
+        #endregion
+
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
             }
         }
         #endregion
@@ -191,7 +212,7 @@ namespace TradITAM.ViewModel
 
         public void GetAssetTypeInformation(Object obj)
         {
-            if (SelectedSupplier != null)
+            if (SelectedAssetType != null)
             {
                 Asset_type_id = SelectedAssetType.asset_type_id;
             }
@@ -236,6 +257,7 @@ namespace TradITAM.ViewModel
             if (SelectedOs != null)
             {
                 Os_id = SelectedOs.os_id;
+                Os_name = SelectedOs.os_name;
             }
         }
         #endregion
@@ -455,6 +477,17 @@ namespace TradITAM.ViewModel
                 OnPropertyChanged(nameof(Os_id));
             }
         }
+
+        private string _os_name;
+        public string Os_name
+        {
+            get => _os_name;
+            set
+            {
+                _os_name = value;
+                OnPropertyChanged(nameof(Os_name));
+            }
+        }
         #endregion
 
         #region Load AssetType Data
@@ -479,14 +512,14 @@ namespace TradITAM.ViewModel
             AssetList.Os_id = Os_id;
 
             /* From object 'SelectedAssetType' */
-            AssetList.Asset_type_id = Asset_type_id;        
+            AssetList.Asset_type_id = Asset_type_id;
 
-            /* From object 'SelectedSupplier' */   
+            /* From object 'SelectedSupplier' */
+            AssetList.Original_supplier_id = Supplier_id;
             AssetList.Supplier_id = Supplier_id;
 
             /* From object 'SelectedStaff' */
             AssetList.Using_by_staff_id = Staff_id;
-            AssetList.Original_supplier_id = Staff_id;
 
             /* From UI's TextBox (Binding) */
             AssetList.Is_active = Is_active_a;
@@ -509,6 +542,12 @@ namespace TradITAM.ViewModel
             {
                 var insertion = new InsertAccess();
                 insertion.AddAsset(AssetList);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Insert " + Asset_code + " in Asset Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
         #endregion
@@ -541,5 +580,20 @@ namespace TradITAM.ViewModel
 
         #endregion
 
+        #region Send UserList Data to other form
+
+        public void AddAssetType(Object obj)
+        {
+            ManageAssetTypeWindow n = new ManageAssetTypeWindow(UserInfo);
+            n.ShowDialog();
+        }
+
+        public void AddOs(Object obj)
+        {
+            ManageOsWindow n = new ManageOsWindow(UserInfo);
+            n.ShowDialog();
+        }
+
+        #endregion
     }
 }

@@ -15,10 +15,15 @@ namespace TradITAM.ViewModel
     {
         #region Global Variable
         public DelegateCommand<object> AddStaffCommand { get; set; }
+
+        private UserData UserInfo { get; set; }
         #endregion
 
-        public AddStaffWindowViewModel()
+        public AddStaffWindowViewModel(UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+            
             /* Define AddEvent using DelegateCommand */
             AddStaffCommand = new DelegateCommand<object>(AddStaff);
         }
@@ -36,11 +41,30 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
+            }
+        }
+        #endregion
+
         #region Method
         public void AddStaff(Object o)
         {
             var insertion = new InsertAccess();
             insertion.AddStaff(StaffList);
+
+            /*  Add User Log */
+            historyUser.User_id = UserInfo.user_id;
+            historyUser.Detail = "Insert " + StaffList.aka + " in Staff Table";
+            var insertionLog = new InsertAccess();
+            insertionLog.LogHistory(historyUser);
         }
         #endregion
     }

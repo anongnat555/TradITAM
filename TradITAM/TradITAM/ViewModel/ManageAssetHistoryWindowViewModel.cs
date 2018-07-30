@@ -17,10 +17,15 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> AddAssetHistoryTypeCommand { get; set; }
         public DelegateCommand<object> UpdateAssetHistoryTypeCommand { get; set; }
         public DelegateCommand<object> GetAssetHistoryTypeEvent { get; set; }
+
+        private UserData UserInfo { get; set; }
         #endregion
 
-        public ManageAssetHistoryWindowViewModel()
+        public ManageAssetHistoryWindowViewModel(UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             /* Define AddEvent using DelegateCommand */
             AddAssetHistoryTypeCommand = new DelegateCommand<object>(AddAssetHistoryType);
 
@@ -70,6 +75,19 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
+            }
+        }
+        #endregion
+
         #region Load Asset History Type
         private string _type_code;
         public string Type_code
@@ -79,6 +97,17 @@ namespace TradITAM.ViewModel
             {
                 _type_code = value;
                 OnPropertyChanged(nameof(Type_code));
+            }
+        }
+
+        private string _type_description;
+        public string Type_description
+        {
+            get => _type_description;
+            set
+            {
+                _type_description = value;
+                OnPropertyChanged(nameof(Type_description));
             }
         }
 
@@ -132,6 +161,7 @@ namespace TradITAM.ViewModel
             /* Assign asset history type value into each asset property from ui selection */
             Asset_history_type_id_u = SelectedAssetHistoryType.Asset_history_type_id;
             Type_code_u = SelectedAssetHistoryType.Type_code;
+            Type_description_u = SelectedAssetHistoryType.Type_description;
             Is_active_u = SelectedAssetHistoryType.Is_active;
         }
         #endregion
@@ -159,6 +189,17 @@ namespace TradITAM.ViewModel
             }
         }
 
+        private string _type_description_u;
+        public string Type_description_u
+        {
+            get => _type_description_u;
+            set
+            {
+                _type_description_u = value;
+                OnPropertyChanged(nameof(Type_description_u));
+            }
+        }
+
         private bool _is_active_u;
         public bool Is_active_u
         {
@@ -175,12 +216,19 @@ namespace TradITAM.ViewModel
         public void AddAssetHistoryType(Object o)
         {
             AssetHistoryTypeList.Type_code = Type_code;
+            AssetHistoryTypeList.Type_description = Type_description;
             AssetHistoryTypeList.Is_active = Is_active;
 
             if (AssetHistoryTypeList != null)
             {
                 var insertion = new InsertAccess();
                 insertion.AddAssetHistoryType(AssetHistoryTypeList);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Insert " + Type_code + " in AssetHistoryType Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
 
@@ -188,12 +236,19 @@ namespace TradITAM.ViewModel
         {
             AssetHistoryTypenew.Asset_history_type_id = Asset_history_type_id_u;
             AssetHistoryTypenew.Type_code = Type_code_u;
+            AssetHistoryTypenew.Type_description = Type_description_u;
             AssetHistoryTypenew.Is_active = Is_active_u;
 
             if (AssetHistoryTypenew != null)
             {
                 var update = new UpdateAccess();
                 update.UpdateAssetHistoryType(AssetHistoryTypenew);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Update " + Type_code_u + " in AssetHistoryType Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
 

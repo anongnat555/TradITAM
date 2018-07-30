@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TradITAM.Model;
 using TradITAM.ViewModel;
 
 namespace TradITAM.View
@@ -20,10 +21,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class ManageAssetTypeWindow : Window
     {
-        public ManageAssetTypeWindow()
+        public ManageAssetTypeWindow(UserData UserList)
         {
             InitializeComponent();
-            this.DataContext = new ManageAssetTypeWindowViewModel();
+            this.DataContext = new ManageAssetTypeWindowViewModel(UserList);
         }
     }
 }

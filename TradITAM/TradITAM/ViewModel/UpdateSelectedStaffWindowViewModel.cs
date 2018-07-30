@@ -8,12 +8,19 @@ using TradITAM.Model;
 
 namespace TradITAM.ViewModel
 {
-    
     public class UpdateSelectedStaffWindowViewModel : ViewModelBase
     {
+        #region Global Variable
         public DelegateCommand<object> Updatecommand { get; set; }
-        public UpdateSelectedStaffWindowViewModel(StaffData StaffSelect)
+
+        private UserData UserInfo { get; set; }
+        #endregion
+
+        public UpdateSelectedStaffWindowViewModel(StaffData StaffSelect, UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             LoadSelected(StaffSelect);
             Updatecommand = new DelegateCommand<object>(Update);
         }
@@ -119,7 +126,7 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
-        #region Properties
+        #region A Property use for Database 
         private StaffData _newstaff = new StaffData();
         public StaffData Staffnew
         {
@@ -128,6 +135,19 @@ namespace TradITAM.ViewModel
             {
                 _newstaff = value;
                 OnPropertyChanged(nameof(Staffnew));
+            }
+        }
+        #endregion
+
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
             }
         }
         #endregion
@@ -159,6 +179,12 @@ namespace TradITAM.ViewModel
 
             var updatestaff = new UpdateAccess();
             updatestaff.UpdateStaff(Staffnew);
+
+            /*  Add User Log */
+            historyUser.User_id = UserInfo.user_id;
+            historyUser.Detail = "Update " + Staffnew.aka + " in Staff Table";
+            var insertionLog = new InsertAccess();
+            insertionLog.LogHistory(historyUser);
         }
 
         #endregion

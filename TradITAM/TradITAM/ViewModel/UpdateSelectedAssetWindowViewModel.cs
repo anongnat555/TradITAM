@@ -23,10 +23,14 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> UpdateCommand { get; set; }
 
         private AssetData AssetInfo { get; set; }
+        private UserData UserInfo { get; set; }
         #endregion
 
-        public UpdateSelectedAssetWindowViewModel(AssetData AssetSelect)
+        public UpdateSelectedAssetWindowViewModel(AssetData AssetSelect, UserData UserList)
         {
+            UserInfo = new UserData();
+            UserInfo = UserList;
+
             AssetInfo = new AssetData();
             AssetInfo = AssetSelect;
 
@@ -69,6 +73,19 @@ namespace TradITAM.ViewModel
             {
                 _newasset = value;
                 OnPropertyChanged(nameof(Assetnew));
+            }
+        }
+        #endregion
+
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
             }
         }
         #endregion
@@ -664,6 +681,12 @@ namespace TradITAM.ViewModel
 
                 var update = new UpdateAccess();
                 update.UpdateAsset(Assetnew);
+
+                /*  Add User Log */
+                historyUser.User_id = UserInfo.user_id;
+                historyUser.Detail = "Update " + Assetnew.Asset_code + " in Asset Table";
+                var insertionLog = new InsertAccess();
+                insertionLog.LogHistory(historyUser);
             }
         }
         #endregion

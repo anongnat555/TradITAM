@@ -26,11 +26,5 @@ namespace TradITAM.View
             InitializeComponent();
             this.DataContext = new ReportWindowViewModel(UserList);
         }
-
-        private void Button_Add_ReportType(object sender, RoutedEventArgs e)
-        {
-            ManageAssetHistoryWindow n = new ManageAssetHistoryWindow();
-            n.Show();
-        }
     }
 }

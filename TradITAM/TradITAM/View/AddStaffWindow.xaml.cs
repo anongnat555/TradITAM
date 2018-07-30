@@ -21,10 +21,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class AddStaffWindow : Window
     {
-        public AddStaffWindow()
+        public AddStaffWindow(UserData UserList)
         {
             InitializeComponent();
-            this.DataContext = new AddStaffWindowViewModel();
+            this.DataContext = new AddStaffWindowViewModel(UserList);
         }
     }
 }

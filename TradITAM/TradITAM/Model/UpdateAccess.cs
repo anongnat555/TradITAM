@@ -217,6 +217,7 @@ namespace TradITAM.Model
                     if (aht_ != null)
                     {
                         aht_.type_code = newitem.Type_code;
+                        aht_.type_description = newitem.Type_description;
                         aht_.is_active = newitem.Is_active;
                         aht_.modified_date = DateTime.Now;
 

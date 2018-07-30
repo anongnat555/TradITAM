@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TradITAM.Model;
 using TradITAM.ViewModel;
 
 namespace TradITAM.View
@@ -20,10 +21,10 @@ namespace TradITAM.View
     /// </summary>
     public partial class UpdateAssetWindow : Window
     {
-        public UpdateAssetWindow()
+        public UpdateAssetWindow(UserData UserList)
         {
             InitializeComponent();
-            this.DataContext = new UpdateAssetWindowViewModel();
+            this.DataContext = new UpdateAssetWindowViewModel(UserList);
         }
 
         public void Button_ClearAsset(object sender, RoutedEventArgs e)

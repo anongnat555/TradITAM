@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:vmx="clr-namespace:TradITAM.ViewModel"
         d:DataContext="{d:DesignInstance Type=vmx:ManageAssetHistoryWindowViewModel}"
-        Title="TradITAM - Add/Update Asset Report Window" Height="300" Width="500" WindowStartupLocation="CenterScreen">
+        Title="TradITAM - Add/Update Asset Report Window" Height="420" Width="500" WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
             <Setter Property="Template">
@@ -46,7 +46,7 @@
                 <TabItem Header="Add" Cursor="Hand" Style="{DynamicResource TabItemStyle1}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
@@ -58,7 +58,7 @@
                             <Grid Grid.Column="0">
                                 <Image Grid.Column="0" Height="100" Margin="0,10,0,0" Source="/image/Page_UAsset.png" Cursor="Arrow"/>
                             </Grid>
-                            <Grid Grid.Column="1">
+                            <Grid Grid.Column="1" Margin="0,10,0,0">
                                 <StackPanel Margin="0,20,0,0">
                                     <Label Content="Report Type Name:" FontWeight="Bold"/>
                                     <TextBox Text="{Binding Type_code, Mode=TwoWay}" FontSize="14" Height="25" BorderThickness="1" Padding="3,-2,0,0"/>
@@ -68,15 +68,19 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <Button Command="{Binding AddAssetHistoryTypeCommand}" Background="LimeGreen" BorderBrush="{x:Null}" Content="CREATE" Width="200" Margin="10"/>
+                            <StackPanel HorizontalAlignment="Center">
+                                <Label Content="Description:" FontWeight="Bold"/>
+                                <TextBox Text="{Binding Type_description}" Cursor="IBeam" Width="300" Height="80" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,0,0,0" Margin="5"/>
+                                <Button Command="{Binding AddAssetHistoryTypeCommand}" Background="LimeGreen" BorderBrush="{x:Null}" Content="CREATE" Width="200" Margin="10"/>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </TabItem>
                 <TabItem Header="Update" Cursor="Hand" Style="{DynamicResource TabItemStyle1}">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="4*"/>
-                            <RowDefinition Height="1.8*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0">
                             <Grid.ColumnDefinitions>
@@ -91,7 +95,7 @@
                                 <StackPanel Margin="0,10,0,0">
                                     <Label Content="Report Type Name:" FontWeight="Bold"/>
                                     <ComboBox ItemsSource="{Binding AssetHistoryTypeCollectionView}" DisplayMemberPath="Type_code" 
-                                      SelectedValue="{Binding SelectedAssetHistoryType}" Text="{Binding Type_code}" 
+                                      SelectedValue="{Binding SelectedAssetHistoryType}" Text="{Binding Type_code_u}" 
                                               FontSize="14" Height="25" BorderThickness="1" Padding="3,-2,0,0"/>
                                     <Label Content="Report Type Name:" FontWeight="Bold"/>
                                     <TextBox Text="{Binding Type_code_u,Mode=TwoWay}" FontSize="14" Height="25" BorderThickness="1" Padding="3,-2,0,0"/>
@@ -101,7 +105,11 @@
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="1">
-                            <Button Command="{Binding UpdateAssetHistoryTypeCommand}" Background="Salmon" BorderBrush="{x:Null}" Content="UPDATE" Width="200" Margin="10"/>
+                            <StackPanel HorizontalAlignment="Center">
+                                <Label Content="Description:" FontWeight="Bold"/>
+                                <TextBox Text="{Binding Type_description_u}" Cursor="IBeam" Width="300" Height="80" BorderThickness="1" TextWrapping="Wrap" AcceptsReturn="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Left" VerticalContentAlignment="Top" Padding="3,0,0,0" Margin="5"/>
+                                <Button Command="{Binding UpdateAssetHistoryTypeCommand}" Background="Salmon" BorderBrush="{x:Null}" Content="UPDATE" Width="200" Margin="10"/>
+                            </StackPanel>
                         </Grid>
                     </Grid>
                 </TabItem>
