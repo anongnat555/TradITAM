@@ -8,11 +8,11 @@ Tradition IT Asset Management (TredITAM) is a software for IT Asset Information 
 <p align="center">
   <img src="https://ekiy5aot90-flywheel.netdna-ssl.com/wp-content/uploads/2013/07/segue-blog-key-phases-software-development-projects-1.png"width="380" height="300"/>
 </p>
-This Project is work on Software Development Life Cycle (SDLC) which can be divide into 5 Phases.
-1. Project Planning
-2. Requirement Collection and Analysis
-3. Design
-4. Implementation
+This Project is work on Software Development Life Cycle (SDLC) which can be divide into 5 Phases. <br/>
+1. Project Planning <br/>
+2. Requirement Collection and Analysis <br/>
+3. Design <br/>
+4. Implementation <br/>
 5. Testing
 
 ## MVVM Design Pattern
