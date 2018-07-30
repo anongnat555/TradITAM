@@ -1,5 +1,3 @@
-<snippet>
-  <content>
 # IT Asset Management System
 <p align="center">
   <img src="http://www.traditionasia.com/assets/images/tradition_asia_logo.svg"/>
@@ -17,5 +15,8 @@ This Project is work on Software Development Life Cycle (SDLC) which can be divi
 - Implementation
 - Testing
 
-</content>
-</snippet>
+### Design Tool
+
+#### Development Tool
+1. install Entity Framework `PM> Install-Package EntityFramework -Version 6.2.0`
+2. install Material Design In XAML Toolkit: `PM> Install-Package MaterialDesignThemes`
