@@ -1,5 +1,3 @@
-<snippet>
-  <content>
 # IT Asset Management System
 <p align="center">
   <img src="http://www.traditionasia.com/assets/images/tradition_asia_logo.svg"/>
@@ -17,5 +15,12 @@ This Project is work on Software Development Life Cycle (SDLC) which can be divi
 - Implementation
 - Testing
 
-</content>
-</snippet>
+## MVVM Design Pattern
+<p align="center">
+  <img src="https://www.codeproject.com/KB/WPF/MVVMQuickTutorial/MVVM.jpg" width="380" height="300"/>
+</p>
+read more: https://www.codeproject.com/Articles/81484/A-Practical-Quick-start-Tutorial-on-MVVM-in-WPF
+
+## Development Tool
+1. install Entity Framework `PM> Install-Package EntityFramework -Version 6.2.0`
+2. install Material Design In XAML Toolkit: `PM> Install-Package MaterialDesignThemes`
