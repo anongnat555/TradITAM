@@ -21,10 +21,17 @@ namespace TradITAM.View
     /// </summary>
     public partial class AddAssetWindow : Window
     {
+        #region Global Variable
+        private UserData UserInfo { get; set; }
+        #endregion
+
         public AddAssetWindow(UserData UserList)
         {
             InitializeComponent();
             this.DataContext = new AddAssetWindowViewModel(UserList);
+
+            UserInfo = new UserData();
+            UserInfo = UserList;
         }
 
         public void Button_ClearAsset(object sender, RoutedEventArgs e)
@@ -45,6 +52,13 @@ namespace TradITAM.View
             dp2.Text = null;
 
             tgb1.IsChecked = false;
+        }
+
+        private void Button_Reload(object sender, RoutedEventArgs e)
+        {
+            AddAssetWindow n = new AddAssetWindow(UserInfo);
+            n.ShowDialog();
+            this.Close();
         }
     }
 }

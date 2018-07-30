@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\GStan\Desktop\TradITAM_stang\TradITAM\obj\Debug\
+C:\Users\patipon_wiangnak\Desktop\git\TradITAM\TradITAM_stang\TradITAM\obj\Debug\
 TradITAM
 none
 false
 DEBUG;TRACE
-C:\Users\GStan\Desktop\TradITAM_stang\TradITAM\App.xaml
+C:\Users\patipon_wiangnak\Desktop\git\TradITAM\TradITAM_stang\TradITAM\App.xaml
 15-275639020
 2561690093
-61-663678291
-29-102126891
+651671497173
+29-911361765
 View\AddAssetWindow.xaml;View\AddStaffWindow.xaml;View\AddSupplierWindow.xaml;View\CreateWindow.xaml;View\HistoryWindow.xaml;View\LoginWindow.xaml;View\MainWindow.xaml;View\RegisterWindow.xaml;View\ReportWindow.xaml;View\UpdateAssetWindow.xaml;View\UpdateSelectedAssetWindow.xaml;View\UpdateSelectedStaffWindow.xaml;View\UpdateStaffWindow.xaml;View\UpdateSupplierWindow.xaml;View\UpdateWindow.xaml;
 
-False
+True
 

@@ -45,7 +45,10 @@ namespace TradITAM.Model
                     pTemp.create_date = (DateTime)item.create_date;
                     pTemp.modified_date = (DateTime)item.modified_date;
 
-                    _staff.Add(pTemp);
+                    if (pTemp.is_active == true)
+                    {
+                        _staff.Add(pTemp);
+                    }
                 }
             }
             catch (Exception ex)
@@ -88,7 +91,10 @@ namespace TradITAM.Model
                     pTemp.Create_date = (DateTime)item.create_date;
                     pTemp.Modified_date = (DateTime)item.modified_date;
 
-                    _asset.Add(pTemp);
+                    if (pTemp.Is_active == true)
+                    {
+                        _asset.Add(pTemp);
+                    }
                 }
             }
             catch (Exception ex)
@@ -122,7 +128,10 @@ namespace TradITAM.Model
                     pTemp.create_date = (DateTime)item.create_date;
                     pTemp.modified_date = (DateTime)item.modified_date;
 
-                    _supplier.Add(pTemp);
+                    if (pTemp.is_active == true)
+                    {
+                        _supplier.Add(pTemp);
+                    }
                 }
             }
             catch (Exception ex)
@@ -223,6 +232,67 @@ namespace TradITAM.Model
                 hasError = true;
             }
             return _asset_history_type;
+        }
+        #endregion
+
+        #region History
+        public ObservableCollection<HistoryData> GetHistory()
+        {
+            hasError = false;
+            ObservableCollection<HistoryData> _history = new ObservableCollection<HistoryData>();
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var query = db.history.ToList();
+                foreach (var item in query)
+                {
+                    HistoryData pTemp = new HistoryData(/*item*/);
+                    pTemp.History_id = item.history_id;
+                    pTemp.User_id = (int)item.user_id;
+                    pTemp.Detail = item.detail;
+                    pTemp.History_timestamp = (DateTime)item.history_timestamp;
+                    pTemp.History_type = (int)item.history_type;
+
+                    _history.Add(pTemp);
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Gethistory() error, " + ex.Message;
+                hasError = true;
+            }
+            return _history;
+        }
+        #endregion
+
+        #region AssetHistory
+        public ObservableCollection<ReportData> GetAssetHistory()
+        {
+            hasError = false;
+            ObservableCollection<ReportData> _history = new ObservableCollection<ReportData>();
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+                var query = db.asset_history.ToList();
+                foreach (var item in query)
+                {
+                    ReportData pTemp = new ReportData(/*item*/);
+                    pTemp.asset_history_id = item.asset_history_id;
+                    pTemp.user_id = (int)item.user_id;
+                    pTemp.asset_id = (int)item.asset_id;
+                    pTemp.asset_history_type = (int)item.asset_history_type;
+                    pTemp.remark = item.remark;
+                    pTemp.history_timestamp = (DateTime)item.history_timestamp;
+
+                    _history.Add(pTemp);
+                }
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "Gethistory() error, " + ex.Message;
+                hasError = true;
+            }
+            return _history;
         }
         #endregion
 

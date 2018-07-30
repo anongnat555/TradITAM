@@ -126,6 +126,7 @@
     <Compile Include="Model\InsertAccess.cs" />
     <Compile Include="Model\LoginAccess.cs" />
     <Compile Include="Model\OsData.cs" />
+    <Compile Include="Model\ReportData.cs" />
     <Compile Include="Model\SupplierData.cs" />
     <Compile Include="Model\UpdateAccess.cs" />
     <Compile Include="Model\UserData.cs" />
@@ -159,12 +160,14 @@
     <Compile Include="ViewModel\AddAssetWindowViewModel.cs" />
     <Compile Include="ViewModel\AddStaffWindowViewModel.cs" />
     <Compile Include="ViewModel\AddSupplierWindowViewModel.cs" />
+    <Compile Include="ViewModel\HistoryWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\ManageAssetHistoryWindowViewModel.cs" />
     <Compile Include="ViewModel\ManageAssetTypeWindowViewModel.cs" />
     <Compile Include="ViewModel\ManageOsWindowViewModel.cs" />
     <Compile Include="ViewModel\RegisterWindowViewModel.cs" />
     <Compile Include="Model\StaffData.cs" />
+    <Compile Include="ViewModel\ReportViewWindowViewModel.cs" />
     <Compile Include="ViewModel\ReportWindowViewModel.cs" />
     <Compile Include="ViewModel\UpdateAssetWindowViewModel.cs" />
     <Compile Include="ViewModel\UpdateSelectedAssetWindowViewModel.cs" />
@@ -182,6 +185,9 @@
     <Compile Include="View\AddSupplierWindow.xaml.cs">
       <DependentUpon>AddSupplierWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\HistoryWindow.xaml.cs">
+      <DependentUpon>HistoryWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ManageAssetHistoryWindow.xaml.cs">
       <DependentUpon>ManageAssetHistoryWindow.xaml</DependentUpon>
     </Compile>
@@ -193,6 +199,9 @@
     </Compile>
     <Compile Include="View\RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ReportViewWindow.xaml.cs">
+      <DependentUpon>ReportViewWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ReportWindow.xaml.cs">
       <DependentUpon>ReportWindow.xaml</DependentUpon>
@@ -224,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddSupplierWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HistoryWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,6 +273,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\RegisterWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ReportViewWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

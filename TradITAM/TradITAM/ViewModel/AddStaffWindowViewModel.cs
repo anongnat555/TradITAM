@@ -54,9 +54,27 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region checkbox value
+        private bool _check;
+        public bool Check
+        {
+            get { return _check; }
+            set
+            {
+                _check = value;
+                OnPropertyChanged(nameof(Check));
+            }
+        }
+        #endregion
+
         #region Method
         public void AddStaff(Object o)
         {
+            if(Check == false)
+            {
+                StaffList.end_date = DateTime.MinValue;
+            }
+
             var insertion = new InsertAccess();
             insertion.AddStaff(StaffList);
 

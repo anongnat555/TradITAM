@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TradITAM.View"
         mc:Ignorable="d"
         xmlns:vmx="clr-namespace:TradITAM.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         d:DataContext="{d:DesignInstance Type=vmx:ReportWindowViewModel}"
         Title="TradITAM - Asset Report" Height="600" Width="820" WindowStartupLocation="CenterScreen">
     <Grid>
@@ -14,6 +15,14 @@
                 <Grid Background="#FF018EFF" Height="50">
                     <Label Content="ASSET REPORT" FontSize="18" Foreground="White" FontWeight="DemiBold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
+                <StackPanel HorizontalAlignment="Left" Height="25" Margin="5,10,50,0">
+                    <Button Click="Button_Reload" Width="90" Height="Auto" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="DimGray" BorderThickness="0" Margin="30,0,0,0">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Reload" FontSize="12" Margin="0,0,2,0"/>
+                            <materialDesign:PackIcon Kind="Reload" Foreground="White" Height="18" Width="22" Margin="0,-2,5,0"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
                 <StackPanel VerticalAlignment="Stretch" Margin="10">
                     <Grid>
                         <Grid.RowDefinitions>

@@ -70,11 +70,22 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
                                 <Label Content="Start Date:" FontSize="14" FontWeight="Bold"/>
-                                <DatePicker Name="dt1" SelectedDate="{Binding Start_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220" BorderThickness="1" Margin="0,0,5,0"/>
+                                <DatePicker Name="dt1" SelectedDate="{Binding Start_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220" Height="30" BorderThickness="1" Margin="0,0,5,0"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Margin="0,8,0,0">
-                                <CheckBox Content="End Date: " FontSize="14" FontWeight="Bold"/>
-                                <DatePicker Name="dt2" SelectedDate="{Binding End_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220"  BorderThickness="1" Margin="0,0,5,0"/>
+                                <CheckBox IsChecked="{Binding Check, Mode=TwoWay}" Content="End Date: " FontSize="14" FontWeight="Bold"/>
+                                <DatePicker Name="dt2" SelectedDate="{Binding End_date, Mode=TwoWay}" DisplayDate="{Binding DateTime.Now}" Width="220" Height="30" BorderThickness="1" FontSize="14" Margin="15,0,0,0" Padding="3,3,0,0">
+                                    <DatePicker.Style>
+                                        <Style TargetType="{x:Type DatePicker}">
+                                            <Setter Property="IsEnabled" Value="False"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=Check, Mode=TwoWay}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="True"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DatePicker.Style>
+                                </DatePicker>
                             </StackPanel>
                         </Grid>
                         <!--Command="{Binding AddStaffCommand}"-->

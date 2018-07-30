@@ -21,10 +21,24 @@ namespace TradITAM.View
     /// </summary>
     public partial class ReportWindow : Window
     {
+        #region Global Variable
+        private UserData UserInfo { get; set; }
+        #endregion
+
         public ReportWindow(UserData UserList)
         {
             InitializeComponent();
             this.DataContext = new ReportWindowViewModel(UserList);
+
+            UserInfo = new UserData();
+            UserInfo = UserList;
+        }
+
+        private void Button_Reload(object sender, RoutedEventArgs e)
+        {
+            ReportWindow n = new ReportWindow(UserInfo);
+            n.ShowDialog();
+            this.Close();
         }
     }
 }

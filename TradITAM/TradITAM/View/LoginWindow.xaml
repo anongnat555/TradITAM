@@ -82,7 +82,6 @@
             </StackPanel>
         </Grid>
         <Button Command="{Binding LoginCommand}" VerticalAlignment="Bottom" Margin="0,85" Width="150" Content="LOGIN"/>
-        <Button Click="Button_Register" Content="No account? Create one!" VerticalAlignment="Bottom" HorizontalAlignment="Center" BorderBrush="{x:Null}" BorderThickness="0" Background="{x:Null}" Foreground="Black" Margin="30"/>
         <Button Background="{x:Null}" BorderBrush="{x:Null}" Click="Button_Close" Height="Auto" Margin="280,10,0,446">
             <materialDesign:PackIcon Kind="Close" Height="25" Width="25" Foreground="White" />
         </Button>

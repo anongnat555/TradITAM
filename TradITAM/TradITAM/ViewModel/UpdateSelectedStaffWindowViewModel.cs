@@ -152,6 +152,19 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region checkbox value
+        private bool _check;
+        public bool Check
+        {
+            get { return _check; }
+            set
+            {
+                _check = value;
+                OnPropertyChanged(nameof(Check));
+            }
+        }
+        #endregion
+
         #region Method
         public void LoadSelected(StaffData StaffSelect)
         {
@@ -162,21 +175,39 @@ namespace TradITAM.ViewModel
             Is_active = StaffSelect.is_active;
             Start_date = StaffSelect.start_date;
             End_date = StaffSelect.end_date;
+
+            if (End_date != DateTime.MinValue)
+            {
+                Check = true;
+            }
+            else
+            {
+                Check = false;
+            }
         }
 
         public void Update(object o)
         {
+            if (Staffnew != null)
+            {
+                Staffnew.staff_id = Staff_id;
+                Staffnew.aka = Aka;
+                Staffnew.firstname = Firstname;
+                Staffnew.lastname = Lastname;
+                Staffnew.is_active = Is_active;
+                Staffnew.start_date = Start_date;
+                Staffnew.create_date = Create_date;
+                Staffnew.modified_date = Modified_date;
 
-            Staffnew.staff_id = Staff_id;
-            Staffnew.aka = Aka;
-            Staffnew.firstname = Firstname;
-            Staffnew.lastname = Lastname;
-            Staffnew.is_active = Is_active;
-            Staffnew.start_date = Start_date;
-            Staffnew.end_date = End_date;
-            Staffnew.create_date = Create_date;
-            Staffnew.modified_date = Modified_date;
-
+                if (Check == false)
+                {
+                    Staffnew.end_date = DateTime.MinValue;
+                }
+                else
+                {
+                    Staffnew.end_date = End_date;
+                }
+            }
             var updatestaff = new UpdateAccess();
             updatestaff.UpdateStaff(Staffnew);
 

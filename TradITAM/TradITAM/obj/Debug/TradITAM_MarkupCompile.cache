@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\patipon_wiangnak\Desktop\Tradition Asia\InternProject\TDInventory\TradITAM\TradITAM\App.xaml
-16-1708765883
+18-1171227799
 2561690093
-65492232555
+701917531738
 29-1176045077
-View\AddAssetWindow.xaml;View\AddStaffWindow.xaml;View\AddSupplierWindow.xaml;View\LoginWindow.xaml;View\MainWindow.xaml;View\ManageAssetHistoryWindow.xaml;View\ManageAssetTypeWindow.xaml;View\ManageOsWindow.xaml;View\RegisterWindow.xaml;View\ReportWindow.xaml;View\UpdateAssetWindow.xaml;View\UpdateSelectedAssetWindow.xaml;View\UpdateSelectedStaffWindow.xaml;View\UpdateStaffWindow.xaml;View\UpdateSelectedSupplierWindow.xaml;View\UpdateSupplierWindow.xaml;
+View\AddAssetWindow.xaml;View\AddStaffWindow.xaml;View\AddSupplierWindow.xaml;View\HistoryWindow.xaml;View\LoginWindow.xaml;View\MainWindow.xaml;View\ManageAssetHistoryWindow.xaml;View\ManageAssetTypeWindow.xaml;View\ManageOsWindow.xaml;View\RegisterWindow.xaml;View\ReportViewWindow.xaml;View\ReportWindow.xaml;View\UpdateAssetWindow.xaml;View\UpdateSelectedAssetWindow.xaml;View\UpdateSelectedStaffWindow.xaml;View\UpdateStaffWindow.xaml;View\UpdateSelectedSupplierWindow.xaml;View\UpdateSupplierWindow.xaml;
 
 False
 

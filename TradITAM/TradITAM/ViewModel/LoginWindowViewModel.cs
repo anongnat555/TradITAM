@@ -60,6 +60,5 @@ namespace TradITAM.ViewModel
             }
         }
         #endregion
-
     }
 }

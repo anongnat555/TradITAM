@@ -271,7 +271,7 @@ namespace TradITAM.Model
                 };
                 db.history.Add(data);
                 db.SaveChanges();
-                MessageBox.Show("Insert complete");
+                //MessageBox.Show("Insert complete");
 
             }
             catch (Exception ex)

@@ -35,6 +35,23 @@ namespace TradITAM
 
             UserInfo = new UserData();
             UserInfo = UserList;
+
+            MainWindowViewModel vm = new MainWindowViewModel(UserList);
+            this.DataContext = vm;
+            if (vm.CloseAction == null)
+                vm.CloseAction = new Action(this.Close);
+        }
+
+        private void Button_Close(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Button_Reload(object sender, RoutedEventArgs e)
+        {
+            MainWindow n = new MainWindow(UserInfo);
+            n.Show();
+            this.Close();
         }
     }
 }

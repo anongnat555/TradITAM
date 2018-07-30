@@ -55,14 +55,16 @@
             <Grid Grid.Column="1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <materialDesign:PackIcon Kind="AccountCircle" Foreground="#373737" Height="22" Width="22" Margin="0,3,5,0"/>
-                    <wpfx:DropDownButton Content="{Binding Username}" Cursor="Hand" FontSize="12" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <wpfx:DropDownButton.DropDownContent>
-                            <ListBox Cursor="Hand">
-                                <ListBoxItem Content="View ULOG" />
-                                <ListBoxItem Content="Exit" />
-                            </ListBox>
-                        </wpfx:DropDownButton.DropDownContent>
-                    </wpfx:DropDownButton>
+                    <Menu Background="#FF018EFF">
+                        <MenuItem Header="{Binding Username}" Cursor="Hand" FontSize="14" Foreground="White" Background="#FF018EFF" 
+                                  BorderBrush="{x:Null}" BorderThickness="0" Width="auto" Height="27" Margin="0,0,10,0" HorizontalContentAlignment="Right" HorizontalAlignment="Right">
+                            <MenuItem Header="View Report" Command="{Binding ReportViewCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="View Ulog" Command="{Binding UlogViewCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="Add User" Command="{Binding RegisterCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="Log out" Command="{Binding LoginCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="Exit" Click="Button_Close" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                        </MenuItem>
+                    </Menu>
                 </StackPanel>
             </Grid>
         </Grid>
@@ -78,16 +80,24 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
-                                <Label Content="_Search" VerticalAlignment="Center"/>
-                                <TextBox Width="180" Height="22" BorderThickness="1"/>
+                                <Button Click="Button_Reload" Width="90" Height="30" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="DimGray" BorderThickness="0" Margin="20,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Reload" FontSize="12" Margin="0,0,2,0"/>
+                                        <materialDesign:PackIcon Kind="Reload" Foreground="White" Height="18" Width="22" Margin="0,-2,5,0"/>
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5">
-                                <Label Content="Sort by" VerticalAlignment="Center"/>
-                                <ComboBox Width="180" Height="22" BorderThickness="1"/>
+                                <Label Content="Filter" VerticalAlignment="Center"/>
+                                <ComboBox Width="180" Height="30" BorderThickness="1">
+                                    <ComboBoxItem Content="Active"/>
+                                    <ComboBoxItem Content="Disactive"/>
+                                    <ComboBoxItem Content="All"/>
+                                </ComboBox>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
                                 <Button Command="{Binding AddAssetEvent}" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
@@ -135,16 +145,24 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
-                                <Label Content="_Search" VerticalAlignment="Center"/>
-                                <TextBox Width="180" Height="22" BorderThickness="1"/>
+                                <Button Click="Button_Reload" Width="90" Height="30" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="DimGray" BorderThickness="0" Margin="20,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Reload" FontSize="12" Margin="0,0,2,0"/>
+                                        <materialDesign:PackIcon Kind="Reload" Foreground="White" Height="18" Width="22" Margin="0,-2,5,0"/>
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5">
-                                <Label Content="_Sort by" VerticalAlignment="Center"/>
-                                <ComboBox Width="180" Height="22" BorderThickness="1"/>
+                                <Label Content="Filter" VerticalAlignment="Center"/>
+                                <ComboBox Width="180" Height="30" BorderThickness="1">
+                                    <ComboBoxItem Content="Active"/>
+                                    <ComboBoxItem Content="Disactive"/>
+                                    <ComboBoxItem Content="All"/>
+                                </ComboBox>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
                                 <Button Command="{Binding AddStaffEvent}" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
@@ -156,9 +174,9 @@
                                   ItemsSource="{Binding StaffCollectionView}" SelectedItem="{Binding SelectedStaff}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="auto" Header="Staff ID" Binding="{Binding staff_id}"/>
+                                <DataGridTextColumn Width="auto" Header="AKA" Binding="{Binding aka}"/>
                                 <DataGridTextColumn Width="auto" Header="Firstname" Binding="{Binding firstname}"/>
                                 <DataGridTextColumn Width="auto" Header="Lastname" Binding="{Binding lastname}"/>
-                                <DataGridTextColumn Width="auto" Header="AKA" Binding="{Binding aka}"/>
                                 <DataGridTextColumn Width="auto" Header="Start Date" Binding="{Binding start_date}"/>
                                 <DataGridTextColumn Width="auto" Header="End Date" Binding="{Binding end_date}"/>
                                 <DataGridTextColumn Width="auto" Header="Active Status" Binding="{Binding is_active}"/>
@@ -183,16 +201,24 @@
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
-                                <Label Content="_Search" VerticalAlignment="Center"/>
-                                <TextBox Width="180" Height="22" BorderThickness="1"/>
+                                <Button Click="Button_Reload" Width="90" Height="30" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="DimGray" BorderThickness="0" Margin="20,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Reload" FontSize="12" Margin="0,0,2,0"/>
+                                        <materialDesign:PackIcon Kind="Reload" Foreground="White" Height="18" Width="22" Margin="0,-2,5,0"/>
+                                    </StackPanel>
+                                </Button>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5">
-                                <Label Content="_Sort by" VerticalAlignment="Center"/>
-                                <ComboBox Width="180" Height="22" BorderThickness="1"/>
+                                <Label Content="Filter" VerticalAlignment="Center"/>
+                                <ComboBox Width="180" Height="30" BorderThickness="1">
+                                    <ComboBoxItem Content="Active"/>
+                                    <ComboBoxItem Content="Disactive"/>
+                                    <ComboBoxItem Content="All"/>
+                                </ComboBox>
                             </StackPanel>
                             <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
                                 <Button Command="{Binding AddSupplierEvent}" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>

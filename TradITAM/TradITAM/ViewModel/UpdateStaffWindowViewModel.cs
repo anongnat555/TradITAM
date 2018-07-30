@@ -70,6 +70,18 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region checkbox value
+        private bool _check;
+        public bool Check
+        {
+            get { return _check; }
+            set
+            {
+                _check = value;
+                OnPropertyChanged(nameof(Check));
+            }
+        }
+        #endregion
 
         #region Staff
         private ObservableCollection<StaffData> _liststaff = new ObservableCollection<StaffData>();
@@ -127,6 +139,15 @@ namespace TradITAM.ViewModel
                 Is_active = SelectedStaff.is_active;
                 Start_date = SelectedStaff.start_date;
                 End_date = SelectedStaff.end_date;
+
+                if(End_date != DateTime.MinValue)
+                {
+                    Check = true;
+                }
+                else
+                {
+                    Check = false;
+                }
             }
         }
 
@@ -228,7 +249,13 @@ namespace TradITAM.ViewModel
                 Staffnew.lastname = Lastname;
                 Staffnew.is_active = Is_active;
                 Staffnew.start_date = Start_date;
-                Staffnew.end_date = End_date;
+                if (Check == false) {
+                    Staffnew.end_date = DateTime.MinValue;
+                }
+                else
+                {
+                    Staffnew.end_date = End_date;
+                }
             }
             var update = new UpdateAccess();
             update.UpdateStaff(Staffnew);

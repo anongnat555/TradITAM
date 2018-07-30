@@ -11,25 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using TradITAM.Model;
 using TradITAM.ViewModel;
 
 namespace TradITAM.View
 {
     /// <summary>
-    /// Interaction logic for Register.xaml
+    /// Interaction logic for HistoryWindow.xaml
     /// </summary>
-    public partial class RegisterWindow : Window
+    public partial class HistoryWindow : Window
     {
-        public RegisterWindow(UserData UserList)
+        public HistoryWindow()
         {
             InitializeComponent();
-            this.DataContext = new RegisterWindowViewModel(UserList);
-        }
-
-        public void Button_Close(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            this.DataContext = new HistoryWindowViewModel();
         }
     }
 }

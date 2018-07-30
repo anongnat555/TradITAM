@@ -28,8 +28,14 @@ namespace TradITAM.ViewModel
         public DelegateCommand<object> EditSelectedStaffEvent { get; set; }
         public DelegateCommand<object> EditSelectedSupplierEvent { get; set; }
 
+        public DelegateCommand<object> ReportViewCommand { get; set; }
+        public DelegateCommand<object> UlogViewCommand { get; set; }
+        public DelegateCommand<object> RegisterCommand { get; set; }
+        public DelegateCommand<object> LoginCommand { get; set; }
+
         public DelegateCommand<UserData> ReportAssetEvent { get; set; }
 
+        public Action CloseAction { get; set; }
         private UserData UserInfo { get; set; }
         #endregion
 
@@ -52,6 +58,18 @@ namespace TradITAM.ViewModel
             EditSelectedAssetEvent = new DelegateCommand<object>(EditSelectedAsset);
             EditSelectedStaffEvent = new DelegateCommand<object>(EditSelectedStaff);
             EditSelectedSupplierEvent = new DelegateCommand<object>(EditSelectedSupplier);
+
+            /* Define 'ReportViewCommand' to authenticate using DelegateCommand */
+            ReportViewCommand = new DelegateCommand<object>(ReportView);
+
+            /* Define 'UlogViewCommand' to authenticate using DelegateCommand */
+            UlogViewCommand = new DelegateCommand<object>(UlogView);
+
+            /* Define 'LoginCommand' to authenticate using DelegateCommand */
+            LoginCommand = new DelegateCommand<object>(Login);
+
+            /* Define 'RegisterCommand' to authenticate using DelegateCommand */
+            RegisterCommand = new DelegateCommand<object>(Register);
 
             /* Define GetEvent using DelegateCommand */
             ReportAssetEvent = new DelegateCommand<UserData>(ReportAsset);
@@ -233,19 +251,19 @@ namespace TradITAM.ViewModel
         public void AddAsset(object obj)
         {
             AddAssetWindow n = new AddAssetWindow(UserInfo);
-            n.Show();
+            n.ShowDialog();
         }
 
         public void AddStaff(object obj)
         {
             AddStaffWindow n = new AddStaffWindow(UserInfo);
-            n.Show();
+            n.ShowDialog();
         }
 
         public void AddSupplier(object obj)
         {
             AddSupplierWindow n = new AddSupplierWindow(UserInfo);
-            n.Show();
+            n.ShowDialog();
         }
         #endregion
 
@@ -255,7 +273,7 @@ namespace TradITAM.ViewModel
             if (SelectedStaff != null)
             {
                 UpdateAssetWindow n = new UpdateAssetWindow(UserInfo);
-                n.Show();
+                n.ShowDialog();
             }
         }
 
@@ -264,7 +282,7 @@ namespace TradITAM.ViewModel
             if (SelectedStaff != null)
             {
                 UpdateStaffWindow n = new UpdateStaffWindow(UserInfo);
-                n.Show();
+                n.ShowDialog();
             }
         }
 
@@ -273,7 +291,7 @@ namespace TradITAM.ViewModel
             if (SelectedStaff != null)
             {
                 UpdateSupplierWindow n = new UpdateSupplierWindow(UserInfo);
-                n.Show();
+                n.ShowDialog();
             }
         }
         #endregion
@@ -284,7 +302,7 @@ namespace TradITAM.ViewModel
             if (SelectedStaff != null)
             {
                 UpdateSelectedAssetWindow n = new UpdateSelectedAssetWindow(SelectedAsset, UserInfo);
-                n.Show();
+                n.ShowDialog();
             }
         }
 
@@ -293,7 +311,7 @@ namespace TradITAM.ViewModel
             if (SelectedStaff != null)
             {
                 UpdateSelectedStaffWindow n = new UpdateSelectedStaffWindow(SelectedStaff, UserInfo);
-                n.Show();
+                n.ShowDialog();
             }
         }
 
@@ -302,15 +320,41 @@ namespace TradITAM.ViewModel
             if (SelectedStaff != null)
             {
                 UpdateSelectedSupplierWindow n = new UpdateSelectedSupplierWindow(SelectedSupplier, UserInfo);
-                n.Show();
+                n.ShowDialog();
             }
         }
         #endregion
 
+        public void ReportView(object obj)
+        {
+            ReportViewWindow n = new ReportViewWindow();
+            n.ShowDialog();
+        }
+
+        public void UlogView(object obj)
+        {
+            HistoryWindow n = new HistoryWindow();
+            n.ShowDialog();
+        }
+
+        public void Login(object obj)
+        {
+            LoginWindow n = new LoginWindow();
+            CloseAction();
+            n.Show();
+        }
+
+        public void Register(object obj)
+        {
+            RegisterWindow n = new RegisterWindow(UserInfo);
+            n.ShowDialog();
+        }
+
+
         public void ReportAsset(Object obj)
         {
             ReportWindow n = new ReportWindow(UserInfo);
-            n.Show();
+            n.ShowDialog();
         }
         #endregion
     }
