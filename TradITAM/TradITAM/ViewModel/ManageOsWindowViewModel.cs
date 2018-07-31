@@ -201,6 +201,7 @@ namespace TradITAM.ViewModel
 
                 /*  Add User Log */
                 historyUser.User_id = UserInfo.user_id;
+                historyUser.History_id = 1;
                 historyUser.Detail = "Insert " + Os_name + " in Os Table";
                 var insertionLog = new InsertAccess();
                 insertionLog.LogHistory(historyUser);
@@ -220,6 +221,7 @@ namespace TradITAM.ViewModel
 
                 /*  Add User Log */
                 historyUser.User_id = UserInfo.user_id;
+                historyUser.History_id = 2;
                 historyUser.Detail = "Update " + Os_name_u + " in Os Table";
                 var insertionLog = new InsertAccess();
                 insertionLog.LogHistory(historyUser);

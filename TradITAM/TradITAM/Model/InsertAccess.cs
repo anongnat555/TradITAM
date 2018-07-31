@@ -267,7 +267,7 @@ namespace TradITAM.Model
                     user_id = item.User_id,
                     detail = item.Detail,
                     history_timestamp = DateTime.Now,
-                    history_type = 1
+                    history_type = item.History_id
                 };
                 db.history.Add(data);
                 db.SaveChanges();

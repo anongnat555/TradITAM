@@ -202,6 +202,7 @@ namespace TradITAM.ViewModel
 
                 /*  Add User Log */
                 historyUser.User_id = UserInfo.user_id;
+                historyUser.History_id = 1;
                 historyUser.Detail = "Insert " + Asset_type_name + " in AssetType Table";
                 var insertionLog = new InsertAccess();
                 insertionLog.LogHistory(historyUser);
@@ -221,6 +222,7 @@ namespace TradITAM.ViewModel
 
                 /*  Add User Log */
                 historyUser.User_id = UserInfo.user_id;
+                historyUser.History_id = 2;
                 historyUser.Detail = "Update " + Asset_type_name_u + " in AssetType Table";
                 var insertionLog = new InsertAccess();
                 insertionLog.LogHistory(historyUser);

@@ -171,6 +171,7 @@ namespace TradITAM.ViewModel
 
             /*  Add User Log */
             historyUser.User_id = UserInfo.user_id;
+            historyUser.History_id = 2;
             historyUser.Detail = "Update " + Suppliernew.company_name + " in Supplier Table";
             var insertionLog = new InsertAccess();
             insertionLog.LogHistory(historyUser);

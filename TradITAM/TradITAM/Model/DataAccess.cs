@@ -560,6 +560,39 @@ namespace TradITAM.Model
         }
         #endregion
 
+        #region Join Asset Type via Asset
+        public ObservableCollection<AssetHistoryTypeData> GetAssetHistoryTypeNameFromAssetHistoryType(AssetHistoryData item)
+        {
+            hasError = false;
+            ObservableCollection<AssetHistoryTypeData> _result = new ObservableCollection<AssetHistoryTypeData>();
+            try
+            {
+                TradAssetDBEntities db = new TradAssetDBEntities();
+
+                var query = db.asset_history_type.FirstOrDefault(x => x.asset_history_type_id == item.Asset_history_type);
+
+                if (query != null)
+                {
+                    AssetHistoryTypeData pTemp = new AssetHistoryTypeData(/*item*/);
+                    pTemp.Type_code = query.type_code;
+
+                    _result.Add(pTemp);
+                }
+                else
+                {
+                    MessageBox.Show("NOT FOUND");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                errorMessage = "GetAssetHistoryTypeNameFromAssetHistoryType() error, " + ex.Message;
+                hasError = true;
+            }
+            return _result;
+        }
+        #endregion
+
         #endregion
     }
 }

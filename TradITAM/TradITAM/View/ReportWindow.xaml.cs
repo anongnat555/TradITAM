@@ -37,8 +37,8 @@ namespace TradITAM.View
         private void Button_Reload(object sender, RoutedEventArgs e)
         {
             ReportWindow n = new ReportWindow(UserInfo);
-            n.ShowDialog();
             this.Close();
+            n.ShowDialog();
         }
     }
 }

@@ -73,6 +73,19 @@ namespace TradITAM.ViewModel
         }
         #endregion
 
+        #region A Property use for Log
+        private HistoryData _listuser = new HistoryData();
+        public HistoryData historyUser
+        {
+            get { return _listuser; }
+            set
+            {
+                _listuser = value;
+                OnPropertyChanged(nameof(historyUser));
+            }
+        }
+        #endregion
+
         #region Asset
         private ObservableCollection<AssetData> _listasset = new ObservableCollection<AssetData>();
         public ObservableCollection<AssetData> AssetList
@@ -546,6 +559,12 @@ namespace TradITAM.ViewModel
             var addassethistory = new InsertAccess();
             addassethistory.AddAssetHistory(SelectedAssetHistory);
 
+            /*  Add User Log */
+            historyUser.User_id = UserInfo.user_id;
+            historyUser.History_id = 3;
+            historyUser.Detail = "Insert " + SelectedAssetHistoryType.Type_code + " in Asset Table";
+            var insertionLog = new InsertAccess();
+            insertionLog.LogHistory(historyUser);
         }
 
         public void LoadAssetTypeName()
