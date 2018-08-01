@@ -1,0 +1,254 @@
+﻿<Window x:Class="TradITAM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TradITAM"
+        xmlns:vmx="clr-namespace:TradITAM.ViewModel"
+        xmlns:wpfx="clr-namespace:Xceed.Wpf.Toolkit;assembly=Xceed.Wpf.Toolkit"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        d:DataContext="{d:DesignInstance Type=vmx:MainWindowViewModel}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="TradITAM - Tradition IT Asset Management " Height="600" Width="1080" WindowStartupLocation="CenterScreen" WindowStyle="ThreeDBorderWindow">
+    <Window.Resources>
+        <Style x:Key="TabItemStyle1" TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border" BorderThickness="0" BorderBrush="{x:Null}">
+                            <ContentPresenter x:Name="ContentSite" HorizontalAlignment="Center" Margin="10" ContentSource="Header" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="#373737"/>
+                                <Setter TargetName="Border" Property="Background" Value="white"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter Property="TextElement.Foreground" TargetName="ContentSite" Value="White"/>
+                                <Setter TargetName="Border" Property="Background" Value="#373737"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <!-- Header -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF018EFF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <materialDesign:PackIcon Kind="AccountCircle" Foreground="#373737" Height="22" Width="22" Margin="0,3,5,0"/>
+                    <Menu Background="#FF018EFF">
+                        <MenuItem Header="{Binding Username}" Cursor="Hand" FontSize="14" Foreground="White" Background="#FF018EFF" 
+                                  BorderBrush="{x:Null}" BorderThickness="0" Width="auto" Height="27" Margin="0,0,10,0" HorizontalContentAlignment="Right" HorizontalAlignment="Right">
+                            <MenuItem Header="View Report" Command="{Binding ReportViewCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="View Ulog" Command="{Binding UlogViewCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="Add User" Command="{Binding RegisterCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="Log out" Command="{Binding LoginCommand}" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                            <MenuItem Header="Exit" Click="Button_Close" Foreground="#373737" Background="WhiteSmoke" FontSize="10" Height="18" />
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <!-- Main Content -->
+        <Grid Grid.Row="1" Background="#373737">
+            <TabControl TabStripPlacement="Left">
+                <TabItem Header="ASSET" Cursor="Hand" Style="{DynamicResource TabItemStyle1}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.25*"/>
+                            <RowDefinition Height="15*"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
+                                <Button Click="Button_Reload" Width="90" Height="30" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="DimGray" BorderThickness="0" Margin="20,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Reload" FontSize="12" Margin="0,0,2,0"/>
+                                        <materialDesign:PackIcon Kind="Reload" Foreground="White" Height="18" Width="22" Margin="0,-2,5,0"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5">
+                                <Label Content="Filter" VerticalAlignment="Center"/>
+                                <ComboBox Width="180" Height="30" BorderThickness="1">
+                                    <ComboBoxItem Content="Active"/>
+                                    <ComboBoxItem Content="Disactive"/>
+                                    <ComboBoxItem Content="All"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                                <Button Command="{Binding AddAssetEvent}" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Command="{Binding EditAssetEvent}" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Content="Report" Command="{Binding ReportAssetEvent}" Background="Salmon" BorderBrush="{x:Null}" Width="100"/>
+                            </StackPanel>
+                        </Grid>
+                        <DataGrid Grid.Row="1" Margin="10"  Name="dg_asset" IsReadOnly="True" AutoGenerateColumns="False"  
+                                  IsSynchronizedWithCurrentItem="true" BorderThickness="1"
+                                  ItemsSource="{Binding AssetCollectionView}" SelectedItem="{Binding SelectedAsset}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="auto" Header="Asset ID" Binding="{Binding Asset_id}"/>
+                                <DataGridTextColumn Width="auto" Header="OS" Binding="{Binding Os_id}"/>
+                                <DataGridTextColumn Width="auto" Header="Type" Binding="{Binding Asset_type_id}"/>
+                                <DataGridTextColumn Width="auto" Header="Original Supplier" Binding="{Binding Original_supplier_id}"/>
+                                <DataGridTextColumn Width="auto" Header="Supplier ID" Binding="{Binding Supplier_id}"/>
+                                <DataGridTextColumn Width="auto" Header="Staff ID" Binding="{Binding Using_by_staff_id}"/>
+                                <DataGridTextColumn Width="auto" Header="Asset Code" Binding="{Binding Asset_code}"/>
+                                <DataGridTextColumn Width="auto" Header="Brand" Binding="{Binding Brand}"/>
+                                <DataGridTextColumn Width="auto" Header="Price" Binding="{Binding Price}"/>
+                                <DataGridTextColumn Width="auto" Header="CPU" Binding="{Binding Cpu}"/>
+                                <DataGridTextColumn Width="auto" Header="RAM" Binding="{Binding Ram}"/>
+                                <DataGridTextColumn Width="auto" Header="HDD" Binding="{Binding Hdd}"/>
+                                <DataGridTextColumn Width="auto" Header="Notes" Binding="{Binding Note}"/>
+                                <DataGridTextColumn Width="auto" Header="Start Date Warranty" Binding="{Binding Start_date_warranty}"/>
+                                <DataGridTextColumn Width="auto" Header="Expiry Date Warranty" Binding="{Binding Expiry_date_warranty}"/>
+                                <DataGridTextColumn Width="auto" Header="Active Status" Binding="{Binding Is_active}"/>
+                                <DataGridTextColumn Width="auto" Header="Create Date" Binding="{Binding Create_date}"/>
+                                <DataGridTextColumn Width="auto" Header="Modified Date" Binding="{Binding Modified_date}"/>
+                            </DataGrid.Columns>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding EditSelectedAssetEvent}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="STAFF" Cursor="Hand" Style="{DynamicResource TabItemStyle1}" Height="36" VerticalAlignment="Bottom">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.25*"/>
+                            <RowDefinition Height="15*"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
+                                <Button Click="Button_Reload" Width="90" Height="30" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="DimGray" BorderThickness="0" Margin="20,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Reload" FontSize="12" Margin="0,0,2,0"/>
+                                        <materialDesign:PackIcon Kind="Reload" Foreground="White" Height="18" Width="22" Margin="0,-2,5,0"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5">
+                                <Label Content="Filter" VerticalAlignment="Center"/>
+                                <ComboBox Width="180" Height="30" BorderThickness="1">
+                                    <ComboBoxItem Content="Active"/>
+                                    <ComboBoxItem Content="Disactive"/>
+                                    <ComboBoxItem Content="All"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                                <Button Command="{Binding AddStaffEvent}" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Command="{Binding EditStaffEvent}" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100"/>
+                            </StackPanel>
+                        </Grid>
+                        <DataGrid Grid.Row="1" Margin="10"  Name="dg_staff" IsReadOnly="True" AutoGenerateColumns="False" 
+                                  IsSynchronizedWithCurrentItem="true" BorderThickness="1"
+                                  ItemsSource="{Binding StaffCollectionView}" SelectedItem="{Binding SelectedStaff}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="auto" Header="Staff ID" Binding="{Binding staff_id}"/>
+                                <DataGridTextColumn Width="auto" Header="AKA" Binding="{Binding aka}"/>
+                                <DataGridTextColumn Width="auto" Header="Firstname" Binding="{Binding firstname}"/>
+                                <DataGridTextColumn Width="auto" Header="Lastname" Binding="{Binding lastname}"/>
+                                <DataGridTextColumn Width="auto" Header="Start Date" Binding="{Binding start_date}"/>
+                                <DataGridTextColumn Width="auto" Header="End Date" Binding="{Binding end_date}"/>
+                                <DataGridTextColumn Width="auto" Header="Active Status" Binding="{Binding is_active}"/>
+                                <DataGridTextColumn Width="auto" Header="Create Date" Binding="{Binding create_date}"/>
+                                <DataGridTextColumn Width="auto" Header="Modified Date" Binding="{Binding modified_date}"/>
+
+                            </DataGrid.Columns>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding EditSelectedStaffEvent}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="SUPPLIER" Cursor="Hand"  Style="{DynamicResource TabItemStyle1}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.25*"/>
+                            <RowDefinition Height="15*"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="4*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal" Margin="5">
+                                <Button Click="Button_Reload" Width="90" Height="30" HorizontalAlignment="Left" BorderBrush="{x:Null}" Background="DimGray" BorderThickness="0" Margin="20,0,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Reload" FontSize="12" Margin="0,0,2,0"/>
+                                        <materialDesign:PackIcon Kind="Reload" Foreground="White" Height="18" Width="22" Margin="0,-2,5,0"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="5">
+                                <Label Content="Filter" VerticalAlignment="Center"/>
+                                <ComboBox Width="180" Height="30" BorderThickness="1">
+                                    <ComboBoxItem Content="Active"/>
+                                    <ComboBoxItem Content="Disactive"/>
+                                    <ComboBoxItem Content="All"/>
+                                </ComboBox>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,20,0">
+                                <Button Command="{Binding AddSupplierEvent}" Content="Add" Background="LimeGreen" BorderBrush="{x:Null}" Width="100" Margin="0,0,15,0"/>
+                                <Button Command="{Binding EditSupplierEvent}" Content="Edit" Background="#FFC300" BorderBrush="{x:Null}" Width="100"/>
+                            </StackPanel>
+                        </Grid>
+                        <DataGrid Grid.Row="1" Margin="10"  Name="dg_supplier" IsReadOnly="True" AutoGenerateColumns="False" 
+                                  IsSynchronizedWithCurrentItem="true" BorderThickness="1"
+                                  ItemsSource="{Binding SupplierCollectionView}" SelectedItem="{Binding SelectedSupplier}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="auto" Header="Supplier ID" Binding="{Binding supplier_id}"/>
+                                <DataGridTextColumn Width="auto" Header="Company Name" Binding="{Binding company_name}"/>
+                                <DataGridTextColumn Width="auto" Header="Contact Person" Binding="{Binding contact_person}"/>
+                                <DataGridTextColumn Width="auto" Header="Address" Binding="{Binding address}"/>
+                                <DataGridTextColumn Width="auto" Header="Email" Binding="{Binding email}"/>
+                                <DataGridTextColumn Width="auto" Header="Phone" Binding="{Binding phone}"/>
+                                <DataGridTextColumn Width="auto" Header="Active Status" Binding="{Binding is_active}"/>
+                                <DataGridTextColumn Width="auto" Header="Create Date" Binding="{Binding create_date}"/>
+                                <DataGridTextColumn Width="auto" Header="Modified Date" Binding="{Binding modified_date}"/>
+                            </DataGrid.Columns>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDoubleClick">
+                                    <i:InvokeCommandAction Command="{Binding EditSelectedSupplierEvent}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
+</Window>
+
