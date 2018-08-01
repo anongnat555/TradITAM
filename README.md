@@ -1,5 +1,5 @@
 # IT Asset Management System
-Tradition IT Asset Management (TradITAM) is a software for IT Asset Information Management in enterprise. These software will include IT Asset, Employee and Supplier information which users can view, insert, update and delete information. 
+IT Asset Management (ITAM) is a software for IT Asset Information Management in enterprise. These software will include IT Asset, Employee and Supplier information which users can view, insert, update and delete information. 
 
 ## Development Strategy
 <p align="center">
