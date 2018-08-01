@@ -44,7 +44,7 @@ Link: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-s
 3. Create Database:
 - Open Microsoft SQL Server Management Studio and create database name "TraditionAsset"
 - Execute SQL Script (TradAsset.sql) 
-Link:  http://intern.gitlab.com/intern/TDInventory/blob/dev/Script/TradAsset.sql
+Link:  https://github.com/wpatipon/TradITAM/blob/master/Script/TradAsset.sql
 
 4. Install Package in Visual Studio
 NuGet Package: 
