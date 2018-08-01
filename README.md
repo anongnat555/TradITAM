@@ -35,27 +35,27 @@ Document Link: http://intern.gitlab.com/intern/TDInventory/blob/dev/Document/Tra
 Read More: https://www.codeproject.com/Articles/81484/A-Practical-Quick-start-Tutorial-on-MVVM-in-WPF
 
 ## Development Manual
-####1. Download Visual Studio (.NET Framework 4.6.1): 
+1. Download Visual Studio (.NET Framework 4.6.1): 
 Link: https://visualstudio.microsoft.com/downloads/
 
-####2. Download Microsoft SQL Server Management Studio: 
+2. Download Microsoft SQL Server Management Studio: 
 Link: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-2017
 
-####3. Create Database:
-1. Open Microsoft SQL Server Management Studio and create database name "TraditionAsset"
-2. Execute SQL Script (TradAsset.sql) 
+3. Create Database:
+- Open Microsoft SQL Server Management Studio and create database name "TraditionAsset"
+- Execute SQL Script (TradAsset.sql) 
 Link:  http://intern.gitlab.com/intern/TDInventory/blob/dev/Script/TradAsset.sql
 
 ####4. Install Package in Visual Studio
-###### NuGet Package: 
+NuGet Package: 
 1. install Entity Framework Version 6.2.0: 
 `PM> Install-Package EntityFramework -Version 6.2.0`
 2. install Material Design In XAML Toolkit: 
 `PM> Install-Package MaterialDesignThemes`
 
-###### Material Design:
+Material Design:
 1. Getting Started: http://materialdesigninxaml.net
 2. Github & DEMO: https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
 
-## Limitation
+Limitation
 Document Link: http://intern.gitlab.com/intern/TDInventory/blob/dev/Document/TradITAM_DevelopmentLimitation.pdf
