@@ -2,11 +2,11 @@
 IT Asset Management (ITAM) is a software for IT Asset Information Management in enterprise. These software will include IT Asset, Employee and Supplier information which users can retrieve, insert and update information. 
 
 ## Features
-####1. Retrieval
+1. Retrieval
 Software can retrieve all detail of Asset, Staff and Supplier Data. 
-####2. Insertion
+2. Insertion
 Software can add all detail of Asset, Staff and Supplier Data.
-####3. Updating
+3. Updating
 Software can update all detail of Asset, Staff and Supplier Data.
 
 ## Development Strategy
@@ -46,11 +46,11 @@ Link: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-s
 - Execute SQL Script (TradAsset.sql) 
 Link:  http://intern.gitlab.com/intern/TDInventory/blob/dev/Script/TradAsset.sql
 
-####4. Install Package in Visual Studio
+4. Install Package in Visual Studio
 NuGet Package: 
-1. install Entity Framework Version 6.2.0: 
+- install Entity Framework Version 6.2.0: 
 `PM> Install-Package EntityFramework -Version 6.2.0`
-2. install Material Design In XAML Toolkit: 
+- install Material Design In XAML Toolkit: 
 `PM> Install-Package MaterialDesignThemes`
 
 Material Design:
